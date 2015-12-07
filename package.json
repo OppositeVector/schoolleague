@@ -1,0 +1,16 @@
+{
+  "name": "schoolleague",
+  "version": "0.0.1",
+  "description": "A service that an retrieve information about schools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Belski",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "mongoose": "^4.2.9"
+  },
+  "repository": "https://github.com/shenkarlab/schoolLeague.git"
+}
