@@ -1,3 +1,10 @@
+// GetSchool&id=<schoolId> returns all the info about the a certain school
+// GetCity&name=<cityName> returns all the schools in a city
+// test&<whatever> is for me to do tests on
+
+// The structure of the returned queries will ALWAYS be: { result: 0/1, data: <data> }, the result tells if the operation was
+// successfull or it failed
+
 "use strict";
 
 var bodyParser = require('body-parser');
