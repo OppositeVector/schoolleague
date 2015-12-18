@@ -1,39 +1,22 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>CHANGE THIS</title>
-		<link rel = "stylesheet" href = "includes/css/style.css">
-		<script type="text/javascript" src="includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="includes/js/lib/angular/angular.min.js"></script>
+<html ng-app="schoolApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel = "stylesheet" href = "includes/css/style.css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8">
+</head>
+<body dir="rtl">
 
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-		<link href='https://fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
-		<meta charset="utf-8">
-	</head>
+    <div ng-view></div>
 
-	<body dir="rtl">
+    <script type="text/javascript" src="includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="includes/js/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="includes/js/lib/angular/angular-route.min.js"></script>
+    <script type="text/javascript" src="includes/js/schoolApp.js"></script>
+    <script type="text/javascript" src="includes/js/controllers.js"></script>
 
-
-		<div id="google_map">
-
-		</div>
-		<div id="wrapper">
-			<header>
-				<section id="logo">לוגו</section>
-
-				<nav>
-					<a href="#">על הפרוייקט</a>
-					<a href="#">על הרפורמה</a>
-				</nav>
-			</header>
-
-			<section id="searchBox">
-				<h3>הזן כתובת/מיקוד או בית ספר:</h3>
-				<input type="search" name="schoolSearch" id="schoolSearch">
-			</section>
-		</div>
-		<script src="/includes/js/googlemap.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&signed_in=true&callback=initMap&language=iw"
-				async defer></script>
-	</body>
+</body>
 </html>

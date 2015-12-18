@@ -10,7 +10,8 @@
 var mongoose = require("mongoose");
 
 var config = require("./configHandler");
-mongoose.connect(process.env.MONGOLAB_URI);
+//mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect('mongodb://natalie:tuti1007@ds055772.mongolab.com:55772/heroku_tc5r8rrm');
 var con = exports.connection = mongoose.connection;
 
 var school = require("./schema/school");

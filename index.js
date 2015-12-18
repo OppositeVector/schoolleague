@@ -30,6 +30,11 @@ app.get("/GetSchools", function(req, res) {
 			res.json({ result: 0, data: err });
 			return;
 		}
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-Width, Content-Type, Accept");
+		app.set('json spaces', 4);
+		app.set('Content-Type', 'application/json');
+		res.status(200);
 
 		res.json({ result: 1, data: data });
 
