@@ -10,8 +10,11 @@
 	</header>
 
 	<section id="searchBox">
-		<h3>הזן כתובת/מיקוד או בית ספר:</h3>
-		<input type="search" name="schoolSearch" id="schoolSearch">
+		<div ng-controller="searchCtrl">
+			<h3>הזן כתובת/מיקוד או בית ספר:</h3>
+			<!--<input type="search" name="schoolSearch" id="schoolSearch">-->
+			<autocomplete ng-model="schoolSearch" data="schools"></autocomplete>
+		</div>
 	</section>
 </div>
 <script src="/includes/js/googlemap.js"></script>

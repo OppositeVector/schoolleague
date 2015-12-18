@@ -3,7 +3,8 @@
  */
 var schoolApp = angular.module("schoolApp", [
     'ngRoute',
-    'schoolsControllers'
+    'schoolsControllers',
+    'autocomplete'
 ]);
 
 schoolApp.config(['$routeProvider',
@@ -11,7 +12,7 @@ schoolApp.config(['$routeProvider',
         $routeProvider.
         when('/', {
             templateUrl: 'home.html',
-            controller: 'homeCtrl'
+            controller: 'searchCtrl'
         }).
         //when('/getMaxPrice/:priceInp', {
         //    templateUrl: 'BookList.html',

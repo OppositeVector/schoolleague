@@ -3,11 +3,19 @@
  */
 var schoolsControllers = angular.module('schoolsControllers', []);
 
-schoolsControllers.controller('homeCtrl', ['$scope', '$http',
+schoolsControllers.controller('searchCtrl', ['$scope', '$http',
     function ($scope, $http) {
         $http.get('http://localhost:8080/GetSchools').success(function(data) {
             console.log(data.data);
-            $scope.schools = data;
+            $scope.schools = data.data;
+
+            //$scope.updateSchools = function(typed){
+            //    // MovieRetriever could be some service returning a promise
+            //    $scope.newmovies = MovieRetriever.getmovies(typed);
+            //    $scope.newmovies.then(function(data){
+            //        $scope.movies = data;
+            //    });
+            //}
         });
 
         //console.log($scope.schools)
