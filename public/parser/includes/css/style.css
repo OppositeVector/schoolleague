@@ -1,0 +1,19 @@
+* { margin:0; padding:0 }
+a { text-decoration: none; color: #ffffff; }
+
+header, nav, main, aside, footer, section, article {
+	display:block;
+}
+
+body {
+	background-color: #c3d4e3;
+	color: #ffffff;
+}
+
+#wrapper {
+	margin: auto;
+}
+
+.clear {
+	clear: both;
+}

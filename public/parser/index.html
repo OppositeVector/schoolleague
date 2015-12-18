@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="Parser">
+	<head>
+		<title>Parser</title>
+		<link rel = "stylesheet" href = "includes/css/style.css">
+		<script type="text/javascript" src="includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="includes/js/lib/angular/angular.min.js"></script>
+		<style>
+			table, tr, td { border: 1px solid #000; color: #000; padding: 3px; }
+		</style>
+	</head>
+
+	<body ng-controller="BodyController">
+		<div id="wrapper">
+			<input type="file" id="fileBox" />
+			<table>
+				<tr ng-repeat="row in model.data track by $index">
+					<td ng-repeat="cell in row track by $index">{{cell}}</td>
+				</tr>
+			</table>
+			<button id="send">Send</button>
+		</div>
+		<script type="text/javascript" src="includes/js/Parser.js"></script>
+	</body>
+</html>
