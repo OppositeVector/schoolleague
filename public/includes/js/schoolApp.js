@@ -14,14 +14,10 @@ schoolApp.config(['$routeProvider',
             templateUrl: 'home.html',
             controller: 'searchCtrl'
         }).
-        //when('/getMaxPrice/:priceInp', {
-        //    templateUrl: 'BookList.html',
-        //    controller: 'maxPriceCtrl'
-        //}).
-        //when('/getMix/:authorInp/:yearInp', {
-        //    templateUrl: 'BookList.html',
-        //    controller: 'mixCtrl'
-        //}).
+        when('/getSchool/:schoolId', {
+            templateUrl: 'schoolInfo.html',
+            controller: 'schoolInfoCtrl'
+        }).
         otherwise({
             redirectTo: '/'
         });

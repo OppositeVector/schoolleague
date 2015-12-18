@@ -17,17 +17,14 @@ schoolsControllers.controller('searchCtrl', ['$scope', '$http',
             //    });
             //}
         });
+}]);
 
-        //console.log($scope.schools)
-        //$scope.orderProp = 'name';
-        //
-        //$scope.filter = '$';
-        //
-        //$scope.query = '';
-        //
-        //$scope.getFilter = function() {
-        //    var filter = {};
-        //    filter[$scope.filter] = $scope.query;
-        //    return filter;
-        //};
+
+schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
+    function ($scope, $http, $routeParams) {
+        $http.get('http://localhost:8080/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
+            console.log(data.data);
+            $scope.school = data.data;
+        });
+
 }]);

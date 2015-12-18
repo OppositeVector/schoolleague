@@ -81,6 +81,57 @@ nav a{
 	color: #464646;
 }
 
+#searchBox {
+	position: absolute;
+	font-size: 0.8em;
+	left: 3em;
+	top: 0;
+}
+
+#searchBox h3 {
+	display: inline-block;
+	margin-left: 1em;
+}
+
+#schoolSearch {
+	border: 1px solid #464646;
+	border-radius: 5px;
+	height: 3em;
+	width:25em;
+	direction: rtl;
+}
+
+#schoolSearch::-webkit-search-cancel-button{
+	position:relative;
+	right:23em;
+	background-color: transparent;
+	color: #464646;
+}
+
+#content {
+	width: 100%;
+	height: inherit;
+	position: relative;
+	/*top:10%;*/
+	padding-right: 1em;
+	box-sizing:border-box;
+}
+
+#generalInfo {
+	width: 29%;
+	height: inherit;
+	float: right;
+	/*			margin-left: 10em;
+    */			border: 1px solid red;
+}
+
+#leftSideInfo {
+	width: 69%;
+	height: inherit;
+	float: right;
+	border: 1px solid green;
+}
+
 
 /* AUTOCOMPLETE */
 
