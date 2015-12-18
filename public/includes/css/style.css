@@ -7,13 +7,76 @@ header, nav, main, aside, footer, section, article {
 
 body {
 	background-color: #c3d4e3;
-	color: #ffffff;
 }
 
 #wrapper {
 	margin: auto;
+	position: relative; z-index: 3;height: 100%; width: 100%;
 }
 
 .clear {
 	clear: both;
+}
+
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Alef', sans-serif;
+	color: #1d1d1d;
+}
+
+#over_map { position: absolute; top: 10px; left: 10px; z-index: 99; }
+#google_map {
+	position: absolute;
+	top:10%;
+	height: 90%;
+	width: 100%;
+}
+header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 10%;
+	background-color: #c7c7c7;
+	padding: 1em;
+	box-sizing: border-box;
+}
+
+#logo {
+	float: right;
+}
+
+nav {
+	float: right;
+	margin-right: 9em;
+}
+
+nav a{
+	color: #1d1d1d;
+	text-decoration: none;
+	margin-left: 3em;
+}
+
+#searchBox {
+	position: absolute;
+	font-size: 0.8em;
+	top:10em;
+	right: 14.4em;
+}
+
+#schoolSearch {
+	border: 1px solid #464646;
+	border-radius: 5px;
+	height: 3em;
+	width:25em;
+	direction: rtl;
+}
+
+#schoolSearch::-webkit-search-cancel-button{
+	position:relative;
+	right:23em;
+	background-color: transparent;
+	color: #464646;
 }
