@@ -81,6 +81,10 @@ nav a{
 	color: #464646;
 }
 
+
+
+/*school info*/
+
 #searchBox {
 	position: absolute;
 	font-size: 0.8em;
@@ -131,6 +135,9 @@ nav a{
 	float: right;
 	border: 1px solid green;
 }
+
+/*end school info*/
+
 
 
 /* AUTOCOMPLETE */
