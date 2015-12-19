@@ -1,5 +1,5 @@
 * { margin:0; padding:0 }
-a { text-decoration: none; color: #ffffff; }
+a { text-decoration: none; color: #1d1d1d; }
 
 header, nav, main, aside, footer, section, article {
 	display:block;
@@ -30,7 +30,7 @@ html, body {
 #over_map { position: absolute; top: 10px; left: 10px; z-index: 99; }
 #google_map {
 	position: absolute;
-	top:10%;
+	top: 80px;
 	height: 90%;
 	width: 100%;
 }
@@ -38,9 +38,10 @@ header {
 	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 10%;
+	/*height: 10%;*/
+	height: 80px;
 	background-color: #c7c7c7;
-	padding: 1em;
+	padding: 1.5em;
 	box-sizing: border-box;
 }
 
@@ -85,32 +86,32 @@ nav a{
 
 /*school info*/
 
-#searchBox {
-	position: absolute;
-	font-size: 0.8em;
-	left: 3em;
-	top: 0;
-}
+/*#searchBox {*/
+	/*position: absolute;*/
+	/*font-size: 0.8em;*/
+	/*left: 3em;*/
+	/*top: 0;*/
+/*}*/
 
-#searchBox h3 {
-	display: inline-block;
-	margin-left: 1em;
-}
+/*#searchBox h3 {*/
+	/*display: inline-block;*/
+	/*margin-left: 1em;*/
+/*}*/
 
-#schoolSearch {
-	border: 1px solid #464646;
-	border-radius: 5px;
-	height: 3em;
-	width:25em;
-	direction: rtl;
-}
+/*#schoolSearch {*/
+	/*border: 1px solid #464646;*/
+	/*border-radius: 5px;*/
+	/*height: 3em;*/
+	/*width:25em;*/
+	/*direction: rtl;*/
+/*}*/
 
-#schoolSearch::-webkit-search-cancel-button{
-	position:relative;
-	right:23em;
-	background-color: transparent;
-	color: #464646;
-}
+/*#schoolSearch::-webkit-search-cancel-button{*/
+	/*position:relative;*/
+	/*right:23em;*/
+	/*background-color: transparent;*/
+	/*color: #464646;*/
+/*}*/
 
 #content {
 	width: 100%;
@@ -141,46 +142,24 @@ nav a{
 
 
 /* AUTOCOMPLETE */
+.autocompletedemoCustomTemplate .autocomplete-custom-template li {
+	border-bottom: 1px solid #ccc;
+	height: auto;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	white-space: normal; }
 
-.autocomplete{
-	width: 100%;
-	position: relative;
-}
+.autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {
+	border-bottom-width: 0; }
 
-.autocomplete input{
-	font-size: 1.2em;
-	width: 100%;
-	padding:0.4em;
-}
+.autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,
+.autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {
+	display: block;
+	line-height: 2;
+vertical-align: middle;}
 
-.autocomplete ul{
-	position: absolute;
-	left: 0;
-	width: 100%;
-	border-left: 1px solid #888;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-	z-index: 1;
-}
-
-.autocomplete li{
-	text-align: left;
-	list-style:none;
-	width: 100%;
-	padding:0.4em;
-	background-color: #fff;
-}
-
-.autocomplete li.active{
-	width: 100%;
-	background-color: #4bf;
-}
-
-.autocomplete .highlight {
-	background-color: #E2E2E2;
-}
-
-.autocomplete li.active .highlight {
-	background: #666;
-	color: #fff;
+.schoolIcon {
+	height: 19px;
+	width: 19px;
+	vertical-align: text-top;
 }

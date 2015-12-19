@@ -3,22 +3,18 @@
  */
 var schoolsControllers = angular.module('schoolsControllers', []);
 
-schoolsControllers.controller('searchCtrl', ['$scope', '$http',
-    function ($scope, $http) {
+schoolsControllers.controller('searchCtrl', ['$scope', '$http', '$timeout', '$q',
+    function ($scope, $http, $timeout, $q) {
+        $scope.flag=false;
+
         $http.get('http://localhost:8080/GetSchools').success(function(data) {
             console.log(data.data);
             $scope.schools = data.data;
-
-            //$scope.updateSchools = function(typed){
-            //    // MovieRetriever could be some service returning a promise
-            //    $scope.newmovies = MovieRetriever.getmovies(typed);
-            //    $scope.newmovies.then(function(data){
-            //        $scope.movies = data;
-            //    });
-            //}
+            $scope.flag=true
         });
-}]);
 
+
+}]);
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
