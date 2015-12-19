@@ -1,3 +1,4 @@
+<script type="text/javascript" src="includes/js/script.js"></script>
 <div id="wrapper">
     <header>
         <section id="logo">לוגו</section>
@@ -7,14 +8,122 @@
             <a href="#">על הרפורמה</a>
         </nav>
 
-        <section id="searchBox">
+        <section id="searchBoxInPage">
             <h3>חיפוש</h3>
-            <input type="search" name="schoolSearch" id="schoolSearch">
+            <input type="search" name="schoolSearch" id="schoolSearchInPage">
         </section>
     </header>
 
     <section id="content">
-        <section id="generalInfo">{{school.name}}</section>
-        <section id="leftSideInfo"></section>
+        <section id="rightSideInfo">
+            <article id="schoolImg"> </article>
+            <article id="feedbacks"> </article>
+            <article id="rate">
+                <h2 style="text-align: center; padding-top: 50px"> מילוי חוות דעת</h2>
+            </article>
+
+        </section>
+        <section id="leftSideInfo">
+            <section id="madlanInfo">
+                <h1>בית ספר
+                    {{school.name}} </h1>
+                <section id="generalInfo">
+                    <article id="generalRightSide">
+                    <ul>
+                        <li>כתובת:
+                            {{school.address}}, {{school.city}} </li>
+                    </ul>
+                    </article>
+                    <article id="generalLeftSide">
+                    <ul>
+                        <li>טלפון: </li>
+                    </ul>
+                    </article>
+                </section>
+                <section id="generalInfoFullView">
+                    <article id="generalRightSide">
+                        <ul>
+                            <li>כתובת:
+                                {{school.address}}, {{school.city}} </li>
+                            <li>שלב:
+                                <div class="inlineBlock" ng-if="school.toClass <= 6">יסודי</div>
+                                <div class="inlineBlock" ng-if="school.toClass > 6 && school.toClass < 10">חטיבה</div>
+                                <div class="inlineBlock" ng-if="school.toClass >= 10">תיכון</div>
+                            </li>
+                            <li>כיתות:
+                                <div class="inlineBlock" ng-if="school.fromClass == 1">א</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 2">ב</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 3">ג</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 4">ד</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 5">ה</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 6">ו</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 7">ז</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 8">ח</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 9">ט</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 10">י</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 11">י"א</div>
+                                <div class="inlineBlock" ng-if="school.fromClass == 12">י"ב</div>
+                                -
+                                <div class="inlineBlock" ng-if="school.toClass == 1">א</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 2">ב</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 3">ג</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 4">ד</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 5">ה</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 6">ו</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 7">ז</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 8">ח</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 9">ט</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 10">י</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 11">י"א</div>
+                                <div class="inlineBlock" ng-if="school.toClass == 12">י"ב</div>
+                            </li>
+                            <li>פיקוח:
+                                <div class="inlineBlock" ng-if="school.supervision == 'state'">ממלכתי </div>
+                                <div class="inlineBlock" ng-if="school.supervision == 'religious'">ממכלתי דתי  </div>
+                                <div class="inlineBlock" ng-if="school.supervision == 'orthodox'">חרדי  </div>
+                            </li>
+                            <li>סוג חינוך:
+                                {{school.type}}</li>
+                            <li>מספר תלמידים:
+                                {{school.studentsCount}}</li>
+                            <li>מספר כיתות:
+                                {{school.classCount}}</li>
+                            <li>תלמידים בכיתה:
+                                {{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}</li>
+                        </ul>
+                    </article>
+                    <article id="generalLeftSide">
+                        <ul>
+                            <li>טלפון: </li>
+                            <li>סקטור:
+                                <div class="inlineBlock" ng-if="school.sector == 'Jewish'">יהודי </div>
+                                <div class="inlineBlock" ng-if="school.sector == 'Arabic'">ערבי</div>
+                            </li>
+                            <li>רשות חינוך: </li>
+                            <li>יום לימודים ארוך:
+                                <div class="inlineBlock" ng-if="school.fullEducationalDay == true">כן </div>
+                                <div class="inlineBlock" ng-if="school.fullEducationalDay != true">לא  </div>
+                            </li>
+                            <li>באופק חדש:
+                                <div class="inlineBlock" ng-if="school.joinedNewHorizons == true">כן </div>
+                                <div class="inlineBlock" ng-if="school.joinedNewHorizons != true">לא  </div>
+                            </li>
+                            <li>שנת היווסדות:
+                                {{school.foudingYear}}</li>
+                            <li>מעמד ביה"ס:
+                                {{school.legal}}</li>
+                            <li>שפת לימוד:
+                                {{school.language}}</li>
+                        </ul>
+                    </article>
+                </section>
+            <h4 onClick="switchView()" id="moreInfo">פרטים נוספים +</h4>
+            </section>
+            <section id="meitsavInfo">
+                <h1>רמת השגים</h1>
+            </section>
+
+
+        </section>
     </section>
 </div>

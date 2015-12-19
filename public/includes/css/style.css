@@ -6,7 +6,36 @@ header, nav, main, aside, footer, section, article {
 }
 
 body {
-	background-color: #c3d4e3;
+	//background-color: #c3d4e3;
+}
+
+h1 {
+	font-size: 35px;
+	margin-bottom: 20px;
+}
+
+h2 {
+	font-size: 30px;
+	font-weight: 300;
+	color: white;
+}
+
+h4 {
+	font-size: 15px;
+	font-weight: 600;
+	display: inline-block;
+}
+
+ul {
+	list-style-type: none;
+}
+
+li {
+	margin-top: 16px;
+}
+
+.inlineBlock {
+	display: inline-block;
 }
 
 #wrapper {
@@ -35,13 +64,14 @@ html, body {
 	width: 100%;
 }
 header {
-	position: absolute;
+	position: relative;
 	top: 0;
 	width: 100%;
-	height: 10%;
+	height: 70px;
 	background-color: #c7c7c7;
 	padding: 1em;
 	box-sizing: border-box;
+	display:block;
 }
 
 #logo {
@@ -85,19 +115,19 @@ nav a{
 
 /*school info*/
 
-#searchBox {
+#searchBoxInPage {
 	position: absolute;
 	font-size: 0.8em;
 	left: 3em;
-	top: 0;
+	top: 1em;
 }
 
-#searchBox h3 {
+#searchBoxInPage h3 {
 	display: inline-block;
 	margin-left: 1em;
 }
 
-#schoolSearch {
+#schoolSearchInPage {
 	border: 1px solid #464646;
 	border-radius: 5px;
 	height: 3em;
@@ -113,27 +143,102 @@ nav a{
 }
 
 #content {
-	width: 100%;
-	height: inherit;
+	position: relative;
+	margin: auto;
+	margin-top: 70px;
+	width: 90%;
+	height: 900px;
 	position: relative;
 	/*top:10%;*/
 	padding-right: 1em;
+	border: 1px solid black;
 	box-sizing:border-box;
+	display:block;
 }
 
-#generalInfo {
+#rightSideInfo {
 	width: 29%;
 	height: inherit;
 	float: right;
-	/*			margin-left: 10em;
-    */			border: 1px solid red;
+	//border: 1px solid red;
 }
 
 #leftSideInfo {
-	width: 69%;
+	width: 60%;
 	height: inherit;
+	float: left;
+	//border: 1px solid green;
+}
+
+#schoolImg {
+	width: 100%;
+	height: 350px;
+	//border: 1px solid blue;
+	display: block;
+	margin-bottom: 20px;
+	background: grey;
+}
+
+#feedbacks {
+	width: 100%;
+	height: 150px;
+	//border: 1px solid blue;
+	margin-bottom: 20px;
+	display: block;
+	background: #cccccc;
+}
+
+#rate {
+	width: 100%;
+	height: 150px;
+	//border: 1px solid blue;
+	display: block;
+	background: #aaaaaa;
+}
+
+#madlanInfo {
+	//width: 70%;
+	//border: 1px solid black;
+	margin-bottom: 30px;
+	display: block;
+}
+
+#generalInfo {
+	width: 70%;
+	height: 30px;
+	display: inline-block;
+	//border: 1px solid black;
+}
+
+#moreInfo{
+	display: inline-block;
+	cursor: hand;
+	cursor: pointer;
+}
+
+
+#generalInfoFullView {
+	width: 70%;
+	height: 300px;
+	//border: 1px solid black;
+	display: none;
+}
+
+#generalRightSide {
+	width: 55%;
 	float: right;
-	border: 1px solid green;
+	height: inherit;
+}
+
+#generalLeftSide {
+	width: 40%;
+	float: left;
+	height: inherit;
+}
+
+#meitsavInfo {
+	//border: 1px solid black;
+	display: block;
 }
 
 /*end school info*/
@@ -172,7 +277,7 @@ nav a{
 }
 
 .autocomplete li.active{
-	width: 100%;
+	width: 100%
 	background-color: #4bf;
 }
 
