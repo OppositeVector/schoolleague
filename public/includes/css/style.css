@@ -241,6 +241,10 @@ nav a{
 	display: block;
 }
 
+#graph {
+	max-width: 80%;
+}
+
 /*end school info*/
 
 
