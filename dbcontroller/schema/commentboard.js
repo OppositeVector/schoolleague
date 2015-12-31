@@ -15,9 +15,8 @@ comment.add({ replies: [ comment ] });
 
 var commentboard = Schema({
 
-	id: Number,
-	schoolId: Number,
-	comments: [ comment ]
+	_id: { type: Number, required: true },
+	replies: [ comment ]
 
 }, { collection: "comments" });
 

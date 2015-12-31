@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="CommentsTester">
+	<head>
+		<title>Comments Tester</title>
+		<link rel = "stylesheet" href = "../includes/css/style.css">
+		<script type="text/javascript" src="../includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../includes/js/lib/angular/angular.min.js"></script>
+		<style>
+			table, tr, td { border: 1px solid #000; color: #000; padding: 3px; }
+			#wrapper { padding: 20px; width: 500px; height: auto; }
+			#blockWrapper { border: 1px solid #000; width: 800px; margin: auto; padding: 20px; }
+			input, textarea { width: 80%; float: right }
+			.divider { border: 1px solid #000; margin: 20px;}
+			h3 { text-align: center; }
+			button { display: block; }
+			ul { list-style-type: none; }
+			li { margin-left: 40px; }
+			#commentButton { margin: auto; width: 250px; height: 50px; }
+			.commentContainer { border: 1px solid #000; border-radius: 5px; margin: 5px; background-color: #bbf; }
+			.commentName { padding: 10px; border-bottom: 1px solid #000;}
+			.commentContent { padding: 15px; }
+			.reply { border-top: 1px solid #000; padding: 5px; padding-left: 50px; }
+			.replyExpander { background-color: #99d; border-radius: 5px; display: block; width: 200px; float: right; text-align: center; color: #000; }
+			.replyExpander:hover { background-color: #bb9; cursor: pointer; color: #558; }
+			.replyButton { float: right; width: 70px; height: 70px;}
+			.replyContainer { overflow: hidden; padding-right: 10px; }
+			span { background-color: #99a; overflow: hidden; }
+		</style>
+		<script type="text/ng-template" id="comments.html">
+			<article class="commentContainer">
+				<p class="commentName"><b>{{comment.poster}}</b>, {{comment.time}}</p>
+				<p class="commentContent">{{comment.content}}</p>
+				<div class="reply" ng-show="comment.reply.visible">
+					<button class="replyButton" ng-click="PostReply(comment.reply);">Reply</button>
+					<div class="replyContainer">
+						<label>Poster <input type="text" ng-model="comment.reply.poster"></label>
+						<div class="clear"></div>
+						<label>Message <textarea row=3 ng-model="comment.reply.message"></textarea></label>
+					</div>
+				</div>
+				<a class="replyExpander" ng-click="comment.reply.visible = !comment.reply.visible" ng-show="!comment.reply.visible">Reply</a>
+				<div class="clear"></div>
+			</article>
+			<ul>
+				<li ng-repeat="comment in comment.replies" ng-include="'comments.html'"></li>
+			</ul>
+		</script>
+	</head>
+
+	<body ng-controller="BodyController">
+		<div id="wrapper">
+			<h3>Post a comment</h3>
+			<div class="divider"></div>
+			<label>Poster</label> <input type="text" id="poster" ng-model="model.poster">
+			<br><br>
+			<label>Comment</label> <textarea rows=6 id="message" ng-model="model.message"></textarea>
+			<div class="clear"></div>
+			<div class="divider"></div>
+			<button id="commentButton" ng-click="PostReply(model);">Post</button>
+		</div>
+		<div id="blockWrapper">
+			<ul>
+				<li class="comment" ng-repeat="comment in model.schoolData.replies" ng-include="'comments.html'"></li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../includes/js/CommentsTester.js"></script>
+	</body>
+</html>

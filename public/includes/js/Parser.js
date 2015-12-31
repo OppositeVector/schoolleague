@@ -111,35 +111,43 @@ fileBox.change(function(evt) {
 		var f = evt.target.files[i];
 		var reader = new FileReader();
 		reader.onload = function(data) {
-			var parsed = ParseCSV(data.target.result);
-			var from = 0;
-            var to = 20;
-            var mIndex = 0;
+
+			allData = ParseCSV(data.target.result);
+            var total = 30;
+            var current = 0;
+            var left = allData.length;
 			model.data.length = 0;
+            var i = 1;
+            var ii = 1;
 
-			for(var i = 0; i < parsed.length; ++i) {
+            model.data.push([]);
+            for(var j = 0; j < allData[0].length; ++j) {
+                model.data[0].push(allData[0][j] + " " + j);
+            }
 
-                if((i >= from) && (i <= to)) {
+            while((current < total) && (i < allData.length)) {
+
+                var rand = Math.random();
+                var currentChance = (total - current) / left;
+                // console.log(total + " - " + current + " / " + left + " = " + currentChance);
+
+                if(rand < currentChance) {
+
                     model.data.push([]);
-                }
 
-				allData.push([]);
-
-				for(var j = 0; j < parsed[i].length; ++j) {
-
-                    if((i >= from) && (i <= to)) {
-                        model.data[mIndex].push(parsed[i][j]);
+                    for(var j = 0; j < allData[i].length; ++j) {
+                        model.data[ii].push(allData[i][j]);
                     }
 
-					allData[i].push(parsed[i][j]);
+                    ++current;
+                    ++ii;
 
-				}
-
-                if((i >= from) && (i <= to)) {
-                    ++mIndex;
                 }
 
-			}
+                ++i;
+                --left;
+
+            }
 
 			console.log(model);
 
@@ -164,27 +172,49 @@ app.controller("BodyController", [ "$scope", "$http", function($scope, $http) {
     $("#send").click(function() {
 
         var index = 1;
+        var max = 50;
+        var curMax = max;
 
         function SendCurrentSchool() {
 
-            var res = $http.post("../test", allData[index]);
-            res.success(function(data, status, headers, config) {
-                if(data.result == 0) {
-                    console.log("Falied on " + index);
-                    console.log(data);
-                    console.log(allData[index]);
-                }
+            var curData = [];
+            while((index < allData.length) && (index < max)) {
+                curData.push(allData[index]);
                 ++index;
-                if(index < allData.length) {
-                    console.log("Sending " + index);
-                    SendCurrentSchool();
+            }
+            curMax += max;
+            var res = $http.post("../RecieveData", allData);
+            res.success(function(data, status, headers, config) {
+
+                if(data.result == 1) {
+                    console.log("Successfully sent data to server");
                 } else {
-                    console.log("FINISHED");
+                    console.log("Failed to send data to server: " + data.result.data);
                 }
+
             });
             res.error(function(data, status, headers, config) {
                 console.log(data);
             });
+
+            // var res = $http.post("../test", allData[index]);
+            // res.success(function(data, status, headers, config) {
+            //     if(data.result == 0) {
+            //         console.log("Falied on " + index);
+            //         console.log(data);
+            //         console.log(allData[index]);
+            //     }
+            //     ++index;
+            //     if(index < allData.length) {
+            //         console.log("Sending " + index);
+            //         SendCurrentSchool();
+            //     } else {
+            //         console.log("FINISHED");
+            //     }
+            // });
+            // res.error(function(data, status, headers, config) {
+            //     console.log(data);
+            // });
 
         }
 

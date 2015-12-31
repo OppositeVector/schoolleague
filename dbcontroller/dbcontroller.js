@@ -11,7 +11,6 @@ var mongoose = require("mongoose");
 
 var config = require("./configHandler");
 mongoose.connect(process.env.MONGOLAB_URI);
-//mongoose.connect('mongodb://natalie:tuti1007@ds055772.mongolab.com:55772/heroku_tc5r8rrm');
 var con = exports.connection = mongoose.connection;
 
 var school = require("./schema/school");
@@ -143,14 +142,76 @@ exports.GetComments = function(schoolId, callback) {
 		return;
 	}
 
-	commentsModel.findOne({ schoolId: schoolId }, function(err, data) {
+	commentsModel.findOne({ _id: schoolId }, function(err, data) {
 
 		if(err) {
 			callback(innerTAG + err);
 			return;
 		}
-
 		callback(null, data);
+
+	});
+
+}
+
+exports.PostComment = function(comment, callback) {
+
+	var innerTAG = TAG + ": PostComment: ";
+	if(callback == null) {
+		console.log(innerTAG + "no callback supplied");
+		return;
+	}
+
+	commentsModel.findOne({ _id: comment.school }, function(err, commentsData) {
+
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		var formedComment = {
+			poster: comment.poster,
+			time: Date.now(),
+			content: comment.content
+		}
+
+		if(commentsData == null) {
+			commentsData = { 
+				_id: comment.school, 
+				replies: [ formedComment ] 
+			}
+		} else {
+
+			if(comment.path == null) {
+				commentsData.replies.push(formedComment);
+			} else {
+
+				var split = comment.path.split(" ");
+				var current = commentsData;
+				var parsed;
+				for(var i = 0; i < split.length; ++i) {
+					parsed = parseInt(split[i]);
+					if(!isNaN(parsed)) {
+						current = current.replies[parsed];
+					}
+				}
+				if(current.replies == null) {
+					current.replies = [];
+				}
+				current.replies.push(formedComment);
+			}
+			
+		}
+
+		commentsModel.update({ _id: commentsData._id }, commentsData, { upsert: true }, function(err, data) {
+
+			if(err) {
+				callback(err);
+				return;
+			}
+			callback(null, commentsData);
+
+		})
 
 	});
 
@@ -199,7 +260,7 @@ function I_GetAuthority(school, callback) {
 	authorityModel.findOne({ name: school.authority }, function(err, data) {
 
 		if(err) {
-			callback(err);
+			callback("1: " + err);
 			return;
 		}
 
@@ -209,7 +270,7 @@ function I_GetAuthority(school, callback) {
 			config.GetAndIncrement("authority", function(err, config) {
 
 				if(err) {
-					callback(err);
+					callback("2: " + err);
 					return;
 				}
 
@@ -224,7 +285,7 @@ function I_GetAuthority(school, callback) {
 				authorityModel.create(createData, function(err, authority) {
 
 					if(err) {
-						callback(err);
+						callback("3: " + err);
 						return;
 					}
 
@@ -241,6 +302,7 @@ function I_GetAuthority(school, callback) {
 			// Update authority's school data if necessary
 			if(data.schools.indexOf(school._id) == -1) {
 				update = true;
+				// console.log(school);
 				data.schools.push(school._id);
 			}
 
@@ -255,7 +317,8 @@ function I_GetAuthority(school, callback) {
 				data.save(function(err) {
 
 					if(err) {
-						callback(err);
+						console.log(data);
+						callback("4: " + err);
 					} else {
 						callback(null, data);
 					}
@@ -274,19 +337,6 @@ function I_GetAuthority(school, callback) {
 
 exports.RecieveSchool = function(data, callback) {
 
-	var pos = {
-		lon: parseFloat(data[12]),
-		lat: parseFloat(data[13])
-	}
-
-	if(isNaN(pos.lon)) {
-		pos.lon = 0;
-	}
-
-	if(isNaN(pos.lat)) {
-		pos.lat = 0;
-	}
-
 	var school = {
 
 		name: data[0],
@@ -301,7 +351,10 @@ exports.RecieveSchool = function(data, callback) {
 		sector: data[9],
 		address: data[10],
 		city: data[11],
-		position: pos,
+		position: {
+			lon: parseFloat(data[12]),
+			lat: parseFloat(data[13])
+		},
 		fullEducationalDay: (data[14] === "true"),
 		joinedNewHorizons: (data[15] === "true"),
 		foudingYear: parseInt(data[16]),
@@ -312,28 +365,322 @@ exports.RecieveSchool = function(data, callback) {
 
 	}
 
+	if(isNaN(school.position.lon)) {
+		school.position.lon = 360;
+	}
+
+	if(isNaN(school.position.lat)) {
+		school.position.lat = 360;
+	}
+	if(isNaN(school.origGrading)) {
+		school.origGrading = -1;
+	}
+	if(isNaN(school.studentsCount)) {
+		school.studentsCount = -1;
+	}
+
 	var authority = I_GetAuthority(school, function(err, authority) {
 
 		if(err) {
-			callback(err);
+			school.status = err;
+			callback(1, school);
 			return;
 		}
 
 		school.authority = authority._id;
 
-		console.log(school);
+		// console.log(school);
 
 		schoolModel.findOneOrCreate({ _id: school._id }, school, function(err, s) {
 
 			if(err) {
-				callback(err);
+				school.status = err;
+				callback(2, school);
 				return;
 			}
 
-			callback(null, s);
+			var posErr = false;
+			if(s.position.lon == 0) {
+				s.position.lon = 360;
+				posErr = true;
+			}
+			if(s.position.lat == 0) {
+				s.position.lat = 360;
+				posErr = true;
+			}
+
+			if(posErr == true) {
+
+				s.save(function(err) {
+					if(err) {
+						school.status = err;
+						callback(4, school);
+						return;
+					}
+					school.status = "Position non-exsistant, was 0, corrected to 360";
+					callback(3, school);
+				});
+				
+			} else {
+				school.status = "Found or created";
+				callback(null, school);
+			}
 
 		});
 
 	});
+
+}
+
+exports.RecieveGrades = function(data, callback) {
+
+	// in-year in-class indexing:
+	// 0 - engligh
+	// 1 - tech
+	// 2 - math
+	// 3 - hebrew
+	// 4 - arabic
+
+	// in-year classes:
+	// 0 - 4: b
+	// 5 - 9: e
+	// 10 - 14 : h
+
+	// yearly indicies
+	// 22 - 36: 2009
+	// 37 - 51: 2010
+	// 52 - 66: 2011
+	// 67 - 81: 2012
+	// 82 - 96: 2013
+
+	var school = {
+		_id: parseInt(data[1]),
+		grades: {
+			year: 2009,
+			class: Number,
+			math: Number,
+			tech: Number,
+			hebrew: Number,
+			english: Number,
+			arabic: Number
+		}
+	}
+
+}
+
+exports.RecieveClaimsNOT = function(data, callback) {
+
+	var current = 0;
+	var bulk = 100;
+	var errs = false;
+
+	var Recursive = function(current, bulk, recData) {
+
+		var top = ((current + bulk) > recData.length) ? recData.length : (current + bulk);
+		var ids = [];
+		var currentBlock = [];
+		var blockIndex = 0;
+		for(; current < top; ++current) {
+
+			var id = parseInt(recData[current][1]);
+			if(!isNaN(id)) {
+
+				currentBlock.push({ id: id, claims: [] });
+				ids.push(id);
+				var claims = { year: 2009, percent: [] };
+				var tmp = 0;
+				for(var i = 97; i < 178; ++i) {
+					tmp = parseFloat(recData[current][i]);
+					current.percent.push((isNaN(tmp)) ? -1 : tmp);
+				}
+				currentBlock[blockIndex].claims.push(claims);
+				claims = { year: 2010, percent: [] };
+				for(var i = 178; i < 259; ++i) {
+					tmp = parseFloat(recData[current][i]);
+					claims.percent.push((isNaN(tmp)) ? -1 : tmp);
+				}
+				currentBlock[blockIndex].claims.push(claims);
+				claims = { year: 2011, percent: [] };
+				for(var i = 259; i < 340; ++i) {
+					tmp = parseFloat(recData[current][i]);
+					claims.percent.push((isNaN(tmp)) ? -1 : tmp);
+				}
+				currentBlock[blockIndex].claims.push(claims);
+				current = { year: 2012, percent: [] };
+				for(var i = 340; i < 421; ++i) {
+					tmp = parseFloat(recData[current][i]);
+					current.percent.push((isNaN(tmp)) ? -1 : tmp);
+				}
+				currentBlock[blockIndex].claims.push(current);
+				claims = { year: 2013, percent: [] };
+				for(var i = 421; i < 502; ++i) {
+					tmp = parseFloat(recData[current][i]);
+					claims.percent.push((isNaN(tmp)) ? -1 : tmp);
+				}
+				currentBlock[blockIndex].claims.push(claims);
+				++blockIndex;
+
+			}
+			
+		}
+
+		returned = 0;
+
+		schoolModel.find({ _id: { $in: ids } }, function(err, schools) {
+
+			var tmp = 0;
+			for(var i = 0; i < currentBlock.length; ++i) {
+
+				tmp = schools.findIndex(function(ele) {
+					if(ele._id == currentBlock[i].id) {
+						return true;
+					} else {
+						return false;
+					}
+				});
+
+				if(tmp > -1) {
+					
+					schools[tmp].claims = currentBlock[i].claims;
+					schools[tmp].save(function(err, school) {
+						if(err) {
+							console.log(err);
+							console.log(school);
+							errs = true;
+						}
+					});
+
+				} else {
+					console.log("Could not find school " + currentBlock[i].id + " in database");
+					errs = true;
+				}
+
+			}
+
+			if(current < recData.length) {
+				Recursive(current, bulk, recData);
+			} else {
+				console.log("Finished inserting all data" + ((errs == true) ? " with some errors" : ""));
+			}
+			
+
+		});
+
+	}
+
+	Recursive(current, bulk, data);
+
+	// schoolModel.findOne({ _id: parseInt(data[1]) }, function(err, school) {
+
+	// 	if(err) {
+	// 		callback(err);
+	// 		return;
+	// 	}
+
+	// 	var claims = [];
+	// 	var current = { year: 2009, percent: [] };
+	// 	for(var i = 97; i < 178; ++i) {
+	// 		var f = parseFloat(data[i]);
+	// 		current.percent.push((isNaN(f)) ? -1 : f);
+	// 	}
+	// 	claims.push(current);
+	// 	current = { year: 2010, percent: [] };
+	// 	for(var i = 178; i < 259; ++i) {
+	// 		var f = parseFloat(data[i]);
+	// 		current.percent.push((isNaN(f)) ? -1 : f);
+	// 	}
+	// 	claims.push(current);
+	// 	current = { year: 2011, percent: [] };
+	// 	for(var i = 259; i < 340; ++i) {
+	// 		var f = parseFloat(data[i]);
+	// 		current.percent.push((isNaN(f)) ? -1 : f);
+	// 	}
+	// 	claims.push(current);
+	// 	current = { year: 2012, percent: [] };
+	// 	for(var i = 340; i < 421; ++i) {
+	// 		var f = parseFloat(data[i]);
+	// 		current.percent.push((isNaN(f)) ? -1 : f);
+	// 	}
+	// 	claims.push(current);
+	// 	current = { year: 2013, percent: [] };
+	// 	for(var i = 421; i < 502; ++i) {
+	// 		var f = parseFloat(data[i]);
+	// 		current.percent.push((isNaN(f)) ? -1 : f);
+	// 	}
+	// 	claims.push(current);
+
+	// 	school.claims = claims;
+	// 	school.save(function(err) {
+	// 		if(err) {
+	// 			callback(err);
+	// 		} else {
+	// 			callback(null, school);
+	// 		}
+	// 	});
+
+	// });
+
+}
+
+exports.RecieveData = function(data, callback) {
+
+	var i = 0;
+	var end = 2600;
+
+	var Recursive = function() {
+
+		var Continue = function() {
+
+			++i;
+			if((i < data.length) && (i < end)) {
+				Recursive();
+			} else {
+				if(callback != null) {
+					callback(null,  "Finished");
+				}
+			}
+
+		}
+
+		var newSchool = {}
+		for(var j = 0; j < data[i].length; ++j) {
+			school.SetAtIndex(data[i][j], j, newSchool);
+		}
+
+		I_GetAuthority(newSchool, function(err, authority) {
+
+			if(err) {
+
+				console.log("Failed authority retrieval on " + i);
+				console.log(err);
+				console.log(newSchool);
+				Continue();
+				return;
+
+			}
+
+			newSchool.authority = authority._id;
+			var id = newSchool._id;
+			delete newSchool._id;
+
+			schoolModel.update({ _id: id }, newSchool, { upsert: true }, function(err, returnedSchool) {
+
+				if(err) {
+					console.log("Failed on " + i);
+					console.log(err);
+					console.log(newSchool);
+				} else {
+					console.log("Success on " + i);
+				}
+
+				Continue();
+
+			});
+
+		});
+
+	}
+
+	Recursive();
 
 }
