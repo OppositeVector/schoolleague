@@ -2,6 +2,17 @@
 // GetCity?name=<cityName> returns all the schools in a city
 // GetSchools returns all the schools in database, id,
 // GetComments?id=<schoolId> returns all the comments asociated with the school
+// PostComment should be used in post, writes a comment to the database, format:
+//		{ 
+//			school: <schoolId>,
+//			poster: <posterName>,
+//			content: <commentText>,
+//			path: <pathToParentComment>
+//		}
+//	path is used to place a comment under another comment, format: <num> <num> <num> ...
+//	each number denotes the index in the comments data set leading to the desired sub child of the tree
+//	the request will eventually return the updated comment block
+// GetClaims returns the strings corresponding to the claims array index in each school
 // test?<whatever> is for me to do tests on
 
 // The structure of the returned queries will ALWAYS be: { result: 0/1, data: <data> }, the result tells if the operation was
