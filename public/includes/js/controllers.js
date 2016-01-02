@@ -7,18 +7,19 @@ schoolsControllers.controller('searchCtrl', ['$scope', '$http',
     function ($scope, $http) {
         $scope.flag=false;
 
-        $http.get('http://localhost:8080/GetSchools').success(function(data) {
-            console.log(data.data);
+        $http.get('https://schoolleague.herokuapp.com/GetSchools').success(function(data) {
             $scope.schools = data.data;
             $scope.flag=true
         });
+
+
 
 
 }]);
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
-        $http.get('http://localhost:8080/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
+        $http.get('https://schoolleague.herokuapp.com/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
             console.log(data.data);
             $scope.school = data.data;
         });

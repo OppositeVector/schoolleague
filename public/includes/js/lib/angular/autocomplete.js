@@ -1,6 +1,3 @@
-/**
- * Created by Peleg on 19/12/2015.
- */
 /* --- Made by justgoscha and licensed under MIT license --- */
 
 var app = angular.module('autocomplete', []);

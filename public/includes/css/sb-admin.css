@@ -21,6 +21,7 @@ body {
 p {
     color: #777;
     padding: 10px 35px 0px 10px;
+    margin: 0px 0 6px 0;
 }
 
 #wrapper {
@@ -240,7 +241,7 @@ ul.alert-dropdown {
     margin-right: 150px;
 }}
 
-input[type=search] {
+input[type=search]{
     height: 30px;
     width: 300px;
     border: 1px solid #A9A9A9;
@@ -309,14 +310,20 @@ button {
     //top:70px;
     height: calc(100% - 50px);
     width: 100%;
+    top: 50px;
 }
 
-/*#searchBox {*/
-    /*position: absolute;*/
-    /*font-size: 0.8em;*/
-    /*top:10em;*/
-    /*right: 14.4em;*/
-/*}*/
+#searchBox {
+    position: absolute;
+    font-size: 0.8em;
+    top:15em;
+    right: 14.4em;
+    width: 27em;
+}
+
+#searchBox h5 {
+    font-weight: bold;
+}
 
 /*!* AUTOCOMPLETE *!*/
 /*.autocompletedemoCustomTemplate .autocomplete-custom-template li {*/
@@ -339,4 +346,4 @@ button {
     /*height: 19px;*/
     /*width: 19px;*/
     /*vertical-align: text-top;*/
-/*}*/
+}

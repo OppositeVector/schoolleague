@@ -59,7 +59,7 @@ function autoCompleteSearch ($timeout, $q, $scope, $location) {
     }
 
     function searchTextChange(text) {
-        //console.log('Text changed to ' + text);
+        console.log('Text changed to ' + text);
     }
 
     function selectedItemChange(item) {
@@ -77,7 +77,7 @@ function autoCompleteSearch ($timeout, $q, $scope, $location) {
      */
     function loadAll() {
         var repos = $scope.schools;
-        self.selectedItem = repos[0];
+        //self.selectedItem = repos[0];
         return repos.map( function (repo) {
             repo.value = repo.name +" "+ repo.city;
             return repo;

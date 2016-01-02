@@ -37,7 +37,12 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#schoolInfo"><i class="fa fa-fw fa-arrows-v"></i> בית ספר <i class="fa fa-fw fa-caret-down"></i></a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#schoolInfo">
+                        <i class="fa fa-fw fa-arrows-v"></i> בית ספר
+                        {{school.name}} <br>
+                        {{school.address}}, {{school.city}}
+                        <i class="fa fa-fw fa-caret-down"></i>
+                    </a>
                     <ul id="schoolInfo" class="collapse, active">
                         <li>
                             <p class="inlineBlock">שלב: </p>
