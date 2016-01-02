@@ -307,10 +307,10 @@ button {
 #over_map { position: absolute; top: 10px; left: 10px; z-index: 99; }
 #google_map {
     position: absolute;
-    //top:70px;
+    /*top:70px;*/
     height: calc(100% - 50px);
     width: 100%;
-    top: 50px;
+    /*top: 50px;*/
 }
 
 #searchBox {
