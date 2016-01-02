@@ -1,42 +1,204 @@
-<div id="google_map"></div>
-<div id="wrapper">
-	<header>
-		<section id="logo">לוגו</section>
+<div id="wrapper" style="padding-right: 0px;">
 
-		<nav>
-			<a href="#">על הפרוייקט</a>
-			<a href="#">על הרפורמה</a>
-		</nav>
-	</header>
-
-	<section id="searchBox">
-		<h3>הזן כתובת/מיקוד או בית ספר:</h3>
-		<div ng-controller="autoCompleteSearch as ctrl" ng-if="flag">
-			<md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache"
-							 md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText"
-							 md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)"
-							 md-item-text="item.name" md-min-length="0" placeholder="שם בית הספר"
-							 md-menu-class="autocomplete-custom-template">
-				<md-item-template>
-					  <span class="item-title" >
-						<span> <strong>{{item.name}}</strong> </span>
-					  </span>
-					  <span class="item-metadata">
-						<span class="item-metastat">
-						 {{item.city}}
-						</span>
-					  </span>
-				</md-item-template>
-				<md-not-found>לא נמצאו תוצאות</md-not-found>
-			</md-autocomplete>
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html"><b> לוגו</b></a>
 		</div>
-	</section>
-</div>
+		<!-- Top Menu Items -->
+		<section>
+			<li class="leftSearchBox">
+				<p>
+					<b>חיפוש</b>
+					<input type="search" name="schoolSearch" id="schoolSearchInPage">
+				</p>
+			</li>
+		</section>
+		<ul class="nav navbar-right top-nav">
+			<li class="dropdown">
+				<a href="#"><b>
+					על הרפורמה
+				</b></a>
+			</li>
+			<li class="dropdown">
+				<a href="#"><b>
+					על הפרוייקט
+				</b></a>
+			</li>
+		</ul>
+		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+		<!--<div class="collapse navbar-collapse navbar-ex1-collapse">-->
+			<!--<ul class="nav navbar-nav side-nav">-->
+				<!--<li>-->
+					<!--<a href="javascript:;" data-toggle="collapse" data-target="#schoolInfo"><i class="fa fa-fw fa-arrows-v"></i> בית ספר <i class="fa fa-fw fa-caret-down"></i></a>-->
+					<!--<ul id="schoolInfo" class="collapse, active">-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">שלב: </p>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass <= 6">יסודי</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass > 6 && school.toClass < 10">חטיבה</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass >= 10">תיכון</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">כיתות: </p>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 1">א</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 2">ב</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 3">ג</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 4">ד</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 5">ה</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 6">ו</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 7">ז</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 8">ח</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 9">ט</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 10">י</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 11">י"א</div>-->
+							<!--<div class="inlineBlock" ng-if="school.fromClass == 12">י"ב</div>-->
+							<!-- - -->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 1">א</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 2">ב</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 3">ג</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 4">ד</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 5">ה</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 6">ו</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 7">ז</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 8">ח</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 9">ט</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 10">י</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 11">י"א</div>-->
+							<!--<div class="inlineBlock" ng-if="school.toClass == 12">י"ב</div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">פיקוח:</p>-->
+							<!--<div class="inlineBlock" ng-if="school.supervision == 'state'">ממלכתי </div>-->
+							<!--<div class="inlineBlock" ng-if="school.supervision == 'religious'">ממכלתי דתי  </div>-->
+							<!--<div class="inlineBlock" ng-if="school.supervision == 'orthodox'">חרדי  </div>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">סוג חינוך: </p>-->
+							<!--{{school.type}}-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">מס' תלמידים בביה"ס: </p>-->
+							<!--{{school.studentsCount}}-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">מס' כיתות בביה"ס: </p>-->
+							<!--{{school.classCount}}-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">מס' תלמידים בכיתה: </p>-->
+							<!--{{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">שנת היווסדות: </p>-->
+							<!--{{school.foudingYear}}-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p class="inlineBlock">טלפון: </p>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</li>-->
 
+				<!--<li>-->
+					<!--<a href="javascript:;" data-toggle="collapse" data-target="#grades"><i class="fa fa-fw fa-arrows-v"></i> השגים לימודיים<i class="fa fa-fw fa-caret-down"></i></a>-->
+					<!--<ul id="grades" class="collapse">-->
+						<!--<li>-->
+							<!--<p><b>שכבת לימוד</b>  </p>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<form>-->
+								<!--<p>-->
+									<!--<input type="checkbox" name="grade" value="2ndGrade"> כתות ב'-->
+									<!--<br><br>-->
+									<!--<input type="checkbox" name="grade" value="5thGrade"> כתות ה'-->
+									<!--<br><br>-->
+								<!--</p>-->
+							<!--</form>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<p> <b>מקצוע</b></p>-->
+						<!--</li>-->
+						<!--<li>-->
+							<!--<form>-->
+								<!--<p>-->
+									<!--<input type="radio" name="subject" value="hebrew" checked> עברית-->
+									<!--<br><br>-->
+									<!--<input type="radio" name="subject" value="arabic"> ערבית-->
+									<!--<br><br>-->
+									<!--<input type="radio" name="subject" value="english"> אנגלית-->
+									<!--<br><br>-->
+									<!--<input type="radio" name="subject" value="math"> חשבון-->
+									<!--<br><br>-->
+									<!--<input type="radio" name="subject" value="scienceAndTechnology"> מדעים וטכנולוגיה-->
+									<!--<br><br>-->
+								<!--</p>-->
+							<!--</form>-->
+						<!--</li>-->
+					<!--</ul>-->
+				<!--</li>-->
+				<!--<il>-->
+					<!--<button type="button">הוסף בי"ס להשוואה</button>-->
+					<!--<button type="button"> חוות דעת </button>-->
+				<!--</il>-->
+			<!--</ul>-->
+		<!--</div>-->
+		<!-- /.navbar-collapse -->
+	</nav>
+
+	<div id="google_map"></div>
+
+</div>
+<!-- /#wrapper -->
 
 <script src="/includes/js/googlemap.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&signed_in=true&callback=initMap&language=iw"
-		async defer></script>
+async defer></script>
+
+<!--<div id="google_map"></div>-->
+<!--<div id="wrapper">-->
+	<!--<header>-->
+		<!--<section id="logo">לוגו</section>-->
+
+		<!--<nav>-->
+			<!--<a href="#">על הפרוייקט</a>-->
+			<!--<a href="#">על הרפורמה</a>-->
+		<!--</nav>-->
+	<!--</header>-->
+
+	<!--<section id="searchBox">-->
+		<!--<h3>הזן כתובת/מיקוד או בית ספר:</h3>-->
+		<!--<div ng-controller="autoCompleteSearch as ctrl" ng-if="flag">-->
+			<!--<md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache"-->
+							 <!--md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText"-->
+							 <!--md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)"-->
+							 <!--md-item-text="item.name" md-min-length="0" placeholder="שם בית הספר"-->
+							 <!--md-menu-class="autocomplete-custom-template">-->
+				<!--<md-item-template>-->
+					  <!--<span class="item-title" >-->
+						<!--<span> <strong>{{item.name}}</strong> </span>-->
+					  <!--</span>-->
+					  <!--<span class="item-metadata">-->
+						<!--<span class="item-metastat">-->
+						 <!--{{item.city}}-->
+						<!--</span>-->
+					  <!--</span>-->
+				<!--</md-item-template>-->
+				<!--<md-not-found>לא נמצאו תוצאות</md-not-found>-->
+			<!--</md-autocomplete>-->
+		<!--</div>-->
+	<!--</section>-->
+<!--</div>-->
+
+
+<!--<script src="/includes/js/googlemap.js"></script>-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&signed_in=true&callback=initMap&language=iw"-->
+		<!--async defer></script>-->
 
 <!--<script type="text/javascript">-->
 

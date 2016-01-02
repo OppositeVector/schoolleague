@@ -15,9 +15,9 @@ h1 {
 }
 
 h2 {
-	font-size: 30px;
+	font-size: 18px;
 	font-weight: 300;
-	color: white;
+	color: #262626;
 }
 
 h4 {
@@ -145,21 +145,22 @@ nav a{
 #content {
 	position: relative;
 	margin: auto;
-	margin-top: 70px;
-	width: 90%;
-	height: 900px;
+	//margin-top: 70px;
+	//width: 90%;
+	//height: 900px;
 	position: relative;
 	/*top:10%;*/
-	padding-right: 1em;
+	//padding-right: 1em;
 	//border: 1px solid black;
 	box-sizing:border-box;
 	display:block;
 }
 
 #rightSideInfo {
-	width: 29%;
+	width: 250px;
 	height: inherit;
 	float: right;
+	background-color: #D9D6D6;
 	//border: 1px solid red;
 }
 
@@ -176,7 +177,7 @@ nav a{
 	//border: 1px solid blue;
 	display: block;
 	margin-bottom: 20px;
-	background: grey;
+	//background: #cccccc;
 }
 
 #feedbacks {
@@ -185,7 +186,7 @@ nav a{
 	//border: 1px solid blue;
 	margin-bottom: 20px;
 	display: block;
-	background: #cccccc;
+	background: #F7F7F7;
 }
 
 #rate {
@@ -193,7 +194,17 @@ nav a{
 	height: 150px;
 	//border: 1px solid blue;
 	display: block;
-	background: #aaaaaa;
+	background: #F7F7F7;
+}
+
+.sideBtns {
+	margin: auto;
+	width: 200px;
+	height: 50px;
+//border: 1px solid blue;
+	display: block;
+	background: #F7F7F7;
+	margin-bottom: 20px;
 }
 
 #madlanInfo {

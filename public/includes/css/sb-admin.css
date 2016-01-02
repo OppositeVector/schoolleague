@@ -1,0 +1,342 @@
+/*!
+ * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+/* Global Styles */
+
+body {
+    margin-top: 100px;
+    background-color: #222;
+    font-family: 'Alef', sans-serifns;
+}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 50px;
+    }
+}
+
+p {
+    color: #777;
+    padding: 10px 35px 0px 10px;
+}
+
+#wrapper {
+    padding-left: 0;
+}
+
+#page-wrapper {
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+}
+
+.huge {
+    font-size: 50px;
+    line-height: normal;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+
+    #page-wrapper {
+        padding: 10px;
+    }
+}
+
+/* Top Navigation */
+
+.top-nav {
+    padding: 0 15px;
+}
+
+.top-nav>li {
+    display: inline-block;
+    float: left;
+}
+
+.top-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    line-height: 20px;
+    color: #555;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+    //color: #fff;
+    //background-color: #000;
+}
+
+.top-nav>.open>.dropdown-menu {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+    border: 1px solid rgba(0,0,0,.15);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+    white-space: normal;
+}
+
+ul.message-dropdown {
+    padding: 0;
+    max-height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+li.message-preview {
+    width: 275px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+li.message-preview>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+li.message-footer {
+    margin: 5px 0;
+}
+
+ul.alert-dropdown {
+    width: 200px;
+}
+
+/* Side Navigation */
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #dcdcdc;
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+        //background-color: #000 !important;
+    }
+}
+
+.side-nav>li>ul {
+    padding: 0;
+}
+
+.side-nav>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 38px;
+    text-decoration: none;
+    color: #999;
+}
+
+.side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+/* Flot Chart Containers */
+
+.flot-chart {
+    display: block;
+    height: 400px;
+}
+
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
+
+/* Custom Colored Panels */
+
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+    color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+    color: #df8a13;
+}
+
+/*bootstrap overrides*/
+
+@media (min-width: 768px) {
+.navbar-right {
+    float: right!important;
+    margin-right: 150px;
+}}
+
+input[type=search] {
+    height: 30px;
+    width: 300px;
+    border: 1px solid #A9A9A9;
+    border-radius: 3px;
+}
+
+.navbar-inverse {
+    background-color: #c7c7c7;
+    border-color: #c7c7c7;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #555;
+    margin-right: 10px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #555;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: #555;
+    background-color: transparent;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #c7c7c7;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: #c7c7c7;
+    border-color: #337ab7;
+}
+
+@media (min-width: 768px) {
+.navbar-nav>li {
+    float: right;
+    border-bottom: 1px solid #c9c9c9;
+}}
+
+button {
+    display: inline-block;
+    width: 180px;
+    height: 35px;
+    margin: 20px 20px -10px 10px;
+    background-color: #f2f2f0;
+    border: none;
+}
+
+/*my additions*/
+
+.leftSearchBox {
+    float: left;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.inlineBlock {
+    display: inline-block;
+}
+
+#over_map { position: absolute; top: 10px; left: 10px; z-index: 99; }
+#google_map {
+    position: absolute;
+    //top:70px;
+    height: calc(100% - 50px);
+    width: 100%;
+}
+
+/*#searchBox {*/
+    /*position: absolute;*/
+    /*font-size: 0.8em;*/
+    /*top:10em;*/
+    /*right: 14.4em;*/
+/*}*/
+
+/*!* AUTOCOMPLETE *!*/
+/*.autocompletedemoCustomTemplate .autocomplete-custom-template li {*/
+    /*border-bottom: 1px solid #ccc;*/
+    /*height: auto;*/
+    /*padding-top: 8px;*/
+    /*padding-bottom: 8px;*/
+    /*white-space: normal; }*/
+
+/*.autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {*/
+    /*border-bottom-width: 0; }*/
+
+/*.autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,*/
+/*.autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {*/
+    /*display: block;*/
+    /*line-height: 2;*/
+    /*vertical-align: middle;}*/
+
+/*.schoolIcon {*/
+    /*height: 19px;*/
+    /*width: 19px;*/
+    /*vertical-align: text-top;*/
+/*}*/
