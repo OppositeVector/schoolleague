@@ -63,6 +63,7 @@ angular.module( "ngAutocomplete", [])
                                 country: scope.options.country
                             }
                         }
+
                     }
                 }
                 initOpts()
@@ -75,6 +76,10 @@ angular.module( "ngAutocomplete", [])
                         scope.$apply(function() {
                             scope.details = scope.gPlace.getPlace();
                             scope.ngAutocomplete = element.val();
+
+                            //Get coordinates
+                            console.log (scope.details.geometry.location.lat());
+                            console.log (scope.details.geometry.location.lng());
                         });
                     })
                 }

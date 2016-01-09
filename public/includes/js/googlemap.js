@@ -47,8 +47,8 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
                 //infowindow.setContent(results[1].formatted_address);
                 console.log (results[1]);
 
-                if ($('#Autocomplete'))
-                    $('#Autocomplete').val(results[1].address_components[0].long_name)
+                //if ($('#Autocomplete'))
+                //    $('#Autocomplete').val(results[1].address_components[0].long_name)
             } else {
                 window.alert('No results found');
             }

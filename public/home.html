@@ -36,14 +36,17 @@
 			<!--<input type="text" ng-model="selected" typeahead="school as (school.name + ' ' + school.city) for school in schools | filter:$viewValue" typeahead-min-length="3" class="form-control"/>-->
 
 
-			<angucomplete id="ex1"
-						  pause="100"
-						  selectedobject="selectedCountry"
-						  localdata="schools"
-						  searchfields="name"
-						  titlefield="name,city"
-						  minlength="1"
-						  inputclass="form-control form-control-small"/>
+			<!--<angucomplete id="ex1"-->
+						  <!--pause="100"-->
+						  <!--selectedobject="selectedCountry"-->
+						  <!--localdata="schools"-->
+						  <!--searchfields="name"-->
+						  <!--titlefield="name,city"-->
+						  <!--minlength="3"-->
+						  <!--inputclass="form-control form-control-small" googleplace ng-model="chosenPlace"/>-->
+
+			<!--<input ng-model="chosenPlace" googleplace class="form-control"/>-->
+			<input type="text" id="Autocomplete" class="form-control" ng-autocomplete="result2" details="details2" options="options2"/>
 		</div>
 	</section>
 

@@ -5,9 +5,8 @@ var schoolApp = angular.module("schoolApp", [
     'ngRoute',
     'schoolsControllers',
     'ngMessages',
-    'ngAutocomplete',
-    'ui.bootstrap',
-    'angucomplete'
+    'angucomplete',
+    'ngAutocomplete'
 ]).controller('autoCompleteSearch', autoCompleteSearch);
 
 schoolApp.config(['$routeProvider',
@@ -32,4 +31,9 @@ schoolApp.config(['$routeProvider',
 
 function autoCompleteSearch ($scope, $timeout) {
     //TODO complete
+    $scope.result2 = '';
+    $scope.options2 = {
+        country: 'il'
+    };
+    $scope.details2 = '';
 }
