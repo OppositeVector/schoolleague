@@ -15,6 +15,10 @@ schoolApp.config(['$routeProvider',
             templateUrl: 'home.html',
             controller: 'searchCtrl'
         }).
+        when('/filter/:name', {
+            templateUrl: 'filterSchools.html',
+            controller: 'filterSchoolsCtrl'
+        }).
         when('/getSchool/:schoolId', {
             templateUrl: 'schoolInfo.html',
             controller: 'schoolInfoCtrl'
@@ -94,5 +98,53 @@ function autoCompleteSearch ($timeout, $q, $scope, $location) {
             return (item.value.indexOf(lowercaseQuery) >= 0);
         };
 
+    }
+
+    ///**
+    // * Checkbox Filters
+    // */
+    //
+    //function filterSchools(schools) {
+    //    $scope.filter = [
+    //        {'name': 'Apple', 'colour': 'Red'},
+    //        {'name': 'Orange', 'colour': 'Orange'},
+    //        {'name': 'Banana', 'colour': 'Yellow'}];
+    //
+    //    $scope.colourIncludes = [];
+    //
+    //    $scope.includeColour = function(colour) {
+    //        var i = $.inArray(colour, $scope.colourIncludes);
+    //        if (i > -1) {
+    //            $scope.colourIncludes.splice(i, 1);
+    //        } else {
+    //            $scope.colourIncludes.push(colour);
+    //        }
+    //    }
+    //
+    //    $scope.colourFilter = function(fruit) {
+    //        if ($scope.colourIncludes.length > 0) {
+    //            if ($.inArray(fruit.colour, $scope.colourIncludes) < 0)
+    //                return;
+    //        }
+    //
+    //        return fruit;
+    //    }
+    //}
+
+    /**
+     * Drag and Drop
+     */
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
     }
 }

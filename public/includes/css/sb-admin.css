@@ -281,6 +281,7 @@ input[type=search]{
 .navbar-nav>li {
     float: right;
     border-bottom: 1px solid #c9c9c9;
+    width: inherit;
 }}
 
 button {
@@ -336,14 +337,30 @@ button {
 /*.autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {*/
     /*border-bottom-width: 0; }*/
 
-/*.autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,*/
-/*.autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {*/
-    /*display: block;*/
-    /*line-height: 2;*/
-    /*vertical-align: middle;}*/
+.draggingArea {
+    width: 70%;
+    margin: auto;
+}
 
-/*.schoolIcon {*/
-    /*height: 19px;*/
-    /*width: 19px;*/
-    /*vertical-align: text-top;*/
+/* AUTOCOMPLETE */
+.autocompletedemoCustomTemplate .autocomplete-custom-template li {
+    border-bottom: 1px solid #ccc;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    white-space: normal; }
+
+.autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {
+    border-bottom-width: 0; }
+
+.autocompletedemoCustomTemplate .autocomplete-custom-template .item-title,
+.autocompletedemoCustomTemplate .autocomplete-custom-template .item-metadata {
+    display: block;
+    line-height: 2;
+    vertical-align: middle;}
+
+.schoolIcon {
+    height: 19px;
+    width: 19px;
+    vertical-align: text-top;
 }
