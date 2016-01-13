@@ -38,14 +38,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
 }
 
-
 function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     var latlng = {lat: lat, lng: lng};
     geocoder.geocode({'location': latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
                 //infowindow.setContent(results[1].formatted_address);
-                console.log (results[1]);
+                //console.log (results[1]);
 
                 //if ($('#Autocomplete'))
                 //    $('#Autocomplete').val(results[1].address_components[0].long_name)
@@ -58,18 +57,40 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     });
 }
 
-function filterMap(schools) {
+function filterMap(schools, location, title) {
     var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
         mapTypeId: 'roadmap'
     };
 
-    console.log('schools length:' + schools.length);
+    //console.log('schools length:' + schools.length);
 
-      // Display a map on the page
-    map = new google.maps.Map(document.getElementById("google_map"), mapOptions);
-    map.setTilt(45);
+      // Display a map on the page and places the chosen position in a balloon
+    map = new google.maps.Map(document.getElementById("google_map"), mapOptions, {
+        center: {lat: location.lat, lng: location.lng},
+        zoom: 17,
+            disableDefaultUI:true
+    });
+    var infoBalloon = new google.maps.InfoWindow({map: map});
+    var geocoder = new google.maps.Geocoder;
+
+    //console.log(location.lat);
+
+    //infoBalloon.setPosition(location);
+    //infoBalloon.setContent(title);
+    //map.setCenter(location);
+    //geocodeLatLng(geocoder, map, infoBalloon, location.lat, location.lng);
+    //map.setTilt(45);
+
+    var image = '../../includes/images/homeMarker.png';
+    marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: {lat: location.lat, lng: location.lng},
+        icon: image
+    });
 
     // Multiple Markers
     var markers = [
@@ -87,6 +108,7 @@ function filterMap(schools) {
         '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
         '</div>']
     ];
+
 
     // Display multiple markers on a map
     var infoWindow = new google.maps.InfoWindow(), marker, i;

@@ -33,7 +33,7 @@
  */
 
 angular.module( "ngAutocomplete", [])
-    .directive('ngAutocomplete', function($parse) {
+    .directive('ngAutocomplete', function($parse, $window, $location) {
         return {
 
             scope: {
@@ -42,7 +42,7 @@ angular.module( "ngAutocomplete", [])
                 options: '='
             },
 
-            link: function(scope, element, attrs, model) {
+            link: function(scope, element, attrs, model, window) {
 
                 //options for autocomplete
                 var opts
@@ -78,8 +78,23 @@ angular.module( "ngAutocomplete", [])
                             scope.ngAutocomplete = element.val();
 
                             //Get coordinates
-                            console.log (scope.details.geometry.location.lat());
-                            console.log (scope.details.geometry.location.lng());
+                            //console.log (scope.details.geometry.location.lat());
+                            //console.log (scope.details.geometry.location.lng());
+                            //console.log (scope.details.formatted_address);
+
+                            scope.tempAddress = scope.details.formatted_address.split(",");
+
+                            if (scope.tempAddress[2] == null) console.log (scope.tempAddress[0]);
+                            else {
+                                while(scope.tempAddress[1].charAt(0) === ' ')  scope.tempAddress[1] = scope.tempAddress[1].substr(1);
+                                console.log (scope.tempAddress[0]);
+                                console.log (scope.tempAddress[1]);
+                            }
+
+                            $window.sessionStorage.setItem("theAddress", JSON.stringify(scope.details));
+                            console.log($window.sessionStorage);
+                            $location.path("filter/" + scope.tempAddress[1]);
+
                         });
                     })
                 }
