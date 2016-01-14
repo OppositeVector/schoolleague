@@ -27,6 +27,7 @@ var express = require("express");
 var app = express();
 
 var dbc = require("./dbcontroller/dbcontroller");
+var filter = require("./dbcontroller/filter");
 
 var port = process.env.PORT || 8080;
 
@@ -84,6 +85,10 @@ app.get("/GetCity", function(req, res) {
 
 		for(var i = 0; i < data.length; ++i) {
 			data[i].id = data[i]._id;
+			if(data[i].fromClass > 1) {
+				data.splice(i, 1);
+				--i;
+			}
 		}
 		res.json({ result: 1, data: data });
 
@@ -137,13 +142,47 @@ app.post("/PostComment", function(req, res) {
 
 });
 
+app.get("/GetFilterData", function(req, res) {
+
+	res.json({
+		result: 1, 
+		data: { 
+			weights: filter.weights,
+			criteria: filter.criteria
+		}
+	});
+
+});
+
+app.get("/Filter", function(req, res) {
+
+	var params = url.parse(req.url,true).query;
+	dbc.GetCityByName(params.city, function(err, schools) {
+		var filteredData = filter.Filter(schools, params.p1, params.p2, params.p3, params.p4, params.p4);
+		res.json({ result: 1, data: filteredData });
+	});
+
+});
+
+app.get("/GetAuthority", function(req, res) {
+
+	var id = url.parse(req.url,true).query.id;
+
+	dbc.GetAuthority(id, function(err, data) {
+
+		if(err) {
+			res.json({ result: 0, data: err });
+		} else {
+			res.json({ result: 1, data: data });
+		}
+
+	});
+
+});
+
 app.get("/test", function(req, res) {
 
-	// var searchTerm = url.parse(req.url,true).query.searchTerm;
-	var type = url.parse(req.url,true).query.type;
-	console.log(type);
-
-	dbc.TestConfig(type, function(err, data) {
+	dbc.GetSchoolsWithDataAndRunFunction({ "position.lat": 360 }, dbc.AggregateSchoolData, function(err, data) {
 
 		if(err) {
 			res.json({ result: 0, data: err });
@@ -177,12 +216,30 @@ function RecursiveDataInsertion(data, index) {
 
 }
 
+app.post("/RecieveBudget", function(req, res) {
+
+	res.json({ result: 1, data: "Recieved" });
+
+	var data = req.body;
+
+	dbc.RecieveBudget(data, function(err, info) {
+
+		if(err) {
+			console.log(err);
+			return;
+		}
+
+		console.log(info);
+
+	});
+
+});
+
 app.post("/RecieveData", function(req, res) {
 
 	res.json({ result: 1, data: "Recieved" });
 
 	var data = req.body;
-	data.splice(data.length - 1, 1);
 	data.splice(0, 1);
 
 	dbc.RecieveData(data, function(err, info) {

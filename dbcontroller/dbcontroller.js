@@ -7,6 +7,10 @@
 // GetCityById(cityId, callback)
 // GetComments(schoolId, callback)
 
+// callback standard format: funciton(err, data), if err is null, then data should be populated, if err isnt null
+// then an error has occured and data population is undefined (globally, might be defined per function), err will contain
+// the error messege
+
 var mongoose = require("mongoose");
 
 var config = require("./configHandler");
@@ -213,6 +217,152 @@ exports.PostComment = function(comment, callback) {
 			callback(null, commentsData);
 
 		})
+
+	});
+
+}
+
+exports.GetAuthority = function(id, callback) {
+
+	authorityModel.findOne({ _id: id }, function(err, authority) {
+
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		callback(null, authority);
+
+	});
+
+}
+
+// func's first parameter gets the schools data and the second parameter is the callback (standrd callback as defined in the header)
+exports.GetSchoolsWithDataAndRunFunction = function(data, func, callback) {
+
+	schoolModel.find(data, function(err, schools) {
+
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		func(schools, callback);
+
+	});
+
+}
+
+exports.AggregateSchoolData = function(schools, callback) {
+
+	var retVal = {
+		supervision: [],
+		fromClass: [],
+		toClass: [],
+		authority: [],
+		type: [],
+		legal: [],
+		sector: [],
+		language: [],
+
+	};
+	var index = -1;
+
+	for(var i = 0; i < schools.length; ++i) {
+
+		var curr = schools[i];
+
+		for(var key in retVal) {
+			var element = retVal[key].find(function(ele) {
+				if(ele.val.localeCompare != null) {
+					return ele.val.localeCompare(curr[key]) == 0; 
+				} else {
+					return ele.val == curr[key];
+				}
+				
+			});
+			if(element != null) {
+				++element.count;
+			} else {
+				retVal[key].push({ val: curr[key], count : 1 });
+			}
+		}
+
+	}
+
+	for(var key in retVal) {
+
+		retVal[key].sort(function(a, b) {
+			if(a.count < b.count) {
+				return 1;
+			} else if(a.count > b.count) {
+				return -1;
+			}
+			return 0;
+		});
+
+		var total = 0;
+		for(var i = 0; i < retVal[key].length; ++i) {
+			total += retVal[key][i].count;
+		}
+		retVal[key].push({ total: total });
+
+	}
+
+	retVal.totalSchools = schools.length;
+
+	callback(null, retVal);
+
+}
+
+exports.GetEmpty = function(callback) {
+
+	schoolModel.find({ "position.lat": 360 }, "sector supervision" , function(err, schools) {
+
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		var arabic = 0;
+		var ortho = 0;
+		var total = 0;
+		var bed = 0;
+		var cir = 0;
+		var druz = 0;
+
+		for(var i = 0; i < schools.length; ++i) {
+			if(schools[i].sector.localeCompare("Arabic") == 0) {
+				++arabic;
+				++total;
+			}
+			if(schools[i].supervision.localeCompare("orthodox") == 0) {
+				++ortho;
+				++total;
+			}
+			if(schools[i].sector.localeCompare("Bedouin") == 0) {
+				++bed;
+				++total;
+			}
+			if(schools[i].sector.localeCompare("Druse") == 0) {
+				++druz;
+				++total;
+			}
+			if(schools[i].sector.localeCompare("Circassian") == 0) {
+				++cir;
+				++total;
+			}
+		}
+
+		callback(null, { 
+			length: schools.length,
+			total: total,
+			arabic: arabic,
+			orthodox: ortho,
+			bedouin: bed,
+			druse: druz,
+			circassian: cir
+		});
 
 	});
 
@@ -677,6 +827,46 @@ exports.RecieveData = function(data, callback) {
 				Continue();
 
 			});
+
+		});
+
+	}
+
+	Recursive();
+
+}
+
+exports.RecieveBudget = function(data, callback) {
+
+	var current = 0;
+	var end = 2600;
+
+	function Recursive() {
+
+		function Continue() {
+
+			++current;
+			if((current < end) && (current < data.length)) {
+				Recursive();
+			} else {
+				callback(null, "Finished");
+			}
+
+		}
+
+		var schoolId = parseInt(data[current][0]);
+		var budget = parseInt(data[current][2].replace(/,/g, ""));
+		schoolModel.findOneAndUpdate({ _id: schoolId }, { budget: budget }, function(err, data) {
+
+			if(err) {
+				console.log("Failed on " + current);
+				console.log(err);
+				Continue();
+				return;
+			}
+
+			console.log("Success on " + current + " b: " + budget);
+			Continue();
 
 		});
 
