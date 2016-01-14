@@ -822,6 +822,7 @@ exports.RecieveData = function(data, callback) {
 					console.log(newSchool);
 				} else {
 					console.log("Success on " + i);
+					console.log(returnedSchool);
 				}
 
 				Continue();

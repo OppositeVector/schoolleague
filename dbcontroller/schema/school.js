@@ -332,10 +332,10 @@ exports.SetAtIndex = function(value, index, school) {
 			school.position.lat = CheckNaN(parseFloat(value), 360);
 			break;
 		case 14:
-			school.schoolManager;
+			school.schoolManager = value;
 			break;
 		case 15:
-			return school.phoneNumber;
+			school.phoneNumber = value;
 			break;
 		case 16:
 			school.fullEducationalDay = (value === "true");
