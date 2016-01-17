@@ -5,14 +5,14 @@ var schoolsControllers = angular.module('schoolsControllers', []);
 
 schoolsControllers.controller('searchCtrl', ['$scope', '$http',
     function ($scope, $http) {
-        $scope.flag=false;
-
-        $http.get('http://localhost:8080/GetSchools').success(function(data) {
-            $scope.schools = data.data;
-            $scope.flag=false
-
-            console.log($scope.schools[0]);
-        });
+        //$scope.flag=false;
+        //
+        //$http.get('http://localhost:8080/GetSchools').success(function(data) {
+        //    $scope.schools = data.data;
+        //    $scope.flag=false
+        //
+        //    console.log($scope.schools[0]);
+        //});
 
     initMap();
 }]);
@@ -67,10 +67,80 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
-        $http.get('http://localhost:8080/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
+        $http.get('https://schoolleague.herokuapp.com/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
             console.log(data.data);
             $scope.school = data.data;
+            calimsGraph(0, $scope.school);
+            //generateGraph();
+            generateGraph2();
         });
+
+        function generateGraph2() {
+            var chart = c3.generate({
+                bindto: '#c3chart',
+                data: {
+                    rows: [
+                        ['Student Satisfaction', 'Teacher Satisfaction'],
+                        [61, 56],
+                        [null, 88],
+                        [59, 56],
+                        [39, 44] //claims average
+
+                    ],
+                    type: 'area',
+                    colors: {
+                        'Student Satisfaction': '#f49292',
+                        'Teacher Satisfaction': 'green'
+                    },
+                    empty: {
+                        label: {
+                            text: "No Data"
+                        }
+                    }
+                },
+                line: {
+                    connectNull: true
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: ['2009', '2010', '2011', '2012', '2013', '2014'],
+                        tick: {
+                            culling: {
+                                max: 100
+                            }
+                        },
+                        padding: {left:0, right:0}
+                    },
+                    y: {
+                        max: 100,
+                        min: 0,
+                        padding: {top:0, bottom:0}
+                    }
+
+                }
+
+            });
+        }
+
+        $scope.calimsGraph = function calimsGraph(category, school) {
+            //var retVal = [];
+            //var max = 0;
+            //var min = 12301201230123;
+            //
+            //for (var j=0 ; j < school.claims.length ; j++) {
+            //    var curSchoolClaim = school.claims[j];
+            //    console.log ("Year: " + curSchoolClaim.year);
+            //    for(var i = 0; i < criteria[category].claims.length; i++) {
+            //        var curClaim = criteria[category].claims[i];
+            //
+            //        console.log("Claim num:" + curClaim +" " +curSchoolClaim.percent[curClaim]);
+            //
+            //    }
+            //}
+
+            console.log(criteria[category].name);
+        }
 
 }]);
 

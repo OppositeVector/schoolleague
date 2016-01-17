@@ -8,7 +8,7 @@
 
 body {
     margin-top: 100px;
-    background-color: #222;
+    /*background-color: #222;*/
     font-family: 'Alef', sans-serifns;
 }
 
@@ -19,8 +19,8 @@ body {
 }
 
 p {
-    color: #777;
-    padding: 10px 35px 0px 10px;
+    color: #252b5d;
+    /*padding: 10px 35px 0px 10px;*/
     margin: 0px 0 6px 0;
 }
 
@@ -124,15 +124,15 @@ ul.alert-dropdown {
         position: fixed;
         top: 51px;
         left: 225px;
-        width: 225px;
+        width: 280px;
         margin-left: -225px;
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #dcdcdc;
-        bottom: 0;
+        /*bottom: 0;*/
         overflow-x: hidden;
         padding-bottom: 40px;
+        right: 2em;
     }
 
     .side-nav>li>a {
@@ -249,8 +249,8 @@ input[type=search]{
 }
 
 .navbar-inverse {
-    background-color: #c7c7c7;
-    border-color: #c7c7c7;
+    background-color: #fff;
+    border-bottom: 3px solid #f7a2a2;
 }
 
 .navbar-inverse .navbar-brand {
@@ -280,7 +280,7 @@ input[type=search]{
 @media (min-width: 768px) {
 .navbar-nav>li {
     float: right;
-    border-bottom: 1px solid #c9c9c9;
+    /*border-bottom: 1px solid #c9c9c9;*/
     width: inherit;
 }}
 
@@ -288,7 +288,7 @@ button {
     display: inline-block;
     width: 180px;
     height: 35px;
-    margin: 20px 20px -10px 10px;
+    margin: 10px 0px 10px 10px;
     background-color: #f2f2f0;
     border: none;
 }
@@ -423,3 +423,145 @@ button {
     height: 34px;
     width: 34px;
 }
+
+
+.page-header{
+    border-bottom: 3px solid #f7a2a2;
+    margin: 40px 100px 20px;
+}
+
+#graphsFilters {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding-top: 1.5em;
+    margin: auto;
+    flex:3;
+}
+
+.categoryFilter {
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+}
+
+.categoryFilter:nth-child(1){
+    /*text-align: left;*/
+    /*flex: 2;*/
+}
+
+.categoryFilter:nth-child(5){
+    /*text-align: right;*/
+    /*flex: 2;*/
+}
+
+.categoryIcon {
+    height: 2em;
+    max-width: 2.5em;
+}
+
+.categoryTitle{
+    font-weight: lighter;
+    color: #ee5253
+}
+
+#page-wrapper {
+    height: 100vh;
+}
+
+/*.navbar-inverse {*/
+    /*border-bottom: 2px solid #f7a2a2;*/
+/*}*/
+
+.navbar-nav {
+    float: none;
+    color: #252b5d;
+}
+
+.navbar-nav li.active:after, .navbar-nav li.active:before {
+    bottom: 0%;
+    margin-bottom: -2px;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.navbar-nav li.active:after {
+    border-bottom-color: #fff;
+    border-width: 6px;
+    margin-left: -6px;
+    z-index: 1;
+}
+.navbar-nav li.active:before {
+    border-bottom-color: #f7a2a2;
+    border-width: 9px;
+    margin-left: -9px;
+    z-index: 1;
+}
+
+#graphsFilters.navbar-nav>li {
+    border-bottom: 2px solid #f7a2a2;
+}
+
+#graphsFiltersSection {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    width: 80%;
+}
+
+#schoolName {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+#schoolInfo {
+    list-style: none;
+    margin-bottom: 2em;
+}
+
+.schoolInfoSection {
+    border: 3px solid #f7a2a2;
+    border-top: 0px;
+    border-radius: 0px 0px 15px 15px;
+    padding: 1.5em;
+}
+
+.schoolInfoSection:nth-child(2) {
+    border: 3px solid #f7a2a2;
+    border-radius: 15px;
+    margin-top: -3px;
+}
+
+#opinionsBTN,
+#comparisonBTN{
+    color: #252b5d;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#opinionsBTN {
+    background-color: #ff9999;
+}
+
+#comparisonBTN {
+    background-color: #3dc1b4;
+}
+
+.borderCompletion {
+    border-bottom: 2px solid #f7a2a2;
+    display: inline-block;
+    flex:1;
+}
+
+#graphContainer {
+    height: 500px;
+    width:100%;
+}
+

@@ -10,7 +10,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html"><b> לוגו</b></a>
+            <a class="navbar-brand" href="/">
+                <!--<img src="/includes/images/Logo.png" alt="ליגת בתי הספר">-->
+                לוגו
+            </a>
         </div>
         <!-- Top Menu Items -->
         <section>
@@ -21,136 +24,58 @@
                 </p>
             </li>
         </section>
-        <ul class="nav navbar-right top-nav">
-            <li class="dropdown">
-                <a href="#"><b>
-                    על הרפורמה
-                </b></a>
-            </li>
-            <li class="dropdown">
-                <a href="#"><b>
-                    על הפרוייקט
-                </b></a>
-            </li>
-        </ul>
+        <!--<ul class="nav navbar-right top-nav">-->
+            <!--<li class="dropdown">-->
+                <!--<a href="#"><b>-->
+                    <!--על הרפורמה-->
+                <!--</b></a>-->
+            <!--</li>-->
+            <!--<li class="dropdown">-->
+                <!--<a href="#"><b>-->
+                    <!--על הפרוייקט-->
+                <!--</b></a>-->
+            <!--</li>-->
+        <!--</ul>-->
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#schoolInfo">
-                        <i class="fa fa-fw fa-arrows-v"></i> בית ספר
-                        {{school.name}} <br>
-                        {{school.address}}, {{school.city}}
-                        <i class="fa fa-fw fa-caret-down"></i>
-                    </a>
-                    <ul id="schoolInfo" class="collapse, active">
-                        <li>
-                            <p class="inlineBlock">שלב: </p>
-                            <div class="inlineBlock" ng-if="school.toClass <= 6">יסודי</div>
-                            <div class="inlineBlock" ng-if="school.toClass > 6 && school.toClass < 10">חטיבה</div>
-                            <div class="inlineBlock" ng-if="school.toClass >= 10">תיכון</div>
-                        </li>
-                        <li>
-                            <p class="inlineBlock">כיתות: </p>
-                            <div class="inlineBlock" ng-if="school.fromClass == 1">א</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 2">ב</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 3">ג</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 4">ד</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 5">ה</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 6">ו</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 7">ז</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 8">ח</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 9">ט</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 10">י</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 11">י"א</div>
-                            <div class="inlineBlock" ng-if="school.fromClass == 12">י"ב</div>
-                            -
-                            <div class="inlineBlock" ng-if="school.toClass == 1">א</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 2">ב</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 3">ג</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 4">ד</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 5">ה</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 6">ו</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 7">ז</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 8">ח</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 9">ט</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 10">י</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 11">י"א</div>
-                            <div class="inlineBlock" ng-if="school.toClass == 12">י"ב</div>
-                        </li>
-                        <li>
-                            <p class="inlineBlock">פיקוח:</p>
-                            <div class="inlineBlock" ng-if="school.supervision == 'state'">ממלכתי </div>
-                            <div class="inlineBlock" ng-if="school.supervision == 'religious'">ממכלתי דתי  </div>
-                            <div class="inlineBlock" ng-if="school.supervision == 'orthodox'">חרדי  </div>
-                        </li>
+                <li class="schoolInfoSection">
+                    <section id="schoolName">
+                        <article ng-if="school.supervision == 'state'">בית ספר ממלכתי</article>
+                        <article ng-if="school.supervision == 'religious'">בית ספר ממ״ד</article>
+                        <article ng-if="school.supervision == 'orthodox'">בית ספר חרדי</article>
+
+                        {{school.name}}
+                        {{school.city}}
+                    </section>
+                    <ul id="schoolInfo">
                         <li>
                             <p class="inlineBlock">סוג חינוך: </p>
                             {{school.type}}
                         </li>
                         <li>
-                            <p class="inlineBlock">מס' תלמידים בביה"ס: </p>
+                            <p class="inlineBlock">מספר תלמידים:</p>
                             {{school.studentsCount}}
                         </li>
                         <li>
-                            <p class="inlineBlock">מס' כיתות בביה"ס: </p>
-                            {{school.classCount}}
-                        </li>
-                        <li>
-                            <p class="inlineBlock">מס' תלמידים בכיתה: </p>
+                            <p class="inlineBlock">תלמידים בכיתה:</p>
                             {{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}
                         </li>
                         <li>
-                            <p class="inlineBlock">שנת היווסדות: </p>
+                            <p class="inlineBlock">שנת הקמה:</p>
                             {{school.foudingYear}}
                         </li>
                         <li>
                             <p class="inlineBlock">טלפון: </p>
+                            {{school.phoneNumber}}
                         </li>
                     </ul>
+                    <button type="button" id="opinionsBTN"> חוות דעת </button>
                 </li>
+                <li class="schoolInfoSection">
+                    <button type="button" id="comparisonBTN">הוסף בי"ס להשוואה</button>
 
-                <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#grades"><i class="fa fa-fw fa-arrows-v"></i> השגים לימודיים<i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="grades" class="collapse">
-                        <li>
-                            <p><b>שכבת לימוד</b>  </p>
-                        </li>
-                        <li>
-                            <form>
-                                <p>
-                                    <input type="checkbox" name="grade" value="2ndGrade"> כתות ב'
-                                    <br><br>
-                                    <input type="checkbox" name="grade" value="5thGrade"> כתות ה'
-                                    <br><br>
-                                </p>
-                            </form>
-                        </li>
-                        <li>
-                            <p> <b>מקצוע</b></p>
-                        </li>
-                        <li>
-                            <form>
-                                <p>
-                                    <input type="radio" name="subject" value="hebrew" checked> עברית
-                                    <br><br>
-                                    <input type="radio" name="subject" value="arabic"> ערבית
-                                    <br><br>
-                                    <input type="radio" name="subject" value="english"> אנגלית
-                                    <br><br>
-                                    <input type="radio" name="subject" value="math"> חשבון
-                                    <br><br>
-                                    <input type="radio" name="subject" value="scienceAndTechnology"> מדעים וטכנולוגיה
-                                    <br><br>
-                                </p>
-                            </form>
-                        </li>
-                    </ul>
                 </li>
-                <il>
-                    <button type="button">הוסף בי"ס להשוואה</button>
-                    <button type="button"> חוות דעת </button>
-                </il>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -160,273 +85,49 @@
 
         <div class="container-fluid">
 
-            <!-- Page Heading -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">
-                        Dashboard <small>Statistics Overview</small>
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li class="active">
-                            <i class="fa fa-dashboard"></i> Dashboard
-                        </li>
-                    </ol>
-                </div>
+            <div id="graphsFiltersSection" class="row">
+                <section class="borderCompletion"></section>
+                <ul id="graphsFilters" class="nav navbar-nav">
+                    <li class="categoryFilter active">
+                        <img src="/includes/images/4.svg" alt="" class="categoryIcon">
+                        <h5 class="categoryTitle">שביעות רצון</h5>
+                    </li>
+                    <li class="categoryFilter">
+                        <img src="/includes/images/3.svg" alt="" class="categoryIcon">
+                        <h5 class="categoryTitle">אווירה</h5>
+                    </li>
+                    <li class="categoryFilter">
+                        <img src="/includes/images/1.svg" alt="" class="categoryIcon">
+                        <h5 class="categoryTitle">רמת לימוד</h5>
+                    </li>
+                    <li class="categoryFilter">
+                        <img src="/includes/images/2.svg" alt="" class="categoryIcon">
+                        <h5 class="categoryTitle">איכות לימוד</h5>
+                    </li>
+                    <li class="categoryFilter">
+                        <img src="/includes/images/5.svg" alt="" class="categoryIcon">
+                        <h5 class="categoryTitle">ביטחון</h5>
+                    </li>
+                </ul>
+                <section class="borderCompletion"></section>
             </div>
             <!-- /.row -->
 
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="alert alert-info alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
-                    </div>
-                </div>
+                <ul>
+                    <li>
+                        <section class="innerCategories" ng-click="calimsGraph(0, school)">מורים</section>
+                        <section class="innerCategories" ng-click="calimsGraph(1, school)">תלמידים</section>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row" id="graphContainer">
+                <div id="chart"></div>
+                <div id="c3chart"></div>
             </div>
             <!-- /.row -->
 
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-comments fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">26</div>
-                                    <div>New Comments!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-tasks fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">12</div>
-                                    <div>New Tasks!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-shopping-cart fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">124</div>
-                                    <div>New Orders!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
-                                </div>
-                                <div class="col-xs-9 text-right">
-                                    <div class="huge">13</div>
-                                    <div>Support Tickets!</div>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <div class="text-right">
-                                <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">just now</span>
-                                    <i class="fa fa-fw fa-calendar"></i> Calendar updated
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">4 minutes ago</span>
-                                    <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">23 minutes ago</span>
-                                    <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">46 minutes ago</span>
-                                    <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">1 hour ago</span>
-                                    <i class="fa fa-fw fa-user"></i> A new user has been added
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">2 hours ago</span>
-                                    <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">yesterday</span>
-                                    <i class="fa fa-fw fa-globe"></i> Saved the world
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <span class="badge">two days ago</span>
-                                    <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
-                                </a>
-                            </div>
-                            <div class="text-right">
-                                <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>Order #</th>
-                                        <th>Order Date</th>
-                                        <th>Order Time</th>
-                                        <th>Amount (USD)</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>3326</td>
-                                        <td>10/21/2013</td>
-                                        <td>3:29 PM</td>
-                                        <td>$321.33</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3325</td>
-                                        <td>10/21/2013</td>
-                                        <td>3:20 PM</td>
-                                        <td>$234.34</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3324</td>
-                                        <td>10/21/2013</td>
-                                        <td>3:03 PM</td>
-                                        <td>$724.17</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3323</td>
-                                        <td>10/21/2013</td>
-                                        <td>3:00 PM</td>
-                                        <td>$23.71</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3322</td>
-                                        <td>10/21/2013</td>
-                                        <td>2:49 PM</td>
-                                        <td>$8345.23</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3321</td>
-                                        <td>10/21/2013</td>
-                                        <td>2:23 PM</td>
-                                        <td>$245.12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3320</td>
-                                        <td>10/21/2013</td>
-                                        <td>2:15 PM</td>
-                                        <td>$5663.54</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3319</td>
-                                        <td>10/21/2013</td>
-                                        <td>2:13 PM</td>
-                                        <td>$943.45</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="text-right">
-                                <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.row -->
 
         </div>
         <!-- /.container-fluid -->
@@ -436,139 +137,3 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!--<script type="text/javascript" src="includes/js/script.js"></script>-->
-<!--<div id="wrapper">-->
-<!--<header>-->
-<!--<section id="logo">לוגו</section>-->
-
-<!--<nav>-->
-<!--<a href="#">על הפרוייקט</a>-->
-<!--<a href="#">על הרפורמה</a>-->
-<!--</nav>-->
-
-<!--<section id="searchBoxInPage">-->
-<!--<h3>חיפוש</h3>-->
-<!--<input type="search" name="schoolSearch" id="schoolSearchInPage">-->
-<!--</section>-->
-<!--</header>-->
-
-<!--<section id="content">-->
-<!--<section id="rightSideInfo">-->
-<!--<article id="schoolImg"> </article>-->
-<!--<article class="sideBtns">-->
-<!--<h2 style="text-align: center; padding-top: 10px"> עבור להשוואה</h2>-->
-<!--</article>-->
-<!--<article class="sideBtns">-->
-<!--<h2 style="text-align: center; padding-top: 10px"> מילוי חוות דעת</h2>-->
-<!--</article>-->
-
-<!--</section>-->
-<!--<section id="leftSideInfo">-->
-<!--<section id="madlanInfo">-->
-<!--<h1>בית ספר-->
-<!--{{school.name}} </h1>-->
-<!--<section id="generalInfo">-->
-<!--<article id="generalRightSide">-->
-<!--<ul>-->
-<!--<li>כתובת:-->
-<!--{{school.address}}, {{school.city}} </li>-->
-<!--</ul>-->
-<!--</article>-->
-<!--<article id="generalLeftSide">-->
-<!--<ul>-->
-<!--<li>טלפון: </li>-->
-<!--</ul>-->
-<!--</article>-->
-<!--</section>-->
-<!--<section id="generalInfoFullView">-->
-<!--<article id="generalRightSide">-->
-<!--<ul>-->
-<!--<li>כתובת:-->
-<!--{{school.address}}, {{school.city}} </li>-->
-<!--<li>שלב:-->
-<!--<div class="inlineBlock" ng-if="school.toClass <= 6">יסודי</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass > 6 && school.toClass < 10">חטיבה</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass >= 10">תיכון</div>-->
-<!--</li>-->
-<!--<li>כיתות:-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 1">א</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 2">ב</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 3">ג</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 4">ד</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 5">ה</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 6">ו</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 7">ז</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 8">ח</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 9">ט</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 10">י</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 11">י"א</div>-->
-<!--<div class="inlineBlock" ng-if="school.fromClass == 12">י"ב</div>-->
-<!-- - -->
-<!--<div class="inlineBlock" ng-if="school.toClass == 1">א</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 2">ב</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 3">ג</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 4">ד</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 5">ה</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 6">ו</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 7">ז</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 8">ח</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 9">ט</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 10">י</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 11">י"א</div>-->
-<!--<div class="inlineBlock" ng-if="school.toClass == 12">י"ב</div>-->
-<!--</li>-->
-<!--<li>פיקוח:-->
-<!--<div class="inlineBlock" ng-if="school.supervision == 'state'">ממלכתי </div>-->
-<!--<div class="inlineBlock" ng-if="school.supervision == 'religious'">ממכלתי דתי  </div>-->
-<!--<div class="inlineBlock" ng-if="school.supervision == 'orthodox'">חרדי  </div>-->
-<!--</li>-->
-<!--<li>סוג חינוך:-->
-<!--{{school.type}}</li>-->
-<!--<li>מספר תלמידים:-->
-<!--{{school.studentsCount}}</li>-->
-<!--<li>מספר כיתות:-->
-<!--{{school.classCount}}</li>-->
-<!--<li>תלמידים בכיתה:-->
-<!--{{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}</li>-->
-<!--</ul>-->
-<!--</article>-->
-<!--<article id="generalLeftSide">-->
-<!--<ul>-->
-<!--<li>טלפון: </li>-->
-<!--<li>סקטור:-->
-<!--<div class="inlineBlock" ng-if="school.sector == 'Jewish'">יהודי </div>-->
-<!--<div class="inlineBlock" ng-if="school.sector == 'Arabic'">ערבי</div>-->
-<!--<div class="inlineBlock" ng-if="school.sector == 'Druse'">דרוזי</div>-->
-<!--<div class="inlineBlock" ng-if="school.sector == 'Bedouin'">בדואי</div>-->
-<!--<div class="inlineBlock" ng-if="school.sector == 'Circassian'">צ'רקסי</div>-->
-<!--</li>-->
-<!--<li>רשות חינוך: </li>-->
-<!--<li>יום לימודים ארוך:-->
-<!--<div class="inlineBlock" ng-if="school.fullEducationalDay == true">כן </div>-->
-<!--<div class="inlineBlock" ng-if="school.fullEducationalDay != true">לא  </div>-->
-<!--</li>-->
-<!--<li>באופק חדש:-->
-<!--<div class="inlineBlock" ng-if="school.joinedNewHorizons == true">כן </div>-->
-<!--<div class="inlineBlock" ng-if="school.joinedNewHorizons != true">לא  </div>-->
-<!--</li>-->
-<!--<li>שנת היווסדות:-->
-<!--{{school.foudingYear}}</li>-->
-<!--<li>מעמד ביה"ס:-->
-<!--{{school.legal}}</li>-->
-<!--<li>שפת לימוד:-->
-<!--{{school.language}}</li>-->
-<!--</ul>-->
-<!--</article>-->
-<!--</section>-->
-<!--<h4 onClick="switchView()" id="moreInfo">פרטים נוספים +</h4>-->
-<!--</section>-->
-<!--<section id="meitsavInfo">-->
-<!--<h1>רמת השגים</h1>-->
-<!--<img id="graph" src="/includes/images/graphDemo.png">-->
-<!--</section>-->
-
-
-<!--</section>-->
-<!--</section>-->
-<!--</div>-->
