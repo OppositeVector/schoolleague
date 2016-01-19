@@ -67,7 +67,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
-        $http.get('https://schoolleague.herokuapp.com/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
+        console.log("Sschool ID: " + $routeParams.schoolId);
+        $http.get('https://schoolleague.herokuapp.com/GetSchool?id=' + $routeParams.schoolId).success(function(data) {
             console.log(data.data);
             $scope.school = data.data;
             calimsGraph(0, $scope.school);
