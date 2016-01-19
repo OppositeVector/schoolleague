@@ -2,27 +2,41 @@
 listen on port 8080
 ConfigHandler initialized
 Successfully opened production db connection
-Success on 0
-{ ok: 1,
-  nModified: 1,
-  n: 1,
-  lastOp: Timestamp { _bsontype: 'Timestamp', low_: 2, high_: 1452777763 },
-  electionId: 561ee4d19468aca7e979e41d }
-Success on 1
-{ ok: 1,
-  nModified: 1,
-  n: 1,
-  lastOp: Timestamp { _bsontype: 'Timestamp', low_: 1, high_: 1452777764 },
-  electionId: 561ee4d19468aca7e979e41d }
-Success on 2
-{ ok: 1,
-  nModified: 1,
-  n: 1,
-  lastOp: Timestamp { _bsontype: 'Timestamp', low_: 2, high_: 1452777764 },
-  electionId: 561ee4d19468aca7e979e41d }
-Success on 3
-{ ok: 1,
-  nModified: 1,
+{ cities: [ 'נס ציונה' ],
+  schools: 
+   [ 416651,
+     414334,
+     413666,
+     416420,
+     444463,
+     416388,
+     414037,
+     442061,
+     411298,
+     411264,
+     411272,
+     411256 ],
+  __v: 11,
+  name: 'נס ציונה',
+  _id: 89 }
+{ cities: [ 'נס ציונה' ],
+  schools: 
+   [ 416651,
+     414334,
+     413666,
+     416420,
+     444463,
+     416388,
+     414037,
+     442061,
+     411298,
+     411264,
+     411272,
+     411256 ],
+  __v: 11,
+  name: 'נס ציונה',
+  _id: 89 }
+ed: 1,
   n: 1,
   lastOp: Timestamp { _bsontype: 'Timestamp', low_: 2, high_: 1452777766 },
   electionId: 561ee4d19468aca7e979e41d }

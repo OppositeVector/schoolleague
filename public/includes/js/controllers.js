@@ -67,14 +67,82 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
-        console.log("Sschool ID: " + $routeParams.schoolId);
-        $http.get('https://schoolleague.herokuapp.com/GetSchool?id=' + $routeParams.schoolId).success(function(data) {
-            console.log(data.data);
+        $http.get('/GetSchool?id=' + $routeParams.schoolId).success(function(data) {
+            // console.log(data.data);
             $scope.school = data.data;
-            calimsGraph(0, $scope.school);
-            //generateGraph();
-            generateGraph2();
+            // calimsGraph(0, $scope.school);
+            // generateGraph();
+            // generateGraph2();
+            GenerateC3Graph(data.data, [ 2, 5, 7, 10 ]);
         });
+
+        function GenerateC3Graph(school, params) {
+
+            var rowsData = [];
+            var criteria = filterCriteria; // This comes from includes/js/filterCriteria.js
+            // var params = [2, 5, 7, 10]; // Determins the criterias to use
+            var colors = {
+                pattern: []
+            }
+
+            rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01', '2014-01-01', '2015-01-01']);
+            for(var i = 0; i < params.length; ++i) {
+                rowsData.push([null, null, null, null, null, null, null, null]); // reset year arrays
+            }
+
+            for(var i = 0; i < params.length; ++i) {
+
+                var paramCriteria = criteria[params[i]];
+                rowsData[i+1][0] = paramCriteria.name;
+                for(var j = 0; j < school.claims.length; ++j) {
+                    var total = 0;
+                    for(var k = 0; k < paramCriteria.claims.length; ++k) {
+                        total += school.claims[j].percent[k];
+                    }
+                    total /= paramCriteria.claims.length;
+                    rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
+                }
+                colors.pattern.push('#f49292');
+
+            }
+
+            c3.generate({
+                bindto: "#c3chart",
+                data: {
+                    x: "x",
+                    columns: rowsData,
+                    type: "area",
+                    empty: {
+                        label: {
+                            text: "No Data"
+                        }
+                    }
+                },
+                point: {
+                    show: false
+                },
+                color: colors,
+                line: {
+                    connectNull: true
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick:{
+                            format: function (x) { return x.getFullYear(); }
+                        },
+                        padding: {left:0, right:0}
+                    },
+                    y: {
+                        max: 100,
+                        min: 0,
+                        padding: {top:0, bottom:0}
+                    }
+
+                },
+            });
+
+        }
 
         function generateGraph2() {
             var chart = c3.generate({
