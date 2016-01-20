@@ -73,36 +73,45 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
             // calimsGraph(0, $scope.school);
             // generateGraph();
             // generateGraph2();
-            GenerateC3Graph(data.data, [ 2, 5, 7, 10 ]);
+            GenerateC3Graph([ data.data ] , [ 2, 5, 7, 10 ]);
         });
 
-        function GenerateC3Graph(school, params) {
+        function GenerateC3Graph(schools, params) {
 
             var rowsData = [];
             var criteria = filterCriteria; // This comes from includes/js/filterCriteria.js
             // var params = [2, 5, 7, 10]; // Determins the criterias to use
+            var colorBank = [ '#f49292', '#92f492', '#f49292', '#f49292', '#f49292' ];
             var colors = {
                 pattern: []
             }
 
             rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01', '2014-01-01', '2015-01-01']);
-            for(var i = 0; i < params.length; ++i) {
+            for(var i = 0; i < params.length * schools.length; ++i) {
                 rowsData.push([null, null, null, null, null, null, null, null]); // reset year arrays
             }
 
-            for(var i = 0; i < params.length; ++i) {
+            var dataIndex = 1;
+            for(var s = 0; s < schools.length; ++s) {
 
-                var paramCriteria = criteria[params[i]];
-                rowsData[i+1][0] = paramCriteria.name;
-                for(var j = 0; j < school.claims.length; ++j) {
-                    var total = 0;
-                    for(var k = 0; k < paramCriteria.claims.length; ++k) {
-                        total += school.claims[j].percent[k];
+                var school = schools[s];
+                var currentColor = colorBank[s];
+                for(var i = 0; i < params.length; ++i) {
+
+                    var paramCriteria = criteria[params[i]];
+                    rowsData[dataIndex][0] = ((schools.length > 1) ? school.name + " - " : "") + paramCriteria.name;
+                    for(var j = 0; j < school.claims.length; ++j) {
+                        var total = 0;
+                        for(var k = 0; k < paramCriteria.claims.length; ++k) {
+                            total += school.claims[j].percent[k];
+                        }
+                        total /= paramCriteria.claims.length;
+                        rowsData[dataIndex][school.claims[j].year - 2009 + 1] = Math.round(total);
                     }
-                    total /= paramCriteria.claims.length;
-                    rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
+                    colors.pattern.push(currentColor);
+                    ++dataIndex;
+
                 }
-                colors.pattern.push('#f49292');
 
             }
 
