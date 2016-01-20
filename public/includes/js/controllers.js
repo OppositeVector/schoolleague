@@ -67,13 +67,20 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
-        $http.get('https://schoolleague.herokuapp.com/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
+        $http.get('http://localhost:8080/GetSchool?id='+ $routeParams.schoolId).success(function(data) {
             console.log(data.data);
             $scope.school = data.data;
             calimsGraph(0, $scope.school);
             //generateGraph();
             generateGraph2();
         });
+
+        $http.get('http://localhost:8080/GetSchools').success(function(data) {
+            $scope.schools = data.data;
+        });
+
+        $scope.tab = 1;
+        $scope.innerTab = 0;
 
         function generateGraph2() {
             var chart = c3.generate({
@@ -123,23 +130,35 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
             });
         }
 
-        $scope.calimsGraph = function calimsGraph(category, school) {
-            //var retVal = [];
-            //var max = 0;
-            //var min = 12301201230123;
-            //
-            //for (var j=0 ; j < school.claims.length ; j++) {
-            //    var curSchoolClaim = school.claims[j];
-            //    console.log ("Year: " + curSchoolClaim.year);
-            //    for(var i = 0; i < criteria[category].claims.length; i++) {
-            //        var curClaim = criteria[category].claims[i];
-            //
-            //        console.log("Claim num:" + curClaim +" " +curSchoolClaim.percent[curClaim]);
-            //
-            //    }
-            //}
-
+        $scope.calimsGraph = function (category, school) {
             console.log(criteria[category].name);
+        };
+
+        $scope.changeTab = function(tab) {
+            $scope.tab = tab;
+            switch (tab){
+                case 1: $scope.changeInnerTab(0); break;
+                case 2: $scope.changeInnerTab(3); break;
+                case 4: $scope.changeInnerTab(9); break;
+                case 5: $scope.changeInnerTab(2); break;
+            }
+        };
+
+        $scope.isSelectedTab = function(tab) {
+            return $scope.tab === tab;
+        }
+
+        $scope.changeInnerTab = function(innerTab) {
+            $scope.innerTab = innerTab;
+            calimsGraph($scope.innerTab, $scope.school);
+        };
+
+        $scope.isSelectedInnerTab = function(innerTab) {
+            return $scope.innerTab === innerTab;
+        }
+
+        $scope.togglePopUp = function(){
+            $('#comparePopUp').toggle();
         }
 
 }]);

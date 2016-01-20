@@ -4,21 +4,23 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="index.html"><b> לוגו</b></a>
+			<!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
+				<!--<span class="sr-only">Toggle navigation</span>-->
+				<!--<span class="icon-bar"></span>-->
+				<!--<span class="icon-bar"></span>-->
+				<!--<span class="icon-bar"></span>-->
+			<!--</button>-->
+			<a class="navbar-brand" href="#/" id="logo">
+				<img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
+				<b>ליגת בתי הספר</b>
+			</a>
 		</div>
 	</nav>
 
 	<div id="google_map"></div>
 
-	<section id="searchBox">
+	<section id="searchBox" ng-controller="autoCompleteSearch">
 		<h5>הזן כתובתך:</h5>
-		<div ng-controller="autoCompleteSearch">
 			<!--<input type="text" id="Autocomplete" class="form-control" ng-autocomplete="result2" details="details2" options="options2"/>-->
 
 			<!--<input type="text" ng-model="selected" typeahead="school as (school.name + ' ' + school.city) for school in schools | filter:$viewValue" typeahead-min-length="3" class="form-control"/>-->
@@ -34,8 +36,11 @@
 						  <!--inputclass="form-control form-control-small" googleplace ng-model="chosenPlace"/>-->
 
 			<!--<input ng-model="chosenPlace" googleplace class="form-control"/>-->
-			<input type="text" id="Autocomplete" class="form-control" ng-autocomplete="result2" details="details2" options="options2"/>
-		</div>
+		<section id="searchInput">
+			<input type="text" id="Autocomplete" class="form-control clearable" ng-autocomplete="result2" details="details2" options="options2" placeholder=""/>
+			<label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>
+		</section>
+
 	</section>
 
 </div>

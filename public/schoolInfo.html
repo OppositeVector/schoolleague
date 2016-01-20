@@ -4,40 +4,26 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                <!--<img src="/includes/images/Logo.png" alt="ליגת בתי הספר">-->
-                לוגו
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
+                <!--<span class="sr-only">Toggle navigation</span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+                <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <a class="navbar-brand" href="#/" id="logo">
+                <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
+                <b>ליגת בתי הספר</b>
             </a>
+            <section class="leftSearchBox" ng-controller="autoCompleteSearch">
+                <input type="text" id="Autocomplete" class="form-control clearable" ng-autocomplete="result2" details="details2" options="options2" placeholder=""/>
+                <label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>
+            </section>
         </div>
         <!-- Top Menu Items -->
-        <section>
-            <li class="leftSearchBox">
-                <p>
-                    <b>חיפוש</b>
-                    <input type="search" name="schoolSearch" id="schoolSearchInPage">
-                </p>
-            </li>
-        </section>
-        <!--<ul class="nav navbar-right top-nav">-->
-            <!--<li class="dropdown">-->
-                <!--<a href="#"><b>-->
-                    <!--על הרפורמה-->
-                <!--</b></a>-->
-            <!--</li>-->
-            <!--<li class="dropdown">-->
-                <!--<a href="#"><b>-->
-                    <!--על הפרוייקט-->
-                <!--</b></a>-->
-            <!--</li>-->
-        <!--</ul>-->
+
+
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div >
             <ul class="nav navbar-nav side-nav">
                 <li class="schoolInfoSection">
                     <section id="schoolName">
@@ -73,7 +59,7 @@
                     <button type="button" id="opinionsBTN"> חוות דעת </button>
                 </li>
                 <li class="schoolInfoSection">
-                    <button type="button" id="comparisonBTN">הוסף בי"ס להשוואה</button>
+                    <button type="button" id="comparisonBTN" ng-click="togglePopUp()">הוסף בי"ס להשוואה</button>
 
                 </li>
             </ul>
@@ -88,24 +74,91 @@
             <div id="graphsFiltersSection" class="row">
                 <section class="borderCompletion"></section>
                 <ul id="graphsFilters" class="nav navbar-nav">
-                    <li class="categoryFilter active">
-                        <img src="/includes/images/4.svg" alt="" class="categoryIcon">
+                    <li class="categoryFilter" ng-class="{active:isSelectedTab(1)}" ng-click="changeTab(1)">
+                        <!--<img src="/includes/images/4.svg" alt="" class="categoryIcon">-->
+                        <!--<object data="/includes/images/4.svg" type="image/svg+xml" class="categoryIcon"></object>-->
+                        <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="401.169px" height="186.631px" viewBox="0 0 401.169 186.631" enable-background="new 0 0 401.169 186.631"
+                             xml:space="preserve">
+                            <path fill="#EE5253" d="M367.708,59.461l-0.021-12.876L321.3,0h-83.968l-34.233,34.399h-10.233L158.652,0h-83.97L28.24,46.587
+                                v12.874H0l65.771,127.17h257.134l78.264-127.17H367.708z M42.24,52.373L80.494,14h72.337l34.214,34.399h21.873L243.15,14h72.333
+                                l38.213,38.375l0.012,7.085H42.24V52.373z M319.127,73.461l-30.95,51.074H103.615L77.868,73.461H319.127z M315.083,172.631H74.292
+                                l-51.29-99.17H62.19l32.804,65.074h201.07l39.434-65.074h40.617L315.083,172.631z"/>
+                        </svg>
+
                         <h5 class="categoryTitle">שביעות רצון</h5>
                     </li>
-                    <li class="categoryFilter">
-                        <img src="/includes/images/3.svg" alt="" class="categoryIcon">
+                    <li class="categoryFilter" ng-class="{active:isSelectedTab(2)}" ng-click="changeTab(2)">
+                        <!--<object data="/includes/images/3.svg" type="image/svg+xml" class="categoryIcon"></object>-->
+                        <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="341.676px" height="336.644px" viewBox="0 0 341.676 336.644" enable-background="new 0 0 341.676 336.644"
+                             xml:space="preserve">
+                        <path fill="#EE5253" d="M341.676,198.423l-25.934-95.377v-32.88h-28.066l7.837-7.939V21.552L273.961,0h-41.062l-21.553,21.552
+                            v41.062l7.553,7.553h-27.781v32.841l-20.205,71.117l-19.17-70.504V70.166h-28.578l7.837-7.939V21.552L109.449,0H68.387
+                            L46.834,21.552v41.062l7.553,7.553h-27.27v32.731L0,198.347l13.467,3.826l13.65-48.049v79.952h11.315v102.567h43.535V234.077h14.923
+                            v102.567h43.535V234.077h11.316V156.98l18.875,69.416l20.5-72.16v79.841h11.315v102.567h43.535V234.077h14.923v102.567h43.535
+                            V234.077h11.316v-77.672l12.424,45.692L341.676,198.423z M225.346,27.351L238.697,14h29.465l13.351,13.351v29.13l-13.377,13.553
+                            h-29.454l-13.336-13.234V27.351z M60.834,27.351L74.186,14h29.465l13.351,13.351v29.13l-13.377,13.553H74.17L60.834,56.799V27.351z
+                             M67.968,322.644H52.433v-88.567h15.535V322.644z M41.117,220.077V84.166h96.625v135.911H41.117z M126.426,322.644h-15.535v-88.567
+                            h15.535V322.644z M231.968,322.644h-15.535v-88.567h15.535V322.644z M205.117,220.077V84.166h96.625v135.911H205.117z
+                             M290.426,322.644h-15.535v-88.567h15.535V322.644z"/>
+                        </svg>
+
                         <h5 class="categoryTitle">אווירה</h5>
                     </li>
-                    <li class="categoryFilter">
-                        <img src="/includes/images/1.svg" alt="" class="categoryIcon">
+                    <li class="categoryFilter" ng-class="{active:isSelectedTab(3)}" ng-click="changeTab(3)">
+                        <!--<object data="/includes/images/1.svg" type="image/svg+xml" class="categoryIcon"></object>-->
+                        <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="364.124px" height="257.335px" viewBox="0 0 364.124 257.335" enable-background="new 0 0 364.124 257.335"
+                             xml:space="preserve">
+                        <path fill="#EE5253" d="M328.184,200.069h35.94l-21.94-36.425V70.97h-24.398V59.278L158.893,0L0,59.278v35.773l23.402,10.186v93.125
+                            l135.49,58.973l127.727-55.593l-0.166-93.054l31.332-13.637V84.97h10.398V200.069z M158.893,242.065l-121.49-52.879v-77.855
+                            l121.49,52.876l113.561-49.425l0.139,77.796L158.893,242.065z M303.785,70.97H158.893v14h144.893v0.906l-144.893,63.062L14,85.876
+                            V68.997l144.893-54.054l144.893,54.054V70.97z"/>
+                        </svg>
+
                         <h5 class="categoryTitle">רמת לימוד</h5>
                     </li>
-                    <li class="categoryFilter">
-                        <img src="/includes/images/2.svg" alt="" class="categoryIcon">
+                    <li class="categoryFilter" ng-class="{active:isSelectedTab(4)}" ng-click="changeTab(4)">
+                        <!--<object data="/includes/images/2.svg" type="image/svg+xml" class="categoryIcon"></object>-->
+                        <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="367.865px" height="327px" viewBox="0 0 367.865 327" enable-background="new 0 0 367.865 327" xml:space="preserve">
+                        <path fill="#EE5253" d="M147.269,57.889l8.761-14.248V15.227L141.08,0h-30.713L95.035,15.452L80.563,0H49.851L34.521,15.452
+                            l-0.093,27.175l7.783,15.262H0V327h367.865V57.889H147.269z M14,71.889h35.351l23.951,46.968h36.479l28.879-46.968h42.091v28.984
+                            h-32.539v37.771h32.539v35.371h-32.539v37.771h32.539v34.457h-32.539v37.771h32.89V313H14V71.889z M162.213,124.645v-9.771h50.911
+                            v9.771H162.213z M162.213,197.787v-9.771h50.911v9.771H162.213z M162.213,270.016v-9.771h50.911v9.771H162.213z M353.865,313H193.2
+                            v-28.984h33.924v-37.771h-33.573v-34.457h33.573v-37.771h-33.573v-35.371h33.573v-37.771h-33.573V71.889h160.314V313z"/>
+                        <rect x="256.81" y="100.872" fill="#EE5253" width="50.675" height="14"/>
+                        <rect x="256.81" y="136.543" fill="#EE5253" width="69.182" height="14"/>
+                        <rect x="256.81" y="171.285" fill="#EE5253" width="69.182" height="14"/>
+                        </svg>
                         <h5 class="categoryTitle">איכות לימוד</h5>
                     </li>
-                    <li class="categoryFilter">
-                        <img src="/includes/images/5.svg" alt="" class="categoryIcon">
+                    <li class="categoryFilter" ng-class="{active:isSelectedTab(5)}" ng-click="changeTab(5)">
+                        <!--<object data="/includes/images/5.svg" type="image/svg+xml" class="categoryIcon"></object>-->
+                        <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             width="337.735px" height="337.735px" viewBox="0 0 337.735 337.735" enable-background="new 0 0 337.735 337.735"
+                             xml:space="preserve">
+                        <path fill="#EE5253" d="M267.972,168.838l69.689-69.732V33.633L304.03,0h-65.472l-69.721,69.762L99.105,0.072H33.633L0,33.704
+                            v65.473l69.762,69.721L0.073,238.63v65.471l33.632,33.635h65.473l69.72-69.762l69.732,69.689h65.473l33.633-33.633v-65.473
+                            L267.972,168.838z M244.359,14h53.872l25.431,25.432v53.877l-65.592,65.633l-79.33-79.283L244.359,14z M93.375,323.735H39.503
+                            l-25.431-25.434v-53.875l65.592-65.633l79.33,79.283L93.375,323.735z M323.735,298.231l-25.432,25.432h-53.877L14,93.375V39.503
+                            l25.432-25.431h53.876l230.426,230.286V298.231z"/>
+                        <path fill="#EE5253" d="M160.737,101.27l-59.468,59.467l75.784,75.782l59.467-59.465L160.737,101.27z M121.068,160.736
+                            l39.669-39.668l55.984,55.985l-39.668,39.666L121.068,160.736z"/>
+                        <rect x="255.326" y="200.069" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 598.4216 178.0925)" fill="#EE5253" width="14.001" height="25.829"/>
+                        <rect x="230.103" y="225.292" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 573.199 238.9853)" fill="#EE5253" width="14.001" height="25.829"/>
+                        <rect x="199.621" y="255.774" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 177.0213 598.8707)" fill="#EE5253" width="25.829" height="14"/>
+                        <rect x="283.44" y="240.01" transform="matrix(0.7071 0.7071 -0.7071 0.7071 261.463 -137.2061)" fill="#EE5253" width="25.829" height="14.001"/>
+                        <rect x="258.217" y="265.233" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 270.3521 656.4503)" fill="#EE5253" width="25.829" height="14.001"/>
+                        <rect x="233.649" y="289.802" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 211.0499 681.02)" fill="#EE5253" width="25.829" height="14"/>
+                        <rect x="119.4" y="75.726" transform="matrix(0.7071 0.7071 -0.7071 0.7071 97.1761 -69.1562)" fill="#EE5253" width="25.337" height="14"/>
+                        <rect x="94.177" y="100.949" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 106.0682 259.8315)" fill="#EE5253" width="25.337" height="14"/>
+                        <rect x="69.61" y="125.516" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 46.7573 284.3994)" fill="#EE5253" width="25.337" height="14"/>
+                        <rect x="85.546" y="41.873" transform="matrix(0.7071 0.7071 -0.7071 0.7071 63.3232 -55.1336)" fill="#EE5253" width="25.337" height="14"/>
+                        <rect x="60.324" y="67.095" transform="matrix(0.7071 0.7071 -0.7071 0.7071 73.7708 -29.9115)" fill="#EE5253" width="25.337" height="14"/>
+                        <rect x="35.756" y="91.663" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 12.9031 202.6698)" fill="#EE5253" width="25.337" height="14"/>
+                        </svg>
                         <h5 class="categoryTitle">ביטחון</h5>
                     </li>
                 </ul>
@@ -114,12 +167,53 @@
             <!-- /.row -->
 
             <div class="row">
-                <ul>
-                    <li>
-                        <section class="innerCategories" ng-click="calimsGraph(0, school)">מורים</section>
-                        <section class="innerCategories" ng-click="calimsGraph(1, school)">תלמידים</section>
-                    </li>
-                </ul>
+                <section class="innerCategoriesSection" ng-show="isSelectedTab(1)">
+                    <ul>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(0)}" ng-click="changeInnerTab(0)">מורים</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(1)}" ng-click="changeInnerTab(1)">תלמידים</section>
+                        </li>
+                    </ul>
+                </section>
+                <section class="innerCategoriesSection" ng-show="isSelectedTab(2)">
+                    <ul>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(3)}" ng-click="changeInnerTab(3)">התנהלות הכיתה</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(5)}" ng-click="changeInnerTab(5)">יחס המורים</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(7)}" ng-click="changeInnerTab(7)">יחס התלמידים</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(8)}" ng-click="changeInnerTab(8)">יחס חברתי</section>
+                        </li>
+                    </ul>
+                </section>
+                <section class="innerCategoriesSection" ng-show="isSelectedTab(4)">
+                    <ul>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(9)}" ng-click="changeInnerTab(9)">למידה מותאמת</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(6)}" ng-click="changeInnerTab(6)">השקעת המורים</section>
+                        </li>
+                    </ul>
+                </section>
+                <section class="innerCategoriesSection" ng-show="isSelectedTab(5)">
+                    <ul>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(2)}" ng-click="changeInnerTab(2)">בטיחות התלמיד</section>
+                        </li>
+                        <li>
+                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(4)}" ng-click="changeInnerTab(4)">יחס בי״ס לאלימות</section>
+                        </li>
+                    </ul>
+                </section>
+
             </div>
 
             <div class="row" id="graphContainer">
@@ -132,8 +226,61 @@
         </div>
         <!-- /.container-fluid -->
 
+
+
     </div>
     <!-- /#page-wrapper -->
 
+</div>
+<div id="comparePopUp" class="container-fluid">
+    <section id="popUpBox">
+        <button id="closePopUp" ng-click="togglePopUp()">
+            <svg version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="323.58px" height="325.54px" viewBox="0 0 323.58 325.54" enable-background="new 0 0 323.58 325.54" xml:space="preserve">
+            <path fill-rule="evenodd" clip-rule="evenodd" fill="#282c5e" d="M190.392,162.77L317.658,34.729c7.896-7.93,7.896-20.823,0-28.77
+                c-7.895-7.945-20.706-7.945-28.603,0L161.79,134L34.531,5.959c-7.905-7.945-20.705-7.945-28.61,0c-7.895,7.946-7.895,20.84,0,28.77
+                L133.188,162.77L5.921,290.811c-7.895,7.946-7.895,20.825,0,28.77c3.956,3.975,9.133,5.96,14.3,5.96
+                c5.177,0,10.354-1.985,14.31-5.96L161.79,191.539L289.056,319.58c3.957,3.975,9.126,5.96,14.293,5.96
+                c5.185,0,10.354-1.985,14.309-5.96c7.896-7.944,7.896-20.823,0-28.77L190.392,162.77z"/>
+            </svg>
+        </button>
+
+
+        <!--TODO ng-repeat when saving schools in filters page-->
+        <section>
+            <input id="Option" type="checkbox">
+            <label class="compSchoolName" for="Option"> Option 1 </label>
+        </section>
+
+        <section>
+            <input id="option2" type="checkbox" >
+            <label class="compSchoolName" for="option2"> Option 2 </label>
+        </section>
+
+        <section>
+            <input id="option3" type="checkbox" >
+            <label class="compSchoolName" for="option3"> Option 3 </label>
+        </section>
+
+        <section>
+            <input id="option4" type="checkbox" >
+            <label class="compSchoolName" for="option4"> Option 4 </label>
+        </section>
+
+        <section id="enterSchool">
+            <input id="typeSchool" type="checkbox" >
+            <label class="compSchoolName" for="typeSchool">הזן שם בית ספר</label>
+            <angucomplete id="compareSchools"
+                          selectedobject="selectedSchool"
+                          localdata="schools"
+                          searchfields="name,city"
+                          titlefield="name,city"
+                          inputclass="form-control form-control-small"/>
+        </section>
+
+        <button id="compareGo">הוסף</button>
+
+
+    </section>
 </div>
 <!-- /#wrapper -->
