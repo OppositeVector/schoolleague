@@ -1,6 +1,6 @@
 
 @media (min-width: 768px){
-  #wrapper {padding-right: calc(280px + 2em); padding-left: 0;}
+  #wrapper {padding-right: calc(250px + 2em); padding-left: 0;}
   .side-nav{
     /*right: 0;*/
     /*left: auto;*/

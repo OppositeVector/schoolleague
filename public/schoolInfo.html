@@ -166,67 +166,25 @@
             </div>
             <!-- /.row -->
 
-            <div class="row">
-                <section class="innerCategoriesSection" ng-show="isSelectedTab(1)">
-                    <ul>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(0)}" ng-click="changeInnerTab(0)">מורים</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(1)}" ng-click="changeInnerTab(1)">תלמידים</section>
-                        </li>
-                    </ul>
-                </section>
-                <section class="innerCategoriesSection" ng-show="isSelectedTab(2)">
-                    <ul>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(3)}" ng-click="changeInnerTab(3)">התנהלות הכיתה</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(5)}" ng-click="changeInnerTab(5)">יחס המורים</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(7)}" ng-click="changeInnerTab(7)">יחס התלמידים</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(8)}" ng-click="changeInnerTab(8)">יחס חברתי</section>
-                        </li>
-                    </ul>
-                </section>
-                <section class="innerCategoriesSection" ng-show="isSelectedTab(4)">
-                    <ul>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(9)}" ng-click="changeInnerTab(9)">למידה מותאמת</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(6)}" ng-click="changeInnerTab(6)">השקעת המורים</section>
-                        </li>
-                    </ul>
-                </section>
-                <section class="innerCategoriesSection" ng-show="isSelectedTab(5)">
-                    <ul>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(2)}" ng-click="changeInnerTab(2)">בטיחות התלמיד</section>
-                        </li>
-                        <li>
-                            <section class="innerCategories" ng-class="{innerActive:isSelectedInnerTab(4)}" ng-click="changeInnerTab(4)">יחס בי״ס לאלימות</section>
-                        </li>
-                    </ul>
-                </section>
-
-            </div>
-
-            <div class="row" id="graphContainer">
-                <div id="chart"></div>
+            <div class="row" id="categoriesLegends">
+                <div id="legends">
+                    <section class="itemLegend" ng-repeat="item in legendItems" ng-click="toggleGraph(item.id, $index)" ng-mouseover="mouseOverGraph(item.id)" ng-mouseout="mouseOutGraph()">
+                        <!--<object data="/includes/images/check_empty.svg" data-id="{{item}}" type="image/svg+xml"  class="itemLegendIcon"></object>-->
+                        <img ng-src="{{item.checked == true && '/includes/images/check_empty.svg' || '/includes/images/check1.svg'}}" alt="" id="checkbox_{{item.id}}" class="itemLegendIcon">
+                        {{item.id}}
+                    </section>
+                </div>
                 <div id="c3chart"></div>
             </div>
+
+            <!--<div class="row" id="graphContainer">-->
+                <!---->
+            <!--</div>-->
             <!-- /.row -->
 
 
         </div>
         <!-- /.container-fluid -->
-
-
 
     </div>
     <!-- /#page-wrapper -->

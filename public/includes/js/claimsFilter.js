@@ -135,25 +135,3 @@ function filterSchools(schools, params) {
     return retVal;
 
 }
-
-
-
-
-function calimsGraph(category, school) {
-    //var retVal = [];
-    //var max = 0;
-    //var min = 12301201230123;
-    //
-    //for (var j=0 ; j < school.claims.length ; j++) {
-    //    var curSchoolClaim = school.claims[j];
-    //    console.log ("Year: " + curSchoolClaim.year);
-    //    for(var i = 0; i < criteria[category].claims.length; i++) {
-    //        var curClaim = criteria[category].claims[i];
-    //
-    //        console.log("Claim num:" + curClaim +" " +curSchoolClaim.percent[curClaim]);
-    //
-    //    }
-    //}
-
-    console.log(criteria[category].name);
-}
