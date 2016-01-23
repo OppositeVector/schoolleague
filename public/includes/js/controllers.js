@@ -70,40 +70,51 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         $http.get('/GetSchool?id=' + $routeParams.schoolId).success(function(data) {
              console.log(data.data);
             $scope.school = data.data;
-            GenerateC3Graph(data.data, [ 0, 1 ]);
+            GenerateC3Graph([data.data], [ 0, 1 ]);
         });
 
-        function GenerateC3Graph(school, params) {
+        function GenerateC3Graph(schools, params) {
 
             var rowsData = [];
             var criteria = filterCriteria; // This comes from includes/js/filterCriteria.js
             // var params = [2, 5, 7, 10]; // Determins the criterias to use
+            var colorBank = [ '#f49292', '#92f492', '#f49292', '#f49292', '#f49292' ];
             var colors = {
                 pattern: ['#F49292', '#FFDEDE',  '#CB5959', '#FFBEBE','#A22E2E']
             }
 
             rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01']);
-            for(var i = 0; i < params.length; ++i) {
+            for(var i = 0; i < params.length * schools.length; ++i) {
                 rowsData.push([null, null, null, null, null, null]); // reset year arrays
             }
 
-            for(var i = 0; i < params.length; ++i) {
+            var dataIndex = 1;
+            for(var s = 0; s< schools.length; ++s)
+            {
+                var school = schools[s];
+                var currentColor = colorBank[s];
+                for(var i = 0; i < params.length; ++i) {
 
-                var paramCriteria = criteria[params[i]];
-                //console.log (paramCriteria);
-                rowsData[i+1][0] = paramCriteria.hebName;
-                for(var j = 0; j < school.claims.length; ++j) {
-                    var total = 0;
-                    for(var k = 0; k < paramCriteria.claims.length; ++k) {
-                        //console.log("j= "+j + " k="+k+" "+school.claims[j].percent[paramCriteria.claims[k]]);
-                        total += school.claims[j].percent[paramCriteria.claims[k]];
+                    var paramCriteria = criteria[params[i]];
+                    //console.log (paramCriteria);
+                    rowsData[dataIndex][0] = ((schools.length > 1) ? school.name + " - " : "") + paramCriteria.hebName;
+                    for(var j = 0; j < school.claims.length; ++j) {
+                        var total = 0;
+                        for(var k = 0; k < paramCriteria.claims.length; ++k) {
+                            //console.log("j= "+j + " k="+k+" "+school.claims[j].percent[paramCriteria.claims[k]]);
+                            total += school.claims[j].percent[paramCriteria.claims[k]];
+                        }
+                        total /= paramCriteria.claims.length;
+                        rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
                     }
-                    total /= paramCriteria.claims.length;
-                    rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
+                    //colors.pattern.push('#f49292');
+                    colors.pattern.push(currentColor);
+                    ++dataIndex;
                 }
-                //colors.pattern.push('#f49292');
-
             }
+
+
+
              $scope.chart = c3.generate({
                 bindto: "#c3chart",
                 data: {
@@ -428,11 +439,11 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
             $scope.tab = tab;
             switch (tab){
                 case 1: {
-                    GenerateC3Graph($scope.school, [ 0,1 ]);
+                    GenerateC3Graph([$scope.school], [ 0,1 ]);
                     break;
                 }
                 case 2: {
-                    GenerateC3Graph($scope.school, [ 3,5,7,8 ]);
+                    GenerateC3Graph([$scope.school], [ 3,5,7,8 ]);
                     break;
                 }
                 case 3: {
@@ -440,11 +451,11 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                     break;
                 }
                 case 4: {
-                    GenerateC3Graph($scope.school, [ 9,6 ]);
+                    GenerateC3Graph([$scope.school], [ 9,6 ]);
                     break;
                 }
                 case 5: {
-                    GenerateC3Graph($scope.school, [ 2,4 ]);
+                    GenerateC3Graph([$scope.school], [ 2,4 ]);
                     break;
                 }
             }
