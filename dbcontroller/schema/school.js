@@ -6,6 +6,9 @@ var claims = require("./claims");
 var Claim = claims.single;
 var findOneOrCreate = require('mongoose-find-one-or-create');
 
+var gradesStart = 24;
+var claimsStart = 99;
+
 var school = Schema({
 
 	_id: { type: Number, required: true},
@@ -20,6 +23,8 @@ var school = Schema({
 	legal: String,
 	sector: String,
 	address: String,
+	schoolManager: String,
+	phoneNumber: String,
 	fullEducationalDay: Boolean,
 	joinedNewHorizons: Boolean,
 	foudingYear: Number,
@@ -27,6 +32,7 @@ var school = Schema({
 	studentsCount: Number,
 	classCount: Number,
 	ownership: String,
+	budget: Number,
 	position: {
 		lon: Number,
 		lat: Number
@@ -110,7 +116,7 @@ exports.GetAtIndex = function(index, school) {
 		return "What?";
 	}
 
-	if(index < 22) {
+	if(index < gradesStart) {
 
 		switch(index) {
 		case 0:
@@ -142,25 +148,29 @@ exports.GetAtIndex = function(index, school) {
 		case 13:
 			return (school.position == null) ? -1 : school.position.lat;
 		case 14:
-			return school.fullEducationalDay;
+			return school.schoolManager;
 		case 15:
-			return school.joinedNewHorizons;
+			return school.phoneNumber;
 		case 16:
-			return school.foudingYear;
+			return school.fullEducationalDay;
 		case 17:
-			return school.language;
-		case 18: 
-			return school.studentsCount;
+			return school.joinedNewHorizons;
+		case 18:
+			return school.foudingYear;
 		case 19:
-			return school.ownership;
-		case 20:
-			return school.classCount;
+			return school.language;
+		case 20: 
+			return school.studentsCount;
 		case 21:
+			return school.ownership;
+		case 22:
+			return school.classCount;
+		case 23:
 			return school.studentsCount / school.classCount;
 
 		}
 
-	} else if(index < 97) {
+	} else if(index < claimsStart) {
 		return GetGrade(index, school);
 	} else {
 		return GetClaim(index, school);
@@ -174,7 +184,7 @@ function GetGrade(index, school) {
 		return -1;
 	} else {
 
-		var normalized = index - 22;
+		var normalized = index - gradesStart;
 		var yearOffset = Math.floor(normalized / 15);
 		var year = 2009 + yearOffset;
 
@@ -237,7 +247,7 @@ function GetClaim(index, school) {
 		return -1;
 	} else {
 
-		var normalized = index - 97;
+		var normalized = index - claimsStart;
 		var year = Math.floor(normalized / 81) + 2009;
 		var yearIndex = school.claims.findIndex(function(ele) {
 			if(ele.year == year) {
@@ -270,7 +280,7 @@ exports.SetAtIndex = function(value, index, school) {
 		return;
 	}
 
-	if(index < 22) {
+	if(index < gradesStart) {
 
 		switch(index) {
 		case 0:
@@ -322,24 +332,30 @@ exports.SetAtIndex = function(value, index, school) {
 			school.position.lat = CheckNaN(parseFloat(value), 360);
 			break;
 		case 14:
-			school.fullEducationalDay = (value === "true");
+			school.schoolManager = value;
 			break;
 		case 15:
-			school.joinedNewHorizons = (value === "true");
+			school.phoneNumber = value;
 			break;
 		case 16:
-			school.foudingYear = CheckNaN(parseInt(value));
+			school.fullEducationalDay = (value === "true");
 			break;
 		case 17:
-			school.language = value;
+			school.joinedNewHorizons = (value === "true");
 			break;
-		case 18: 
-			school.studentsCount = CheckNaN(parseInt(value));
+		case 18:
+			school.foudingYear = CheckNaN(parseInt(value));
 			break;
 		case 19:
+			school.language = value;
+			break;
+		case 20: 
+			school.studentsCount = CheckNaN(parseInt(value));
+			break;
+		case 21:
 			school.ownership = value;
 			break;
-		case 20:
+		case 22:
 			school.classCount = CheckNaN(parseInt(value));
 			break;
 		default:
@@ -347,7 +363,7 @@ exports.SetAtIndex = function(value, index, school) {
 
 		}
 
-	} else if(index < 97) {
+	} else if(index < claimsStart) {
 		SetGrade(value, index, school);
 	} else {
 		SetClaim(value, index, school);
@@ -366,7 +382,7 @@ function SetGrade(value, index, school) {
 		school.grades = [];
 	}
 
-	var normalized = index - 22;
+	var normalized = index - gradesStart;
 	var yearOffset = Math.floor(normalized / 15);
 	var year = 2009 + yearOffset;
 
@@ -438,7 +454,7 @@ function SetClaim(value, index, school) {
 		school.claims = [];
 	}
 
-	var normalized = index - 97;
+	var normalized = index - claimsStart;
 	var year = Math.floor(normalized / 81) + 2009;
 	var yearIndex = school.claims.findIndex(function(ele) {
 		if(ele.year == year) {

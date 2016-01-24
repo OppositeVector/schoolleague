@@ -8,19 +8,20 @@
 
 body {
     margin-top: 100px;
-    background-color: #222;
+    /*background-color: #222;*/
     font-family: 'Alef', sans-serifns;
+    height: calc(100% - 4em);
 }
 
 @media(min-width:768px) {
     body {
-        margin-top: 50px;
+        margin-top: 4em;
     }
 }
 
 p {
-    color: #777;
-    padding: 10px 35px 0px 10px;
+    color: #252b5d;
+    /*padding: 10px 35px 0px 10px;*/
     margin: 0px 0 6px 0;
 }
 
@@ -32,6 +33,7 @@ p {
     width: 100%;
     padding: 0;
     background-color: #fff;
+    height: 100%;
 }
 
 .huge {
@@ -45,7 +47,7 @@ p {
     }
 
     #page-wrapper {
-        padding: 10px;
+        /*padding: 10px;*/
     }
 }
 
@@ -119,20 +121,21 @@ ul.alert-dropdown {
 
 /* Side Navigation */
 
-@media(min-width:768px) {
+/*@media(min-width:768px) {*/
     .side-nav {
         position: fixed;
         top: 51px;
         left: 225px;
-        width: 225px;
+        width: 250px;
         margin-left: -225px;
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #dcdcdc;
-        bottom: 0;
+        /*bottom: 0;*/
         overflow-x: hidden;
         padding-bottom: 40px;
+        right: 4em;
+        margin-top: 2px;
     }
 
     .side-nav>li>a {
@@ -144,7 +147,7 @@ ul.alert-dropdown {
         outline: none;
         //background-color: #000 !important;
     }
-}
+/*}*/
 
 .side-nav>li>ul {
     padding: 0;
@@ -249,13 +252,16 @@ input[type=search]{
 }
 
 .navbar-inverse {
-    background-color: #c7c7c7;
-    border-color: #c7c7c7;
+    background-color: #fff7f7;
+    border-bottom: 3px solid #f7a2a2;
+    height: 4em;
 }
 
 .navbar-inverse .navbar-brand {
     color: #555;
-    margin-right: 10px;
+    margin-right: 3.3em;
+    padding: 0;
+    padding-top: 0.8em;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -280,7 +286,7 @@ input[type=search]{
 @media (min-width: 768px) {
 .navbar-nav>li {
     float: right;
-    border-bottom: 1px solid #c9c9c9;
+    /*border-bottom: 1px solid #c9c9c9;*/
     width: inherit;
 }}
 
@@ -288,7 +294,7 @@ button {
     display: inline-block;
     width: 180px;
     height: 35px;
-    margin: 20px 20px -10px 10px;
+    margin: 10px 0px 10px 10px;
     background-color: #f2f2f0;
     border: none;
 }
@@ -299,6 +305,13 @@ button {
     float: left;
     display: inline-block;
     margin-left: 15px;
+    /*width: 40%;*/
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    /*padding-top: 10px;*/
+    flex-grow: 2;
+    align-self: flex-end;
 }
 
 .inlineBlock {
@@ -315,15 +328,20 @@ button {
 }
 
 #searchBox {
-    position: absolute;
     font-size: 0.8em;
-    top:15em;
-    right: 14.4em;
-    width: 27em;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    padding-right: 7em;
 }
 
 #searchBox h5 {
     font-weight: bold;
+    color: #2b2d78;
+    font-size: 1.5em;
 }
 
 /*!* AUTOCOMPLETE *!*/
@@ -348,6 +366,8 @@ button {
     width: 70%;
     margin: auto;
 }
+
+
 
 
 .form-control {
@@ -458,4 +478,765 @@ ul {
     min-width: 10px;
     background-color: #5F9EDF;
     text-align: center;
+}
+
+.page-header{
+    border-bottom: 3px solid #f7a2a2;
+    margin: 40px 100px 20px;
+}
+
+#graphsFilters {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    padding-top: 1.5em;
+    margin: auto;
+    flex:5;
+}
+
+.categoryFilter {
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+}
+
+.categoryFilter:nth-child(1){
+    /*text-align: left;*/
+    /*flex: 2;*/
+}
+
+.categoryFilter:nth-child(5){
+    /*text-align: right;*/
+    /*flex: 2;*/
+}
+
+.categoryIcon {
+    max-height: 2em;
+    max-width: 2.5em;
+    width: 100%;
+    vertical-align: inherit;
+}
+
+
+.categoryTitle{
+    font-weight: lighter;
+    color: #ee5253;
+    margin-top:2px;
+    margin-bottom: 15px;
+}
+
+
+#page-wrapper {
+    /*height: 100vh;*/
+}
+
+/*.navbar-inverse {*/
+    /*border-bottom: 2px solid #f7a2a2;*/
+/*}*/
+
+.navbar-nav {
+    float: none;
+    color: #252b5d;
+}
+
+.navbar-nav li.active:after, .navbar-nav li.active:before {
+    bottom: 0%;
+    margin-bottom: -2px;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.navbar-nav li.active:after {
+    border-bottom-color: #fff;
+    border-width: 6px;
+    margin-left: -6px;
+    z-index: 1;
+}
+.navbar-nav li.active:before {
+    border-bottom-color: #f7a2a2;
+    border-width: 9px;
+    margin-left: -9px;
+    z-index: 1;
+}
+
+#graphsFilters.navbar-nav>li {
+    border-bottom: 2px solid #f7a2a2;
+}
+
+#graphsFiltersSection {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    width: 80%;
+}
+
+#schoolName {
+    font-size: 2em;
+    line-height: 1.1em;
+    font-weight: bold;
+    flex-grow: 2;
+    /*margin-bottom: 0.8em;*/
+}
+
+#schoolInfo {
+    list-style: none;
+    margin-bottom: 2em;
+    flex-grow: 5;
+}
+
+.schoolInfoSection {
+    border: 3px solid #f7a2a2;
+    /*border-top: 0px;*/
+    border-radius: 0px 0px 15px 15px;
+    padding: 1.5em;
+    background-color: #fff7f7;
+}
+
+.schoolInfoSection:nth-child(2) {
+    border: 3px solid #f7a2a2;
+    border-radius: 15px;
+    margin-top: -3px;
+    background-color: #fff7f7;
+}
+
+#opinionsBTN,
+#comparisonBTN{
+    color: #252b5d;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#opinionsBTN {
+    background-color: #ff9999;
+    outline: none;
+}
+
+#comparisonBTN {
+    background-color: #3dc1b4;
+    outline: none;
+}
+
+.borderCompletion {
+    border-bottom: 2px solid #f7a2a2;
+    display: inline-block;
+    flex:1;
+}
+
+#graphContainer {
+    height: 500px;
+    width:80%;
+    margin:auto;
+    margin-top: 2em;
+
+
+}
+
+#logo {
+    flex-grow: 16;
+}
+
+#logo img {
+    display: inline-block;
+    height: 1.4em;
+    vertical-align: sub;
+}
+
+#logo b {
+    color: #ff9999;
+    margin-right: 0.2em;
+}
+
+.homeMarker {
+    height:1em;
+}
+
+
+
+.pac-container {
+    background-color: #fff7f7;
+    margin-top: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+.pac-container:before{
+    border-top: 2px solid #f59293;
+    content : "";
+    margin: auto;
+    position: absolute;
+    /*left    : 0;*/
+    /*bottom  : 0;*/
+    top: 0;
+    left: 0;
+    right: 0;
+    height  : 2px;
+    width   : 98%;  /* or 100px */
+}
+
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+}
+
+.pac-item {
+    color: #252b5d;
+    border-top:1px solid #252b5d;
+    font-family: 'Alef', sans-serifns;
+    padding: 0;
+    padding-right: 2em;
+    font-size: 1em;
+    line-height: 40px;
+}
+
+.pac-item-query {
+    color: #252b5d;
+    font-family: 'Alef', sans-serifns;
+    font-size: 1em;
+}
+
+.pac-icon {
+    display: none;
+}
+
+.pac-item:hover {
+    background-color: #ff9999;
+}
+.pac-item-selected, .pac-item-selected:hover {
+    background-color: #ff9999;
+}
+
+
+.clearable{
+    background: #fff url(/includes/images/X.svg) no-repeat left -30px center;
+    border: 1px solid #999;
+    padding: 3px 18px 3px 4px;     /* Use the same right padding (18) in jQ! */
+    border-radius: 3px;
+    /*position: absolute;*/
+    /*left: 0;*/
+    background-size: 1em;
+    /*transition: background 0.4s;*/
+}
+
+.clearable.x {
+    background-position: left 10px center;
+    /*position: absolute;*/
+    /*left: 0;*/
+}
+
+.leftSearchBox .clearable {
+    background: #fff url(/includes/images/X_grey.svg) no-repeat left -30px center;
+    border: 1px solid #999;
+    padding: 3px 18px 3px 4px;     /* Use the same right padding (18) in jQ! */
+    border-radius: 3px;
+    background-size: 1em;
+}
+
+.leftSearchBox .clearable.x{
+    background-size: 13px 13px ;
+    background-position: right 25px center;
+}
+
+/* (jQ) Show icon */
+.clearable.onX {
+    cursor: pointer;
+    /*position: absolute;*/
+    /*left: 0;*/
+}
+
+/* (jQ) hover cursor style */
+.clearable::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Remove IE default X */
+
+
+#searchInput {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    float: left;
+    width: 100%;
+}
+
+#searchInput label {
+    flex-grow: 1;
+    align-self: center;
+    width: auto;
+    margin-right: 1em;
+}
+
+
+#mainAutocomplete {
+    background-color: #fff7f7;
+    height: 3.5em;
+    flex-grow: 3;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    padding-right: 2em;
+    font-size: 1.2em;
+    color: #252b5d;
+    width: auto;
+    margin: 0;
+}
+
+#mainSearchIcon {
+    height:3em;
+    cursor: hand;
+    cursor: pointer;
+}
+
+.leftSearchBox #Autocomplete {
+    background-color: #fff7f7;
+    flex-grow: 5;
+    height: 1.5em;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    padding-right: 2em;
+    font-size: 2.2em;
+    color: #89879c;
+    position: static;
+    width: auto;
+    margin: 0;
+}
+
+.leftSearchBox #searchIcon {
+    height:1.5em;
+    position: static;
+}
+
+.leftSearchBox label {
+    /*flex-grow: 1;*/
+    align-self: center;
+    text-align: left;
+}
+
+.active .categoryIcon path,
+.active .categoryIcon rect,
+.categoryFilter.active h5{
+    fill: #252b5d;
+    color: #252b5d;
+}
+
+
+.innerCategoriesSection {
+    width: 55%;
+    margin: auto;
+    margin-top: 0.5em;
+}
+
+.innerCategoriesSection:nth-child(4),
+.innerCategoriesSection:nth-child(5){
+    float: left;
+}
+
+.innerCategoriesSection ul {
+    list-style-type: none;
+}
+
+.innerCategoriesSection ul li {
+    display: inline-block;
+    margin-left: 2em;
+    color: #252b5d;
+}
+
+.innerCategoriesSection ul li .innerActive {
+    font-weight: bold;
+}
+
+/*Compare PopUp*/
+#comparePopUp.container-fluid{
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    z-index: 100000000;
+    display: none;
+}
+
+
+/*TODO - Not working - show top nav on pop up*/
+.collapse.navbar-collapse.navbar-ex1-collapse::before {
+    z-index: 100000001;
+}
+
+#popUpBox {
+    font-size: 0.8em;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 45%;
+    height: 50%;
+    /*overflow: auto;*/
+    border: 2px solid #ff9999;
+    background-color: #fff7f7;
+    border-radius: 10px;
+    padding-top: 3em;
+    box-sizing: border-box;
+    max-height: 350px;
+    min-width: 250px;
+}
+
+#closePopUp{
+    background-color: #ff9999;
+    border-radius: 8px;
+    position: absolute;
+    top: -2em;
+    left: -2em;
+    width: 3.2em;
+    height: 3.2em;
+    float: left;
+}
+
+#closePopUp svg {
+    height: 1.3em;
+    width: 1.3em;
+    vertical-align: middle;
+}
+
+.compSchoolName {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 13px;
+    margin-right:4em;
+    line-height:30px;
+    color: #252b5d;
+}
+
+input[type=checkbox] {
+    display:none;
+}
+.compSchoolName:before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align:middle;
+    border: 2px solid #ef5f56;
+    background-color: #fffdf3;
+    color: #252b5d;
+    text-align: center;
+    /*margin-left: 1.5em;*/
+}
+
+input[type=checkbox]:checked + .compSchoolName:before {
+    content: url(/includes/images/check.svg);
+    /*text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);*/
+    font-size: 15px;
+    /*margin-left: 1.5em;*/
+}
+
+.compSchoolName:after{
+    /*margin-left: 1.5em;*/
+}
+
+#compareGo {
+    background-color: #ff9999;
+    border-radius: 10px;
+    position: absolute;
+    top: 17em;
+    left: 2em;
+    width: 8em;
+    height: 2.2em;
+    float: left;
+    color: #252b5d;
+    font-size: 14px;
+}
+
+#enterSchool {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+}
+
+#compareSchools {
+    flex: 2;
+    /*align-self: flex-end;*/
+    /*text-align: left;*/
+    /*margin-left: calc(16px + 2em);*/
+}
+
+#compareSchools_value {
+    border:2px solid #ff9999;
+    border-radius: 5px;
+    display: inline-block;
+    /*position: absolute;*/
+    /*left: calc(10px + 2em);*/
+    width: 12em;
+    height: 2em;
+    /*top: -2.5em;*/
+}
+
+.angucomplete-dropdown {
+    max-height: 10em;
+    overflow-y: auto;
+    position: absolute;
+    /*left: calc(16px + 2em);*/
+    width: 15em;
+    border-radius: 5px;
+    border:2px solid #ff9999;
+}
+
+.navbar-header {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
+}
+
+@media(max-width: 850px) {
+    #enterSchool {
+        flex-flow: column wrap;
+    }
+}
+
+
+@media(max-width:768px) {
+    .side-nav{
+        width: 80%;
+        left: 50%;
+        margin-left: -40%;
+        right: auto;
+        top: auto;
+        margin-top: 1px
+    }
+
+    #schoolInfo{
+        margin-bottom: 0px;
+    }
+
+    #schoolName article,
+    #schoolInfo li{
+        display: inline-block
+    }
+
+    #schoolInfo li {
+        margin-left: 1em;
+    }
+
+}
+
+@media(max-width:460px) {
+    .navbar-inverse {
+        height: auto;
+    }
+    .navbar-header {
+        text-align: center;
+        margin-top: 1em;
+    }
+    .navbar-brand, .leftSearchBox{
+        float: none;
+    }
+}
+
+
+/*C3 Graph design*/
+.c3-axis .c3 path, .c3 line {
+    stroke: #42bfb9 !important;
+    stroke-width: 2px;
+}
+
+path.domain{
+    stroke: none !important;
+}
+
+
+.tick text tspan {
+    font-family: 'Alef', sans-serifns;
+    fill: #252b5d;
+    font-size: 1.3em;
+}
+
+.notActive .tick text tspan {
+    fill: #bfbfbf;
+}
+
+.c3-legend-item {
+    font-family: 'Alef', sans-serifns;
+    /*direction: rtl;*/
+}
+
+.c3-text, .c3-empty {
+    font-family: 'Alef', sans-serifns;
+
+}
+
+.itemLegendIcon {
+    height: 1em;
+    vertical-align: baseline;
+}
+
+.itemLegend {
+    color: #252b5d;
+    /*display: inline-block;*/
+    margin-left: 1em;
+    margin-bottom: 5px;
+    white-space: nowrap;
+}
+
+#categoriesLegends {
+    margin: auto;
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+}
+
+.c3 svg {
+    overflow: visible !important;
+}
+
+#legends, #c3chart {
+    /*display: inline-block;*/
+}
+
+#c3chart{
+    position: static !important;
+    align-self: flex-end;
+    max-width: 85%;
+}
+
+#legends {
+    /*position: absolute;*/
+    /*z-index: 10;*/
+    flex-grow: 1;
+}
+
+
+.c3-tooltip tbody tr th:first-of-type {
+    text-align: center;
+    background-color: #252b5d;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.c3-tooltip {
+    font-family: 'Alef', sans-serifns;
+    color: #252b5d;
+    text-align: right;
+    direction: rtl;
+}
+
+.c3-tooltip .name span {
+    margin-left: 6px;
+}
+
+
+.categoryFilter:nth-child(4) svg {
+    /*max-height: 2.2em;*/
+    margin-top: -2px;
+}
+
+
+.categoryFilter:nth-child(4) .categoryTitle{
+    margin-top: 4px;
+}
+
+.schoolInfoSection:first-child {
+    height: 70%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+.ng-scope {
+    height: 100%;
+}
+
+
+/*#warning-message { display: none; }*/
+/*@media only screen and (orientation:portrait){*/
+    /*#wrapper { display:none; }*/
+    /*#warning-message { display:block; }*/
+/*}*/
+/*@media only screen and (orientation:landscape){*/
+    /*#warning-message { display:none; }*/
+/*}*/
+
+
+/*Landing page*/
+#aboutTheProject {
+    color: #252b5d;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    /*padding-bottom: 4em;*/
+    border-bottom: 2px solid #f7a2a2;
+}
+
+#aboutTheProject p {
+    flex-grow: 4;
+    font-size: 1.2em;
+}
+
+#aboutTheProject p a {
+    color: #252b5d;
+    text-decoration: underline;
+}
+
+
+#aboutImg {
+    flex-grow: 1;
+    width:100%;
+    margin-left: 8em;
+}
+
+#aboutImg img {
+    max-width: 120%;
+}
+
+#credits {
+    color: #f7a2a2;
+    font-weight: bold;
+    padding-top: 3em;
+    font-size: 1.1em;
+    line-height: 2em;
+}
+
+#landingPage{
+    height: 100%;
+    padding-top: 5em;
+}
+
+#landingPage .row {
+    width: 80%;
+    /*border: 1px solid black;*/
+    margin: auto;
+}
+
+#shenkarCalcalistLogos {
+    background-color: #f7a2a2;
+    flex-grow: 1;
+    text-align: left;
+}
+
+
+#shenkarCalcalistLogos a img {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.goToSite{
+    color: #252b5d;
+    border-radius: 10px;
+    width: 40%;
+    background-color: #ff9999;
+    outline: none;
+    float: left;
+    margin-top: 3em;
 }

@@ -2,12 +2,16 @@
 <html ng-app="schoolApp">
 <head>
     <meta charset="UTF-8">
-    <title>School League</title>
+    <title>ליגת בתי הספר</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <link rel="icon"
+          type="image/png"
+          href="/includes/images/Favicon32.png">
 
     <!-- Bootstrap Core CSS -->
     <link href="/includes/css/bootstrap.min.css" rel="stylesheet">
@@ -20,12 +24,21 @@
     <link href="/includes/css/sb-admin.css" rel="stylesheet">
     <link href="/includes/css/sb-admin-rtl.css" rel="stylesheet">
 
-       <!-- Morris Charts CSS -->
+
+    <!-- Morris Charts CSS -->
     <link href="/includes/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/includes/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='//fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
+
+
+    <!-- Load c3.css -->
+    <link href="/includes/js/plugins/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+
+    <!-- Load d3.js and c3.js -->
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="/includes/js/plugins/c3-0.4.10/c3.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,19 +50,27 @@
 </head>
 <body dir="rtl">
 
-<div ng-view></div>
+    <div ng-view></div>
 
-<!-- jQuery-->
-<script type="text/javascript" src="includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
+    <!-- jQuery-->
+    <script type="text/javascript" src="includes/js/lib/jquery/jquery-2.1.4.min.js"></script>
 
-<!-- Angular -->
-<script type="text/javascript" src="includes/js/lib/angular/angular.min.js"></script>
-<script type="text/javascript" src="includes/js/lib/angular/angular-route.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
-<script type="text/javascript" src="includes/js/lib/angular/ngAutocomplete.js"></script>
-<script type="text/javascript" src="includes/js/lib/angular/angucomplete.js"></script>
+    <!-- Angular -->
+    <script type="text/javascript" src="includes/js/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="includes/js/lib/angular/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script type="text/javascript" src="includes/js/lib/angular/ngAutocomplete.js"></script>
+    <script type="text/javascript" src="includes/js/lib/angular/angucomplete.js"></script>
+
+    <!-- Custom scripts -->
+
+    <script type="text/javascript" src="includes/js/schoolApp.js"></script>
+    <script type="text/javascript" src="includes/js/filterCriteria.js"></script>
+    <script type="text/javascript" src="includes/js/controllers.js"></script>
+    <script type="text/javascript" src="includes/js/claimsFilter.js"></script>
+    <script type="text/javascript" src="includes/js/script.js"></script>
 
 <!-- jsDelivr :: Sortable :: Latest (http://www.jsdelivr.com/) -->
 <script src="/includes/js/plugins/Sortable-master/Sortable.min.js"></script>
@@ -58,20 +79,18 @@
 <script type="text/javascript" src="includes/js/schoolApp.js"></script>
 <script type="text/javascript" src="includes/js/controllers.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/includes/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/includes/js/bootstrap.min.js"></script>
 
-<!-- Morris Charts JavaScript -->
-<script src="/includes/js/plugins/morris/raphael.min.js"></script>
-<script src="/includes/js/plugins/morris/morris.min.js"></script>
-<script src="/includes/js/plugins/morris/morris-data.js"></script>
-
-
-
-<script src="/includes/js/googlemap.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&language=iw&libraries=places"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="/includes/js/plugins/morris/raphael.min.js"></script>
+    <script src="/includes/js/plugins/morris/morris.min.js"></script>
+    <script src="/includes/js/plugins/morris/morris-data.js"></script>
 
 
+    <!--Google Map scripts-->
+    <script src="/includes/js/googlemap.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&language=iw&libraries=places"></script>
 
 </body>
 </html>

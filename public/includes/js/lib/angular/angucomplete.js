@@ -198,6 +198,9 @@ angular.module('angucomplete', [] )
                     //$location.path('/newValue')
 
                     //$scope.$apply();
+
+                    //$('#typeSchool').check();
+                    document.getElementById("typeSchool").checked = true;
                 }
 
                 var inputField = elem.find('input');

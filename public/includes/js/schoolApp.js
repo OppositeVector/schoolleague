@@ -9,10 +9,22 @@ var schoolApp = angular.module("schoolApp", [
     'ngAutocomplete'
 ]).controller('autoCompleteSearch', autoCompleteSearch);
 
+schoolApp.controller('landingCtrl', ['$scope', '$http', '$location',
+    function ($scope, $http, $location) {
+        $scope.goToSite = function(supervision) {
+            $location.path( '/search' );
+        }
+
+    }]);
+
 schoolApp.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
         when('/', {
+            templateUrl: 'landingPage.html',
+            controller: 'landingCtrl'
+        }).
+        when('/search', {
             templateUrl: 'home.html',
             controller: 'searchCtrl'
         }).
