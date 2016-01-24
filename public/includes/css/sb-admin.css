@@ -337,6 +337,13 @@ button {
 /*.autocompletedemoCustomTemplate .autocomplete-custom-template li:last-child {*/
     /*border-bottom-width: 0; }*/
 
+.droppingPlace {
+    height: 50px;
+    width: inherit;
+    border: 1px solid #C9C9C9;
+    margin-top: 5px;
+}
+
 .draggingArea {
     width: 70%;
     margin: auto;
@@ -422,4 +429,33 @@ button {
     background-size: contain;
     height: 34px;
     width: 34px;
+}
+
+/*Drag&Drop*/
+#labelsList {
+    min-height: 30px;
+    height: auto;
+    width: 95%;
+    margin-right: -30px;
+}
+
+#poolList {
+    min-height: 30px;
+    height: auto;
+    width: 95%;
+    margin-right: -50px;
+}
+
+ul {
+    list-style: none;
+}
+
+.block__list_tags li {
+    color: #fff;
+    float: right;
+    margin: 8px 20px 10px 0;
+    padding: 5px 10px;
+    min-width: 10px;
+    background-color: #5F9EDF;
+    text-align: center;
 }

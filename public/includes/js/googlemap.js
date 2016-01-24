@@ -1,8 +1,10 @@
 /**
  * Created by NatalieMenahem on 18/12/2015.
  */
+var map;
+
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('google_map'), {
+    map = new google.maps.Map(document.getElementById('google_map'), {
         center: {lat: -34.397, lng: 150.644},
         zoom: 17,
         disableDefaultUI:true
@@ -57,8 +59,14 @@ function geocodeLatLng(geocoder, map, infowindow, lat, lng) {
     });
 }
 
+function timeCap(schools ,timeVal) {
+     console.log(schools[0]);
+    var newSchoolsArray = [];
+
+}
+
 function filterMap(schools, location, title) {
-    var map;
+    //var map;
     var bounds = new google.maps.LatLngBounds();
     var mapOptions = {
         mapTypeId: 'roadmap'
@@ -72,42 +80,43 @@ function filterMap(schools, location, title) {
         zoom: 17,
             disableDefaultUI:true
     });
-    var infoBalloon = new google.maps.InfoWindow({map: map});
-    var geocoder = new google.maps.Geocoder;
 
-    //console.log(location.lat);
+    // Home Marker Info
+    var infoBalloon = new google.maps.InfoWindow({content:title});
 
-    //infoBalloon.setPosition(location);
-    //infoBalloon.setContent(title);
-    //map.setCenter(location);
-    //geocodeLatLng(geocoder, map, infoBalloon, location.lat, location.lng);
-    //map.setTilt(45);
-
+    // Home Marker Properties
     var image = '../../includes/images/homeMarker.png';
     marker = new google.maps.Marker({
         map: map,
-        draggable: true,
+        draggable: false,
         animation: google.maps.Animation.DROP,
         position: {lat: location.lat, lng: location.lng},
         icon: image
     });
 
-    // Multiple Markers
-    var markers = [
-        ['London Eye, London', 51.503454,-0.119562],
-        ['Palace of Westminster, London', 51.499633,-0.124755]
-    ];
+    // Allow Home marker to have an info window
+    google.maps.event.addListener(marker, 'click', (function(marker) {
+        return function() {
+            infoBalloon.open(map, marker);
+        }
+    })(marker));
 
-    // Info Window Content
-    var infoWindowContent = [
-        ['<div class="info_content">' +
-        '<h3>London Eye</h3>' +
-        '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
-        ['<div class="info_content">' +
-        '<h3>Palace of Westminster</h3>' +
-        '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-        '</div>']
-    ];
+    //// Multiple Markers
+    //var markers = [
+    //    ['London Eye, London', 51.503454,-0.119562],
+    //    ['Palace of Westminster, London', 51.499633,-0.124755]
+    //];
+    //
+    //// Info Window Content
+    //var infoWindowContent = [
+    //    ['<div class="info_content">' +
+    //    '<h3>London Eye</h3>' +
+    //    '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
+    //    ['<div class="info_content">' +
+    //    '<h3>Palace of Westminster</h3>' +
+    //    '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
+    //    '</div>']
+    //];
 
 
     // Display multiple markers on a map
@@ -134,7 +143,7 @@ function filterMap(schools, location, title) {
 
         // Automatically center the map fitting all markers on the screen
         map.fitBounds(bounds);
-        console.log ('school num:' + schools[i].position);
+        //console.log ("Obj Num:" + schools[i].position);
     }
 
     // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
@@ -143,4 +152,63 @@ function filterMap(schools, location, title) {
         google.maps.event.removeListener(boundsListener);
     });
 
+}
+
+function filterRoutes(startPoint, endPoints, transType) {
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    //var map;
+    var start = new google.maps.LatLng(startPoint.lat, startPoint.lng);
+    var end;
+
+
+    endPoints.forEach(function(entry, i){
+        end = new google.maps.LatLng(entry.position.lat, entry.position.lon);
+
+        var request = {
+            origin: start,
+            destination: end,
+            // Note that Javascript allows us to access the constant
+            // using square brackets and a string value as its
+            // "property."
+            travelMode: google.maps.TravelMode[transType]
+        };
+
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+
+                //console.log(response.routes[0].legs[0].duration.value);
+                //timeRoute.push(response.routes[0].legs[0].duration.value);
+                entry.duration = response.routes[0].legs[0].duration.value;
+            }
+        });
+    });
+
+
+    //function initialize() {
+    //    directionsDisplay = new google.maps.DirectionsRenderer();
+    //    directionsDisplay.setMap(map);
+    //}
+
+    //function calcRoute(transType) {
+    //    for (i = 0; i<end.length; i++) {
+    //        var request = {
+    //            origin: start,
+    //            destination: end[i],
+    //            // Note that Javascript allows us to access the constant
+    //            // using square brackets and a string value as its
+    //            // "property."
+    //            travelMode: google.maps.TravelMode[transType]
+    //        };
+    //
+    //        directionsService.route(request, function (response, status) {
+    //            if (status == google.maps.DirectionsStatus.OK) {
+    //                //console.log(response.routes[0].legs[0].duration.value);
+    //                //directionsDisplay.setDirections(response);
+    //            }
+    //        });
+    //    }
+    //}
+    return endPoints;
+    //initialize();
 }
