@@ -917,9 +917,9 @@ ul {
     color: #252b5d;
 }
 
-input[type=checkbox] {
-    display:none;
-}
+/*input[type=checkbox] {*/
+    /*display:none;*/
+/*}*/
 .compSchoolName:before {
     content: "";
     display: inline-block;

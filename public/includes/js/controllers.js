@@ -10,11 +10,10 @@ schoolsControllers.controller('searchCtrl', ['$scope', '$http',
 
 schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routeParams', '$window',
     function ($scope, $http,  $routeParams, $window) {
-        $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
         globalSchoolsArray = [];
         $scope.transType="DRIVING";
         $scope.timeVal=15;
-        $http.get('http://localhost:8080/GetCity?name=' + $routeParams.name).success(function(data) {
+        $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
             $scope.schools = data.data;
             globalSchoolsArray = angular.copy($scope.schools);
 
