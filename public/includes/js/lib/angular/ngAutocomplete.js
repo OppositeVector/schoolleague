@@ -77,23 +77,39 @@ angular.module( "ngAutocomplete", [])
                             scope.details = scope.gPlace.getPlace();
                             scope.ngAutocomplete = element.val();
 
-                            //Get coordinates
-                            //console.log (scope.details.geometry.location.lat());
-                            //console.log (scope.details.geometry.location.lng());
-                            //console.log (scope.details.formatted_address);
+                            console.log (scope.details);
+
+                            for (var i=0; i<scope.details.address_components.length; i++){
+                                if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
+                                    scope.athority = scope.details.address_components[i].long_name;
+                                }
+                            }
+
+                            console.log(scope.athority);
+
 
                             scope.tempAddress = scope.details.formatted_address.split(",");
 
+                            scope.city;
+
                             if (scope.tempAddress[2] == null) console.log (scope.tempAddress[0]);
                             else {
-                                while(scope.tempAddress[1].charAt(0) === ' ')  scope.tempAddress[1] = scope.tempAddress[1].substr(1);
+                                while(scope.tempAddress[1].charAt(0) === ' ')  {
+                                    scope.tempAddress[1] = scope.tempAddress[1].substr(1);
+                                    scope.city = scope.tempAddress[1];
+                                }
                                 console.log (scope.tempAddress[0]);
                                 console.log (scope.tempAddress[1]);
                             }
 
+                            //In case only city name is entered
+                            if (scope.tempAddress[1].indexOf('ישראל') > -1 ){
+                                scope.city = scope.tempAddress[0];
+                            }
+
                             $window.sessionStorage.setItem("theAddress", JSON.stringify(scope.details));
                             console.log($window.sessionStorage);
-                            $location.path("filter/" + scope.tempAddress[1]);
+                            $location.path("filter/" + scope.city);
 
                         });
                     })

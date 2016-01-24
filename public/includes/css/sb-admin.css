@@ -10,6 +10,7 @@ body {
     margin-top: 100px;
     /*background-color: #222;*/
     font-family: 'Alef', sans-serifns;
+    height: calc(100% - 4em);
 }
 
 @media(min-width:768px) {
@@ -32,6 +33,7 @@ p {
     width: 100%;
     padding: 0;
     background-color: #fff;
+    height: 100%;
 }
 
 .huge {
@@ -45,7 +47,7 @@ p {
     }
 
     #page-wrapper {
-        padding: 10px;
+        /*padding: 10px;*/
     }
 }
 
@@ -132,7 +134,7 @@ ul.alert-dropdown {
         /*bottom: 0;*/
         overflow-x: hidden;
         padding-bottom: 40px;
-        right: 2em;
+        right: 4em;
         margin-top: 2px;
     }
 
@@ -257,7 +259,9 @@ input[type=search]{
 
 .navbar-inverse .navbar-brand {
     color: #555;
-    margin-right: 10px;
+    margin-right: 3.3em;
+    padding: 0;
+    padding-top: 0.8em;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -305,7 +309,9 @@ button {
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
-    padding-top: 10px;
+    /*padding-top: 10px;*/
+    flex-grow: 2;
+    align-self: flex-end;
 }
 
 .inlineBlock {
@@ -329,6 +335,7 @@ button {
     width: 50%;
     height: 50%;
     overflow: auto;
+    padding-right: 7em;
 }
 
 #searchBox h5 {
@@ -449,7 +456,7 @@ button {
     align-items: stretch;
     padding-top: 1.5em;
     margin: auto;
-    flex:3;
+    flex:5;
 }
 
 .categoryFilter {
@@ -469,18 +476,23 @@ button {
 }
 
 .categoryIcon {
-    height: 2em;
+    max-height: 2em;
     max-width: 2.5em;
+    width: 100%;
+    vertical-align: inherit;
 }
+
 
 .categoryTitle{
     font-weight: lighter;
     color: #ee5253;
-    margin-top:0;
+    margin-top:2px;
+    margin-bottom: 15px;
 }
 
+
 #page-wrapper {
-    height: 100vh;
+    /*height: 100vh;*/
 }
 
 /*.navbar-inverse {*/
@@ -531,14 +543,16 @@ button {
 
 #schoolName {
     font-size: 2em;
-    line-height: 1em;
+    line-height: 1.1em;
     font-weight: bold;
-    margin-bottom: 0.5em;
+    flex-grow: 2;
+    /*margin-bottom: 0.8em;*/
 }
 
 #schoolInfo {
     list-style: none;
     margin-bottom: 2em;
+    flex-grow: 5;
 }
 
 .schoolInfoSection {
@@ -565,10 +579,12 @@ button {
 
 #opinionsBTN {
     background-color: #ff9999;
+    outline: none;
 }
 
 #comparisonBTN {
     background-color: #3dc1b4;
+    outline: none;
 }
 
 .borderCompletion {
@@ -586,14 +602,19 @@ button {
 
 }
 
+#logo {
+    flex-grow: 16;
+}
+
 #logo img {
     display: inline-block;
-    height: 1.5em;
+    height: 1.4em;
     vertical-align: sub;
 }
 
 #logo b {
     color: #ff9999;
+    margin-right: 0.2em;
 }
 
 .homeMarker {
@@ -660,7 +681,7 @@ button {
 
 
 .clearable{
-    background: #fff url(/includes/images/X.svg) no-repeat left -20px center;
+    background: #fff url(/includes/images/X.svg) no-repeat left -30px center;
     border: 1px solid #999;
     padding: 3px 18px 3px 4px;     /* Use the same right padding (18) in jQ! */
     border-radius: 3px;
@@ -674,6 +695,19 @@ button {
     background-position: left 10px center;
     /*position: absolute;*/
     /*left: 0;*/
+}
+
+.leftSearchBox .clearable {
+    background: #fff url(/includes/images/X_grey.svg) no-repeat left -30px center;
+    border: 1px solid #999;
+    padding: 3px 18px 3px 4px;     /* Use the same right padding (18) in jQ! */
+    border-radius: 3px;
+    background-size: 1em;
+}
+
+.leftSearchBox .clearable.x{
+    background-size: 13px 13px ;
+    background-position: right 25px center;
 }
 
 /* (jQ) Show icon */
@@ -709,7 +743,7 @@ button {
 }
 
 
-#Autocomplete {
+#mainAutocomplete {
     background-color: #fff7f7;
     height: 3.5em;
     flex-grow: 3;
@@ -723,7 +757,7 @@ button {
     margin: 0;
 }
 
-#searchIcon {
+#mainSearchIcon {
     height:3em;
     cursor: hand;
     cursor: pointer;
@@ -731,14 +765,14 @@ button {
 
 .leftSearchBox #Autocomplete {
     background-color: #fff7f7;
-    flex-grow: 3;
-    height: 2.5em;
+    flex-grow: 5;
+    height: 1.5em;
     border-radius: 8px;
     border: none;
     box-shadow: none;
     padding-right: 2em;
-    font-size: 1.2em;
-    color: #252b5d;
+    font-size: 2.2em;
+    color: #89879c;
     position: static;
     width: auto;
     margin: 0;
@@ -750,8 +784,9 @@ button {
 }
 
 .leftSearchBox label {
-    flex-grow: 1;
+    /*flex-grow: 1;*/
     align-self: center;
+    text-align: left;
 }
 
 .active .categoryIcon path,
@@ -923,6 +958,9 @@ input[type=checkbox]:checked + .compSchoolName:before {
 
 .navbar-header {
     width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    height: 100%;
 }
 
 @media(max-width: 850px) {
@@ -985,7 +1023,7 @@ path.domain{
 .tick text tspan {
     font-family: 'Alef', sans-serifns;
     fill: #252b5d;
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .notActive .tick text tspan {
@@ -1012,13 +1050,16 @@ path.domain{
     /*display: inline-block;*/
     margin-left: 1em;
     margin-bottom: 5px;
+    white-space: nowrap;
 }
 
 #categoriesLegends {
     margin: auto;
     width: 80%;
     margin-top: 20px;
-    /*display: inline-block;*/
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
 }
 
 .c3 svg {
@@ -1029,7 +1070,138 @@ path.domain{
     /*display: inline-block;*/
 }
 
+#c3chart{
+    position: static !important;
+    align-self: flex-end;
+    max-width: 85%;
+}
+
 #legends {
-    position: absolute;
-    z-index: 10;
+    /*position: absolute;*/
+    /*z-index: 10;*/
+    flex-grow: 1;
+}
+
+
+.c3-tooltip tbody tr th:first-of-type {
+    text-align: center;
+    background-color: #252b5d;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.c3-tooltip {
+    font-family: 'Alef', sans-serifns;
+    color: #252b5d;
+    text-align: right;
+    direction: rtl;
+}
+
+.c3-tooltip .name span {
+    margin-left: 6px;
+}
+
+
+.categoryFilter:nth-child(4) svg {
+    /*max-height: 2.2em;*/
+    margin-top: -2px;
+}
+
+
+.categoryFilter:nth-child(4) .categoryTitle{
+    margin-top: 4px;
+}
+
+.schoolInfoSection:first-child {
+    height: 70%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+.ng-scope {
+    height: 100%;
+}
+
+
+/*#warning-message { display: none; }*/
+/*@media only screen and (orientation:portrait){*/
+    /*#wrapper { display:none; }*/
+    /*#warning-message { display:block; }*/
+/*}*/
+/*@media only screen and (orientation:landscape){*/
+    /*#warning-message { display:none; }*/
+/*}*/
+
+
+/*Landing page*/
+#aboutTheProject {
+    color: #252b5d;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    /*padding-bottom: 4em;*/
+    border-bottom: 2px solid #f7a2a2;
+}
+
+#aboutTheProject p {
+    flex-grow: 4;
+    font-size: 1.2em;
+}
+
+#aboutTheProject p a {
+    color: #252b5d;
+    text-decoration: underline;
+}
+
+
+#aboutImg {
+    flex-grow: 1;
+    width:100%;
+    margin-left: 8em;
+}
+
+#aboutImg img {
+    max-width: 120%;
+}
+
+#credits {
+    color: #f7a2a2;
+    font-weight: bold;
+    padding-top: 3em;
+    font-size: 1.1em;
+    line-height: 2em;
+}
+
+#landingPage{
+    height: 100%;
+    padding-top: 5em;
+}
+
+#landingPage .row {
+    width: 80%;
+    /*border: 1px solid black;*/
+    margin: auto;
+}
+
+#shenkarCalcalistLogos {
+    background-color: #f7a2a2;
+    flex-grow: 1;
+    text-align: left;
+}
+
+
+#shenkarCalcalistLogos a img {
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.goToSite{
+    color: #252b5d;
+    border-radius: 10px;
+    width: 40%;
+    background-color: #ff9999;
+    outline: none;
+    float: left;
+    margin-top: 3em;
 }

@@ -5,16 +5,7 @@ var schoolsControllers = angular.module('schoolsControllers', []);
 
 schoolsControllers.controller('searchCtrl', ['$scope', '$http',
     function ($scope, $http) {
-        //$scope.flag=false;
-        //
-        //$http.get('http://localhost:8080/GetSchools').success(function(data) {
-        //    $scope.schools = data.data;
-        //    $scope.flag=false
-        //
-        //    console.log($scope.schools[0]);
-        //});
-
-    initMap();
+        initMap();
 }]);
 
 schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routeParams', '$window',
@@ -77,10 +68,14 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
 
             var rowsData = [];
             var criteria = filterCriteria; // This comes from includes/js/filterCriteria.js
-            // var params = [2, 5, 7, 10]; // Determins the criterias to use
-            var colorBank = [ '#f49292', '#92f492', '#f49292', '#f49292', '#f49292' ];
+            var colorBank = [
+                '#c03c3c', '#f87e7e',
+                '#c94848','#f49292','#f05656',];
             var colors = {
-                pattern: ['#F49292', '#FFDEDE',  '#CB5959', '#FFBEBE','#A22E2E']
+                pattern: [
+                    '#c03c3c', '#f87e7e',
+                    '#c94848','#f49292','#f05656',
+                ]
             }
 
             rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01']);
@@ -96,72 +91,19 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                 for(var i = 0; i < params.length; ++i) {
 
                     var paramCriteria = criteria[params[i]];
-                    //console.log (paramCriteria);
                     rowsData[dataIndex][0] = ((schools.length > 1) ? school.name + " - " : "") + paramCriteria.hebName;
                     for(var j = 0; j < school.claims.length; ++j) {
                         var total = 0;
                         for(var k = 0; k < paramCriteria.claims.length; ++k) {
-                            //console.log("j= "+j + " k="+k+" "+school.claims[j].percent[paramCriteria.claims[k]]);
                             total += school.claims[j].percent[paramCriteria.claims[k]];
                         }
                         total /= paramCriteria.claims.length;
                         rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
                     }
-                    //colors.pattern.push('#f49292');
                     colors.pattern.push(currentColor);
                     ++dataIndex;
                 }
             }
-
-
-
-             $scope.chart = c3.generate({
-                bindto: "#c3chart",
-                data: {
-                    x: "x",
-                    columns: rowsData,
-                    type: "area",
-                    empty: {
-                        label: {
-                            text: "לא נבחרו קטגוריות"
-                        }
-                    },
-                    labels: {
-                        //format: function(v, id, i, j){
-                        //    console.log(v);
-                        //    console.log(id);
-                        //    console.log(i);
-                        //    console.log(j);
-                        //    return id;
-                        //}
-                    }
-                },
-                point: {
-                    show: false
-                },
-                color: colors,
-                line: {
-                    connectNull: true
-                },
-                legend: {
-                    show: false
-                },
-                axis: {
-                    x: {
-                        type: 'timeseries',
-                        tick:{
-                            format: function (x) { return x.getFullYear(); }
-                        },
-                        padding: {left:0, right:0}
-                    },
-                    y: {
-                        max: 100,
-                        min: 0,
-                        padding: {top:0, bottom:-10}
-                    }
-
-                },
-            });
 
             console.log(rowsData);
             $scope.activeYears = [
@@ -190,169 +132,39 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                     active: false
                 }
             ]
+
+            var activeNum = 0;
             for (var i=0; i<rowsData.length-1 ; i++){
                 var curr = rowsData[i+1];
-                for (var j=0 ; j<curr.length ; j++){
+                for (var j=0 ; j<curr.length-1 ; j++){
                     //console.log(curr[j+1]);
-                    if(curr[j+1])
+                    if(curr[j+1] != null && curr[j+1] != -1)
+                    {
                         $scope.activeYears[j].active = true;
+                    }
 
                 }
             }
 
-            //console.log (activeYears);
+            for (var i = 0 ; i< $scope.activeYears.length ; i++){
+                if ($scope.activeYears[i].active == true)
+                    activeNum++;
+            }
 
             $scope.legendItems = [];
             for(var i=0; i<rowsData.length-1 ; i++){
-
-                //$scope.legendItems.push(rowsData[i+1][0]);
                 $scope.legendItems.push({
                     id: rowsData[i+1][0],
                     checked: false
                 });
             }
-        }
 
-
-
-        function GenerateGradesC3Graph(school) {
-
-            var rowsData = [];
-            var colors = {
-                pattern: ['#F49292', '#FFDEDE',  '#CB5959', '#FFBEBE','#A22E2E']
+            var noDataMsg = "לא נבחרו קטגוריות";
+            //In case there is no data
+            if (activeNum == 0){
+                console.log('no active years');
+                noDataMsg = "אין מידע על בי״ס";
             }
-
-            rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01', '2014-01-01']);
-
-
-            //Classes X courses = 3 X 5 = 15
-            for(var i = 0; i < 15; ++i) {
-                rowsData.push([null, null, null, null, null, null, null, null]); // reset year arrays
-            }
-
-            var classB = [], bcounter = 0;
-            var classE = [], ecounter = 0;
-            var classH = [], hcounter = 0;
-
-            for(var i = 0; i < school.grades.length; ++i) {
-                var currentYear = school.grades[i];
-                //class e
-                if (currentYear.b){
-                    classB.push({
-                        year: currentYear.year
-                    });
-
-                    if (currentYear.b.english != -1){
-                        classB[bcounter].english = currentYear.b.english;
-                    }
-                    if (currentYear.b.hebrew != -1){
-                        classB[bcounter].hebrew = currentYear.b.hebrew;
-                    }
-                    if (currentYear.b.arabic != -1){
-                        classB[bcounter].arabic = currentYear.b.arabic;
-                    }
-                    if (currentYear.b.math != -1){
-                        classB[bcounter].math = currentYear.b.math;
-                    }
-                    if (currentYear.b.tech != -1){
-                        classB[bcounter].tech = currentYear.b.tech;
-                    }
-
-                    bcounter++;
-                }
-
-                //class e
-                if (currentYear.e){
-                    classE.push({
-                        year: currentYear.year
-                    });
-
-                    if (currentYear.e.english != -1){
-                        classE[ecounter].english = currentYear.e.english;
-                    }
-                    if (currentYear.e.hebrew != -1){
-                        classE[ecounter].hebrew = currentYear.e.hebrew;
-                    }
-                    if (currentYear.e.arabic != -1){
-                        classE[ecounter].arabic = currentYear.e.arabic;
-                    }
-                    if (currentYear.e.math != -1){
-                        classE[ecounter].math = currentYear.e.math;
-                    }
-                    if (currentYear.e.tech != -1){
-                        classE[ecounter].tech = currentYear.e.tech;
-                    }
-
-                    ecounter++;
-                }
-
-                //class h
-                if (currentYear.h){
-                    classH.push({
-                        year: currentYear.year
-                    });
-
-                    if (currentYear.h.english != -1){
-                        classH[hcounter].hebrew = currentYear.h.hebrew;
-                    }
-                    if (currentYear.h.hebrew != -1){
-                        classH[hcounter].hebrew = currentYear.h.hebrew;
-                    }
-                    if (currentYear.h.arabic != -1){
-                        classH[hcounter].arabic = currentYear.h.arabic;
-                    }
-                    if (currentYear.h.math != -1){
-                        classH[hcounter].math = currentYear.h.math;
-                    }
-                    if (currentYear.h.tech != -1){
-                        classH[hcounter].tech = currentYear.h.tech;
-                    }
-
-                    hcounter++;
-                }
-            }
-
-            console.log(classB);
-            console.log(classE);
-            console.log(classH);
-
-            var newclassB = [], newbcounter = 0;
-            var newclassE = [], newecounter = 0;
-            var newclassH = [], newhcounter = 0;
-
-            var courses = ['hebrew', 'english', 'arabic', 'tech', 'math'];
-
-            if (classE[0] != null){
-                for (var j=0; j<courses.length ; j++){
-                    for(var i=0; i<classE.length ; i++){
-                        if (classE[i][courses[j]] != null) {
-                            console.log(courses[j]+" "+classE[i][courses[j]]);
-                            rowsData[i+1][classE[i].year - 2009 + 1] = classE[i][courses[j]];
-                        }
-                    }
-                }
-            }
-
-            console.log (rowsData);
-
-            //for(var i = 0; i < params.length; ++i) {
-            //
-            //    var paramCriteria = criteria[params[i]];
-            //    //console.log (paramCriteria);
-            //    rowsData[i+1][0] = paramCriteria.hebName;
-            //    for(var j = 0; j < school.claims.length; ++j) {
-            //        var total = 0;
-            //        for(var k = 0; k < paramCriteria.claims.length; ++k) {
-            //            //console.log("j= "+j + " k="+k+" "+school.claims[j].percent[paramCriteria.claims[k]]);
-            //            total += school.claims[j].percent[paramCriteria.claims[k]];
-            //        }
-            //        total /= paramCriteria.claims.length;
-            //        rowsData[i+1][school.claims[j].year - 2009 + 1] = Math.round(total);
-            //    }
-            //    //colors.pattern.push('#f49292');
-            //
-            //}
-
 
             $scope.chart = c3.generate({
                 bindto: "#c3chart",
@@ -362,8 +174,181 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                     type: "area",
                     empty: {
                         label: {
+                            text: noDataMsg
+                        }
+                    },
+                    labels: {}
+                },
+                point: {
+                    show: false
+                },
+                color: colors,
+                line: {
+                    connectNull: true
+                },
+                legend: {
+                    show: false
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick:{
+                            format: function (x) { return x.getFullYear(); }
+                        }
+                    },
+                    y: {
+                        max: 100,
+                        min: 0,
+                        padding: {top:10, bottom:-10}
+                    }
+
+                },
+                size: {
+                    height: 400
+                }
+            });
+
+            //In case there's only one year of data
+            if (activeNum == 1){
+                $scope.chart.transform('bar');
+            }
+
+            //No data
+            if (activeNum == 0){
+                for (var i = 0; i<$scope.legendItems.length ; i++){
+                    $scope.chart.toggle($scope.legendItems[i].id);
+                    $scope.legendItems[i].checked = true;
+                }
+            }
+
+
+        }
+
+
+        function GenerateGradesC3Graph(school) {
+
+            var rowsData = [];
+            var colors = {
+                pattern: ['#f87e7e', '#f49292', '#f05656','#c94848','#c03c3c',]
+            }
+
+            rowsData.push(['x', '2009-01-01', '2010-01-01', '2011-01-01', '2012-01-01', '2013-01-01']);
+
+            for(var i = 0; i < 5; ++i) {
+                rowsData.push([null, 0, 0, 0, 0, 0]); // reset year arrays
+            }
+
+            var acounter2 = 1;
+            var hcounter2 = 1;
+            var ecounter2 = 1;
+            var tcounter2 = 1;
+            var mcounter2 = 1;
+
+            rowsData[1][0] = 'אנגלית';
+            rowsData[2][0] = 'עברית';
+            rowsData[3][0] = 'ערבית';
+            rowsData[4][0] = 'מתמטיקה';
+            rowsData[5][0] = 'טכנולוגיה';
+
+            for(var i = 0; i < school.grades.length; ++i) {
+                var currentYear = school.grades[i];
+
+                if (currentYear.b){
+
+                    if (currentYear.b.english != -1){
+                        rowsData[1][currentYear.year-2009+1] = (rowsData[1][currentYear.year-2009+1]+ currentYear.b.english)/ecounter2;
+                        ecounter2++;
+                    }
+                    if (currentYear.b.hebrew != -1){
+                        rowsData[2][currentYear.year-2009+1] = (rowsData[2][currentYear.year-2009+1]+ currentYear.b.hebrew)/hcounter2;
+                        hcounter2++;
+                    }
+                    if (currentYear.b.arabic != -1){
+                        rowsData[3][currentYear.year-2009+1] = (rowsData[3][currentYear.year-2009+1]+ currentYear.b.arabic)/acounter2;
+                        acounter2++;
+                    }
+                    if (currentYear.b.math != -1){
+                        rowsData[4][currentYear.year-2009+1] = (rowsData[4][currentYear.year-2009+1]+ currentYear.b.math)/mcounter2;
+                        mcounter2++;
+                    }
+                    if (currentYear.b.tech != -1){
+                        rowsData[5][currentYear.year-2009+1] = (rowsData[5][currentYear.year-2009+1]+ currentYear.b.tech)/tcounter2;
+                        tcounter2++;
+                    }
+                }
+
+                if (currentYear.e){
+
+                    if (currentYear.e.english != -1){
+                        rowsData[1][currentYear.year-2009+1] = (rowsData[1][currentYear.year-2009+1]+ currentYear.e.english)/ecounter2;
+                        ecounter2++;
+                    }
+                    if (currentYear.e.hebrew != -1){
+                        rowsData[2][currentYear.year-2009+1] = (rowsData[2][currentYear.year-2009+1]+ currentYear.e.hebrew)/hcounter2;
+                        hcounter2++;
+                    }
+                    if (currentYear.e.arabic != -1){
+                        rowsData[3][currentYear.year-2009+1] = (rowsData[3][currentYear.year-2009+1]+ currentYear.e.arabic)/acounter2;
+                        acounter2++;
+                    }
+                    if (currentYear.e.math != -1){
+                        rowsData[4][currentYear.year-2009+1] = (rowsData[4][currentYear.year-2009+1]+ currentYear.e.math)/mcounter2;
+                        mcounter2++;
+                    }
+                    if (currentYear.e.tech != -1){
+                        rowsData[5][currentYear.year-2009+1] = (rowsData[5][currentYear.year-2009+1]+ currentYear.e.tech)/tcounter2;
+                        tcounter2++;
+                    }
+                }
+
+                if (currentYear.h){
+
+                    if (currentYear.h.english != -1){
+                        rowsData[1][currentYear.year-2009+1] = (rowsData[1][currentYear.year-2009+1]+ currentYear.h.english)/ecounter2;
+                        ecounter2++;
+                    }
+                    if (currentYear.h.hebrew != -1){
+                        rowsData[2][currentYear.year-2009+1] = (rowsData[2][currentYear.year-2009+1]+ currentYear.h.hebrew)/hcounter2;
+                        hcounter2++;
+                    }
+                    if (currentYear.h.arabic != -1){
+                        rowsData[3][currentYear.year-2009+1] = (rowsData[3][currentYear.year-2009+1]+ currentYear.h.arabic)/acounter2;
+                        acounter2++;
+                    }
+                    if (currentYear.h.math != -1){
+                        rowsData[4][currentYear.year-2009+1] = (rowsData[4][currentYear.year-2009+1]+ currentYear.h.math)/mcounter2;
+                        mcounter2++;
+                    }
+                    if (currentYear.h.tech != -1){
+                        rowsData[5][currentYear.year-2009+1] = (rowsData[5][currentYear.year-2009+1]+ currentYear.h.tech)/tcounter2;
+                        tcounter2++;
+                    }
+                }
+                acounter2 = 1, ecounter2 = 1, hcounter2 = 1, tcounter2 = 1, mcounter2 = 1;
+            }
+
+            console.log (rowsData);
+
+            for(var i = 1 ; i<rowsData.length ; i++){
+                for(var j=1; j<rowsData[i].length ; j++){
+                    if(rowsData[i][j] != 0)
+                        rowsData[i][j] = rowsData[i][j]*10;
+                }
+            }
+
+            $scope.chart = c3.generate({
+                bindto: "#c3chart",
+                data: {
+                    x: "x",
+                    columns: rowsData,
+                    type: "bar",
+                    empty: {
+                        label: {
                             text: "לא נבחרו קטגוריות"
                         }
+                    },
+                    labels: {
+                        format: function (v, id, i, j) { return id; }
                     }
                 },
                 point: {
@@ -382,29 +367,43 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                         tick:{
                             format: function (x) { return x.getFullYear(); }
                         },
-                        padding: {left:0, right:0}
+
                     },
                     y: {
                         max: 100,
-                        min: 0,
-                        padding: {top:0, bottom:0}
+                        min: 10,
+                        padding: {top:10, bottom:20}
                     }
 
                 },
+                size: {
+                    height: 400
+                }
             });
 
             $scope.legendItems = [];
             for(var i=0; i<rowsData.length-1 ; i++){
-                //console.log(rowsData[i+1][0]);
-                //$scope.legendItems.push(rowsData[i+1][0]);
                 $scope.legendItems.push({
                     id: rowsData[i+1][0],
                     checked: false
                 });
             }
+
+            var activeYears = 0;
+
+            for(var i = 1 ; i<rowsData.length ; i++){
+                activeYears = 0;
+                for(var j=1; j<rowsData[i].length ; j++){
+                    if(rowsData[i][j] != 0){
+                        activeYears++;
+                    }
+                }
+                if (activeYears == 0){
+                    $scope.legendItems[i-1].checked = true;
+                    $scope.chart.toggle($scope.legendItems[i-1].id);
+                }
+            }
         }
-
-
 
 
         $http.get('/GetSchools').success(function(data) {
@@ -412,13 +411,11 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         });
 
         $scope.tab = 1;
-        //$scope.innerTab = 0;
 
         $scope.toggleGraph = function (id, index) {
             $scope.chart.toggle(id);
-            //console.log($('#checkbox_'+id));
             if ($scope.legendItems[index].checked == true)
-                $scope.legendItems[index].checked = false
+                $scope.legendItems[index].checked = false;
             else $scope.legendItems[index].checked = true;
         }
 
@@ -429,11 +426,6 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         $scope.mouseOutGraph = function () {
             $scope.chart.revert();
         }
-
-
-        $scope.calimsGraph = function (category, school) {
-            console.log(criteria[category].name);
-        };
 
         $scope.changeTab = function(tab) {
             $scope.tab = tab;
@@ -468,9 +460,5 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         $scope.togglePopUp = function(){
             $('#comparePopUp').toggle();
         }
-
-
-
-
 }]);
 

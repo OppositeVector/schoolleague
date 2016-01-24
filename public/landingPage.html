@@ -1,0 +1,59 @@
+<div id="wrapper" style="padding-right: 0px;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
+            <!--<span class="sr-only">Toggle navigation</span>-->
+            <!--<span class="icon-bar"></span>-->
+            <!--<span class="icon-bar"></span>-->
+            <!--<span class="icon-bar"></span>-->
+            <!--</button>-->
+            <a class="navbar-brand" href="#/search" id="logo">
+                <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
+                <b>ליגת בתי הספר</b>
+            </a>
+            <section class="leftSearchBox" ng-controller="autoCompleteSearch">
+                <input type="text" id="Autocomplete" class="form-control clearable" ng-autocomplete="result2" details="details2" options="options2" placeholder=""/>
+                <label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>
+            </section>
+            <section id="shenkarCalcalistLogos">
+                <a href="http://www.shenkar.ac.il/"><img src="/includes/images/shenkar_logo.png"></a>
+                <a href="http://www.calcalist.co.il/"><img src="/includes/images/calcalist_log.png"></a>
+            </section>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="container-fluid" id="landingPage">
+            <div id="aboutTheProject" class="row">
+                <div id="aboutImg">
+                    <img src="/includes/images/landingpage_image.png" alt="">
+                </div>
+                <p>
+                    אזורי הרישום לבתי הספר היסודיים הולכים ונפתחים בכל הארץ (הם כבר פתוחים ב-
+                    <a href="http://cms.education.gov.il/EducationCMS/Units/Nisuyim/BchiraMevukeret/rashuyot.htm">32 רשויות</a>
+                    , למשל בירושלים). אבל איך מחליטים לאיזה בית ספר כדאי לשלוח את הילדים?<br>
+                    ״כלכליסט״ ומעבדת הדאטה ג׳ורנליזם של שנקר אספו עבורכם את כל הנתונים הקיימים אודות בתי הספר בישראל: מה המורים שעובדים בהם חושבים עליהם, מה חושבים התלמידים, מה ההישגים שלהם במבחנים ועוד, בשביל שאתם תוכלו לבחור קודם כל מה חשוב לכם, ואז לבחור את בית הספר שהכי מתאים לילדים שלכם. <br>
+                    כל הנתונים הם נתוני משרד החינוך שנאספו על ידי אתר ״מדלן״.
+                    <button class="goToSite" ng-click="goToSite()">התחילו בחיפוש</button>
+                </p>
+
+
+
+            </div>
+
+            <div class="row" id="credits">
+                עיצוב: חן מגדל &#124; שמרית רדה <br>
+                תכנות: נטלי בר נתן &#124; פלג בר נתן &#124; ויקטור בלסקי<br>
+הנחייה:  יונית רושו &#124; מושון זר אביב &#124; שאול אמסטרדמסקי &#124; אלון רייס
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /#wrapper -->
+
+

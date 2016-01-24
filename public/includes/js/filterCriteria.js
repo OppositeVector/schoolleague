@@ -3,13 +3,13 @@
 var filterCriteria = [
 	{
 		name: "Teachers Satisfaction",
-		hebName: 'שביעות רצון המורים',
+		hebName: 'מורים',
 		id: 0,
 		claims: [ 0, 5, 13, 36, 48, 68 ]
 	},
 	{
 		name: "Student Satisfaction",
-		hebName: 'שביעות רצון התלמידים',
+		hebName: 'תלמידים',
 		id: 1,
 		claims: [ 44, 45, 58, 63 ]
 	},
@@ -27,7 +27,7 @@ var filterCriteria = [
 	},
 	{
 		name: "School Attitude on Violence",
-		hebName: 'יחס בית הספר לאלימות',
+		hebName: 'יחס בי״ס לאלימות',
 		id: 4,
 		claims: [ 1, 12, 71, 72, 77 ]
 	},

@@ -10,13 +10,17 @@
                 <!--<span class="icon-bar"></span>-->
                 <!--<span class="icon-bar"></span>-->
             <!--</button>-->
-            <a class="navbar-brand" href="#/" id="logo">
+            <a class="navbar-brand" href="#/search" id="logo">
                 <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
                 <b>ליגת בתי הספר</b>
             </a>
             <section class="leftSearchBox" ng-controller="autoCompleteSearch">
                 <input type="text" id="Autocomplete" class="form-control clearable" ng-autocomplete="result2" details="details2" options="options2" placeholder=""/>
                 <label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>
+            </section>
+            <section id="shenkarCalcalistLogos">
+                <a href="http://www.shenkar.ac.il/"><img src="/includes/images/shenkar_logo.png"></a>
+                <a href="http://www.calcalist.co.il/"><img src="/includes/images/calcalist_log.png"></a>
             </section>
         </div>
         <!-- Top Menu Items -->
@@ -59,7 +63,7 @@
                     <button type="button" id="opinionsBTN"> חוות דעת </button>
                 </li>
                 <li class="schoolInfoSection">
-                    <button type="button" id="comparisonBTN" ng-click="togglePopUp()">הוסף בי"ס להשוואה</button>
+                    <button type="button" id="comparisonBTN" ng-click="togglePopUp()">הוסיפו בי״ס להשוואה</button>
 
                 </li>
             </ul>
