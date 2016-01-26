@@ -14,6 +14,66 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
         $scope.transType="DRIVING";
         $scope.timeVal=15;
         $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
+
+            $scope.showTopFive = function(){
+                var chart = c3.generate({
+                    bindto: "#topFive",
+                    data: {
+                        columns: [
+                            ['data1', 30, 200, 200, 400, 150],
+                            ['data2', 130, 100, 100, 200, 150],
+                            ['data3', 230, 200, 200, 300, 250],
+                            ['data4', 100, 50, 150, 200, 300],
+                            ['data5', 150, 30, 70, 180, 200]
+                        ],
+                        type: 'bar',
+                        groups: [
+                            ['data1', 'data2', 'data3', 'data4', 'data5']
+                        ]
+                    },
+                    grid: {
+                        y: {
+                            lines: [{value:0}]
+                        }
+                    },
+                    tooltip: {
+                        show: false
+                    },
+                    legend: {
+                        show: false
+                    },
+                    axis: {
+                        x: {
+                            show: false
+                        },
+                        y: {
+                            show: false
+                        }
+                    },
+                    grid: {
+                        x: {
+                            show: false
+                        }
+                    }
+                });
+
+            };
+
+            $scope.state = {
+                name: 'state',
+                checked: false
+            };
+
+            $scope.religious = {
+                name: 'religious',
+                checked: false
+            };
+
+            $scope.orthodox = {
+                name: 'orthodox',
+                checked: false
+            };
+
             $scope.schools = data.data;
             globalSchoolsArray = angular.copy($scope.schools);
 
@@ -22,7 +82,10 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             $scope.tempAddress = $scope.theAddress.formatted_address.split(",");
 
             //Shows markers on map
-            filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+            //filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+
+            //Show Top five schools
+            $scope.showTopFive();
 
             //Gets duration per school
             globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
@@ -31,11 +94,13 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             $scope.supervisionIncludes = [];
 
             $scope.includeSupervision = function(supervision) {
-                var i = $.inArray(supervision, $scope.supervisionIncludes);
+                var i = $.inArray(supervision.name, $scope.supervisionIncludes);
                 if (i > -1) {
                     $scope.supervisionIncludes.splice(i, 1);
+                    supervision.checked = false;
                 } else {
-                    $scope.supervisionIncludes.push(supervision);
+                    $scope.supervisionIncludes.push(supervision.name);
+                    supervision.checked = true;
                 }
                 console.log($scope.supervisionIncludes);
                 //console.log('1st Schools final grade is: ' + $scope.localSchoolsScoresFinal[0]);
@@ -146,8 +211,9 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 },
                 onSort:function(evt){
                     //console.log('onStart.pList:', [evt.item, evt.from]);
-                    //console.log(sortable.toArray()[0]);
-                    $scope.labelFilter(sortable.toArray());
+                    console.log(sortable.toArray());
+                    if (sortable.toArray().length > 0)
+                        $scope.labelFilter(sortable.toArray());
                 },
                 onEnd: function(evt) {
                     //console.log('onEnd.pList:', [evt.item, evt.from]);
@@ -180,52 +246,62 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             // Claims are offset by -1 because the first claim stands on index 0, but its name is claim1
             $scope.criteria = [
                 {
+                    name: "Student Safety",
+                    hebName: 'בטיחות',
+                    id: "sSft",
+                    claims: [ 3, 11, 17, 24, 33, 34, 43, 46, 47, 52, 53, 60, 62, 70, 76 ]
+                },
+                {
                     name: "Teachers Satisfaction",
+                    hebName: 'שביעות רצון המורים',
                     id: "tSat",
                     claims: [ 0, 5, 13, 36, 48, 68 ]
                 },
                 {
                     name: "Student Satisfaction",
+                    hebName: 'שביעות רצון התלמידים',
                     id: "sSat",
                     claims: [ 44, 45, 58, 63 ]
                 },
                 {
-                    name: "Student Safety",
-                    id: "sSft",
-                    claims: [ 3, 11, 17, 24, 33, 34, 43, 46, 47, 52, 53, 60, 62, 70, 76 ]
-                },
-                {
-                    name: "Class Management",
-                    id: "clMng",
-                    claims: [ 18, 57, 78 ]
+                    name: "Social Attitude and Activities",
+                    hebName: 'יחס חברתי',
+                    id: "soAttAct",
+                    claims: [ 4, 14, 20, 28, 30, 40, 50, 51, 64, 69 ]
                 },
                 {
                     name: "School Attitude on Violence",
+                    hebName: 'יחס בי״ס לאלימות',
                     id: "schAttVio",
                     claims: [ 1, 12, 71, 72, 77 ]
                 },
                 {
+                    name: "Class Management",
+                    hebName: 'התנהלות הכיתה',
+                    id: "clMng",
+                    claims: [ 18, 57, 78 ]
+                },
+                {
                     name: "Teacher Personal Treatment",
+                    hebName: 'יחס המורים',
                     id: "tPrsTrt",
                     claims: [ 8, 16, 22, 25, 26, 27, 31, 39, 49, 54, 66, 80 ]
                 },
                 {
                     name: "Teacher Learning Treatment",
+                    hebName: 'השקעת המורים',
                     id: "tLrnTrt",
                     claims: [ 2, 9, 10, 15, 19, 32, 35, 37, 38, 41, 55, 56, 61, 65, 67, 74, 75 ]
                 },
                 {
                     name: "Student Attitude Towards School",
+                    hebName: 'יחס התלמידים',
                     id: "sAttSch",
                     claims: [ 29, 42, 79 ]
                 },
                 {
-                    name: "Social Attitude and Activities",
-                    id: "soAttAct",
-                    claims: [ 4, 14, 20, 28, 30, 40, 50, 51, 64, 69 ]
-                },
-                {
                     name: "Differential Learning",
+                    hebName: 'למידה דיפרנציאלית',
                     id: "difLrn",
                     claims: [ 6, 7, 21, 23, 59, 73 ]
                 }
@@ -289,7 +365,25 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                $scope.getByDuration();
             }
 
+            $scope.mapView = function(){
+                debugger;
+                $('#google_map_filter').show();
+                filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+                $('#page-wrapper').hide();
+            };
+
+            $scope.listView = function(){
+                $('#google_map_filter').hide();
+                $('#page-wrapper').show();
+            };
+
+
+
+
+
         });
+
+
     }]);
 
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',

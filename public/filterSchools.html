@@ -1,249 +1,123 @@
 <div id="wrapper" style="padding-right: 0px;">
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
-				<!--<span class="sr-only">Toggle navigation</span>-->
-				<!--<span class="icon-bar"></span>-->
-				<!--<span class="icon-bar"></span>-->
-				<!--<span class="icon-bar"></span>-->
-			<!--</button>-->
-			<a class="navbar-brand" href="#/" id="logo">
-				<img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
-				<b>ליגת בתי הספר</b>
-			</a>
-		</div>
-		<!-- Top Menu Items -->
-		<!--<section>-->
-			<!--<li class="leftSearchBox">-->
-				<!--<p>-->
-					<!--<b>חיפוש</b>-->
-					<!--<input type="search" name="schoolSearch" id="schoolSearchInPage">-->
-				<!--</p>-->
-			<!--</li>-->
-		<!--</section>-->
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/search" id="logo">
+                <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
+                <b>ליגת בתי הספר</b>
+            </a>
+            <section class="leftSearchBox" ng-controller="autoCompleteSearch">
+                <input type="text" id="Autocomplete" class="form-control clearable" ng-autocomplete="result2"
+                       details="details2" options="options2" placeholder=""/>
+                <label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>
+            </section>
+            <section id="shenkarCalcalistLogos">
+                <a href="http://www.shenkar.ac.il/"><img src="/includes/images/shenkar_logo.png"></a>
+                <a href="http://www.calcalist.co.il/"><img src="/includes/images/calcalist_log.png"></a>
+            </section>
+        </div>
 
-		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav side-nav" style="width: 270px">
-				<!--<li>-->
-					<!--<a href="javascript:;" data-toggle="collapse" data-target="#schoolInfo"><i class="fa fa-fw fa-arrows-v"></i> בית ספר <i class="fa fa-fw fa-caret-down"></i></a>-->
-					<!--<ul id="schoolInfo" class="collapse, active">-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">שלב: </p>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass <= 6">יסודי</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass > 6 && school.toClass < 10">חטיבה</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass >= 10">תיכון</div>-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">כיתות: </p>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 1">א</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 2">ב</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 3">ג</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 4">ד</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 5">ה</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 6">ו</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 7">ז</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 8">ח</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 9">ט</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 10">י</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 11">י"א</div>-->
-							<!--<div class="inlineBlock" ng-if="school.fromClass == 12">י"ב</div>-->
-							 <!-- - -->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 1">א</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 2">ב</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 3">ג</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 4">ד</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 5">ה</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 6">ו</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 7">ז</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 8">ח</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 9">ט</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 10">י</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 11">י"א</div>-->
-							<!--<div class="inlineBlock" ng-if="school.toClass == 12">י"ב</div>-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">פיקוח:</p>-->
-							<!--<div class="inlineBlock" ng-if="school.supervision == 'state'">ממלכתי </div>-->
-							<!--<div class="inlineBlock" ng-if="school.supervision == 'religious'">ממכלתי דתי  </div>-->
-							<!--<div class="inlineBlock" ng-if="school.supervision == 'orthodox'">חרדי  </div>-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">סוג חינוך: </p>-->
-							<!--{{school.type}}-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">מס' תלמידים בביה"ס: </p>-->
-							<!--{{school.studentsCount}}-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">מס' כיתות בביה"ס: </p>-->
-							<!--{{school.classCount}}-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">מס' תלמידים בכיתה: </p>-->
-							<!--{{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">שנת היווסדות: </p>-->
-							<!--{{school.foudingYear}}-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<p class="inlineBlock">טלפון: </p>-->
-						<!--</li>-->
-					<!--</ul>-->
-				<!--</li>-->
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
 
-				<!--<li>-->
-					<!--<a href="javascript:;" data-toggle="collapse" data-target="#grades"><i class="fa fa-fw fa-arrows-v"></i> השגים לימודיים<i class="fa fa-fw fa-caret-down"></i></a>-->
-					<!--<ul id="grades" class="collapse">-->
-						<!--<li>-->
-							<!--<p><b>שכבת לימוד</b>  </p>-->
-						<!--</li>-->
-						<li>
-								<div class="filterSelectors">
-									<p><b>סוג פיקוח</b></p>
-									<p>
-										<input type="checkbox" name="supervisionFilter" value="state" ng-click="includeSupervision('state')"> ממלכתי
-										<br><br>
-										<input type="checkbox" name="supervisionFilter" value="religious" ng-click="includeSupervision('religious')"> ממלכתי דתי
-										<br><br>
-										<input type="checkbox" name="supervisionFilter" value="orthodox" ng-click="includeSupervision('orthodox')"> חרדי
-									</p>
-								</div>
-								<!--<div class="filterSelectors">-->
-									<!--<p><b> רמת לימוד </b></p>-->
-									<!--<p>-->
-										<!--<input type="radio" name="educationFilter" value="elementary" ng-click="includeSupervision('base')"> יסודי-->
-										<!--<br><br>-->
-										<!--<input type="radio" name="educationFilter" value="juniorHigh" ng-click="includeSupervision('junior')"> חטיבה-->
-										<!--<br><br>-->
-										<!--<input type="radio" name="educationFilter" value="highSchool" ng-click="includeSupervision('high')"> תיכוני-->
-									<!--</p>-->
-								<!--</div>-->
-						</li>
-						<!--<li>-->
-							<!--<div id="w1" class="droppingPlace" ondrop="drop(event)" ondragover="allowDrop(event)">1</div>-->
-							<!--<div id="w2" class="droppingPlace" ondrop="drop(event)" ondragover="allowDrop(event)">2</div>-->
-							<!--<div id="w3" class="droppingPlace" ondrop="drop(event)" ondragover="allowDrop(event)">3</div>-->
-							<!--<div id="w4" class="droppingPlace" ondrop="drop(event)" ondragover="allowDrop(event)">4</div>-->
-							<!--<div id="w5" class="droppingPlace" ondrop="drop(event)" ondragover="allowDrop(event)">5</div>-->
-							<!--<br><br><br>-->
-							<!--<div class="draggingArea" ondrop="drop(event)" ondragover="allowDrop(event)">-->
-								<!--<img id="tSat" src="includes/images/0s.png" draggable="true" ondragstart="drag(event)" >-->
-								<!--<img id="sSat" src="includes/images/1s.png"  draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="sSft" src="includes/images/2s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="clMng" src="includes/images/3s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="schAttVio" src="includes/images/4s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="tPrsTrt" src="includes/images/5s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="tLrnTrt" src="includes/images/6s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="sAttSch" src="includes/images/7s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="soAttAct" src="includes/images/8s.png" draggable="true" ondragstart="drag(event)">-->
-								<!--<img id="difLrn" src="includes/images/9s.png" draggable="true" ondragstart="drag(event)">-->
-							<!--</div>-->
-						<!--</li>-->
-						<!--<li>-->
-							<!--<div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:350px;'>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label1">{{list2.label1}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label2">{{list2.label2}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label3">{{list2.label3}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label4">{{list2.label4}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label5">{{list2.label5}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label6">{{list2.label6}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label7">{{list2.label7}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label8">{{list2.label8}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label9">{{list2.label9}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label10">{{list2.label10}}</div>-->
-								<!--<div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.label2">{{list2.label2}}</div>-->
-							<!--</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label1">{{list1.label1}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label2">{{list1.label2}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label3">{{list1.label3}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label4">{{list1.label4}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label5">{{list1.label5}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label6">{{list1.label6}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label7">{{list1.label7}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label8">{{list1.label8}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label9">{{list1.label9}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.label10">{{list1.label10}}</div>-->
-							<!--<div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list3.label2">{{list3.label2}}</div>-->
-						<!--</li>-->
+                <li class="supervisionFilter">
+                        <p><b>סוג פיקוח</b></p>
+                        <ul class="filterSelectors">
+                            <li>
+                                <img ng-model="state" ng-src="{{state.checked == true && '/includes/images/check1.svg' || '/includes/images/check_empty.svg'}}" alt="" class="supervisionCheckIcon" ng-click="includeSupervision(state)">
+                                <p>ממלכתי</p>
+                            </li>
+                            <li>
+                                <img ng-model="religious" ng-src="{{religious.checked == true && '/includes/images/check1.svg' || '/includes/images/check_empty.svg'}}" alt="" class="supervisionCheckIcon" ng-click="includeSupervision(religious)">
+                                <p>ממ&#34;ד</p>
+                            </li>
+                            <li>
+                                <!--<input type="checkbox" name="supervisionFilter" value="orthodox"-->
+                                       <!--ng-click="includeSupervision('orthodox')"> חרדי-->
+                                <img ng-model="orthodox" ng-src="{{orthodox.checked == true && '/includes/images/check1.svg' || '/includes/images/check_empty.svg'}}" alt="" class="supervisionCheckIcon" ng-click="includeSupervision(orthodox)">
+                                <p>חרדי</p>
+                            </li>
+                        </ul>
+                </li>
+                <li class="tagsFilter">
+                    <!-- Connected lists -->
+                    <div class="container" >
+                        <div data-force="30" id="choiceBox">
+                            <p class="layer title"><b>דירוג קריטריונים</b></p>
+                            <ul id="mockupLabelsList" class="block__list block__list_words">
+                                <li>
+                                    <span class="choiceNum">1</span>
+                                    <span>העדפה ראשונה</span>
+                                </li>
+                                <li>
+                                    <span class="choiceNum">2</span>
+                                    <span>העדפה שניה</span>
+                                </li>
+                                <li>
+                                    <span class="choiceNum">3</span>
+                                    <span>העדפה שלישית</span>
+                                </li>
+                                <li>
+                                    <span class="choiceNum">4</span>
+                                    <span>העדפה רביעית</span>
+                                </li>
+                                <li>
+                                    <span class="choiceNum">5</span>
+                                    <span>העדפה חמישית</span>
+                                </li>
+                            </ul>
+                            <ul id="labelsList" class="block__list block__list_words">
+                            </ul>
+                        </div>
 
-						<li>
-							<!-- Connected lists -->
-							<div class="container" style="height: 520px">
-								<div data-force="30" class="layer block" style="left: 14.5%; top: 0; width: 37%">
-									<p class="layer title"><b>Priority List</b></p>
-									<ul id="labelsList" class="block__list block__list_words"></ul>
-								</div>
+                        <div data-force="18">
+                            <ul id="poolList" class="tagsStyle">
+                                <li ng-repeat="item in criteria" data-id={{item.id}}><span>{{item.hebName}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <!--<li>-->
+                    <!--<div>-->
+                        <!--<strong>Mode of Travel: </strong>-->
+                        <!--<select id="mode" ng-model="transType" ng-change="changeTravelType()">-->
+                            <!--<option value="DRIVING">Driving</option>-->
+                            <!--<option value="WALKING">Walking</option>-->
+                            <!--<option value="TRANSIT">Transit</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--<input type="range" id="timeRange" min="1" max="60" ng-model="timeVal"-->
+                               <!--ng-change="getByDuration()">-->
+                    <!--</div>-->
 
-								<div data-force="18" class="layer block" style="left: 58%; top: 143px; width: 40%;">
-									<p class="layer title"><b>Labels</b></p>
-									<ul id="poolList" class="block__list block__list_tags">
-										<li ng-repeat="item in criteria" data-id={{item.id}}>{{item.name}}</li>
-									</ul>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div>
-								<strong>Mode of Travel: </strong>
-								<select id="mode" ng-model="transType"  ng-change="changeTravelType()">
-									<option value="DRIVING">Driving</option>
-									<option value="WALKING">Walking</option>
-									<option value="TRANSIT">Transit</option>
-								</select>
-							</div>
-							<!--<div>-->
-								<!--<strong>Mode of Travel: </strong>-->
-								<!--<input type="radio" name="educationFilter" value="DRIVING" ng-model="transType"  ng-change="changeTravelType()"> Driving-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
 
-								<!--<input type="radio" name="educationFilter" value="WALKING" ng-model="transType"  ng-change="changeTravelType()"> Walking-->
+    <div id="google_map_filter"></div>
 
-								<!--<input type="radio" name="educationFilter" value="TRANSIT" ng-model="transType"  ng-change="changeTravelType()"> Transit-->
-							<!--</div>-->
-							<div >
-								<input type="range" id="timeRange" min="1" max="60" ng-model="timeVal" ng-change="getByDuration()">
-							</div>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <section id="topFive"></section>
+            </div>
+        </div>
+    </div>
 
-						</li>
-						<!--<li>-->
-							<!--<form>-->
-								<!--<p>-->
-									<!--<input type="radio" name="subject" value="hebrew" checked> עברית-->
-									<!--<br><br>-->
-									<!--<input type="radio" name="subject" value="arabic"> ערבית-->
-									<!--<br><br>-->
-									<!--<input type="radio" name="subject" value="english"> אנגלית-->
-									<!--<br><br>-->
-									<!--<input type="radio" name="subject" value="math"> חשבון-->
-									<!--<br><br>-->
-									<!--<input type="radio" name="subject" value="scienceAndTechnology"> מדעים וטכנולוגיה-->
-									<!--<br><br>-->
-								<!--</p>-->
-							<!--</form>-->
-						<!--</li>-->
-					<!--</ul>-->
-				<!--</li>-->
-				<!--<il>-->
-					<!--<button type="button">הוסף בי"ס להשוואה</button>-->
-					<!--<button type="button"> חוות דעת </button>-->
-				<!--</il>-->
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</nav>
+    <div id="switchViews">
+        <button ng-click="mapView()"><img src="includes/images/mapIcon.png" alt=""></button>
+        <button ng-click="listView()"><img src="includes/images/list.svg" alt=""></button>
+    </div>
 
-	<div id="google_map"></div>
 </div>
 
 
 <!-- /#wrapper -->
 
-<!--<script src="/includes/js/googlemap.js"></script>-->
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChdLZaHDeW0jF91EDWtfnVjzXGC453b3I&signed_in=true&language=iw"-->
-<!--async defer></script>-->
 
