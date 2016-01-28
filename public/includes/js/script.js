@@ -24,7 +24,8 @@ $(document).on('input', '.clearable', function(){
     ev.preventDefault();
     $(this).removeClass('x onX').val('').change();
     $("#Autocomplete").blur();
-    $("#Autocomplete").focus();
-
+    if ($('filterAutocomplete')){
+        $("#filterAutocomplete").blur();
+    }
 });
 
