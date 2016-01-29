@@ -85,7 +85,9 @@ angular.module( "ngAutocomplete", [])
                                 }
                             }
 
-                            console.log(scope.athority);
+
+                            if(scope.athority)
+                                console.log(scope.athority);
 
 
                             scope.tempAddress = scope.details.formatted_address.split(",");

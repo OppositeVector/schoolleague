@@ -360,11 +360,6 @@ function geocodeLatLng(geocoder, map, lat, lng) {
     geocoder.geocode({'location': latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-                //infowindow.setContent(results[1].formatted_address);
-                //console.log (results[1]);
-
-                //if ($('#Autocomplete'))
-                //    $('#Autocomplete').val(results[1].address_components[0].long_name)
             } else {
                 window.alert('No results found');
             }
@@ -391,7 +386,7 @@ function filterMap(schools, location, title) {
       // Display a map on the page and places the chosen position in a balloon
     map = new google.maps.Map(document.getElementById("google_map_filter"), mapOptions, {
         center: {lat: location.lat, lng: location.lng},
-        zoom: 17,
+        zoom: 13,
         disableDefaultUI:true
     });
 
@@ -417,24 +412,6 @@ function filterMap(schools, location, title) {
         }
     })(marker));
 
-    //// Multiple Markers
-    //var markers = [
-    //    ['London Eye, London', 51.503454,-0.119562],
-    //    ['Palace of Westminster, London', 51.499633,-0.124755]
-    //];
-    //
-    //// Info Window Content
-    //var infoWindowContent = [
-    //    ['<div class="info_content">' +
-    //    '<h3>London Eye</h3>' +
-    //    '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
-    //    ['<div class="info_content">' +
-    //    '<h3>Palace of Westminster</h3>' +
-    //    '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-    //    '</div>']
-    //];
-
-
     // Display multiple markers on a map
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
@@ -459,72 +436,197 @@ function filterMap(schools, location, title) {
 
         // Automatically center the map fitting all markers on the screen
         map.fitBounds(bounds);
-        //console.log ("Obj Num:" + schools[i].position);
     }
 
     // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        this.setZoom(15);
+        this.setZoom(13);
         google.maps.event.removeListener(boundsListener);
     });
 
 }
 
+//function filterRoutes(startPoint, endPoints, transType) {
+//    var directionsDisplay;
+//    var directionsService = new google.maps.DirectionsService();
+//    //var map;
+//    var start = new google.maps.LatLng(startPoint.lat, startPoint.lng);
+//    var end;
+//
+//
+//    endPoints.forEach(function(entry, i){
+//
+//            end = new google.maps.LatLng(entry.position.lat, entry.position.lon);
+//
+//            var request = {
+//                origin: start,
+//                destination: end,
+//                travelMode: google.maps.TravelMode[transType]
+//            };
+//
+//            directionsService.route(request, function (response, status) {
+//                console.log(status);
+//                if (status == google.maps.DirectionsStatus.OK) {
+//                    entry.duration = response.routes[0].legs[0].duration.value;
+//                }
+//
+//            });
+//    });
+//    return endPoints;
+//}
+
+
 function filterRoutes(startPoint, endPoints, transType) {
-    var directionsDisplay;
-    var directionsService = new google.maps.DirectionsService();
+    var DistanceMatrixService = new google.maps.DistanceMatrixService();
     //var map;
     var start = new google.maps.LatLng(startPoint.lat, startPoint.lng);
-    var end;
+    var destinations = [];
 
 
     endPoints.forEach(function(entry, i){
-        end = new google.maps.LatLng(entry.position.lat, entry.position.lon);
-
-        var request = {
-            origin: start,
-            destination: end,
-            // Note that Javascript allows us to access the constant
-            // using square brackets and a string value as its
-            // "property."
-            travelMode: google.maps.TravelMode[transType]
-        };
-
-        directionsService.route(request, function (response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-
-                //console.log(response.routes[0].legs[0].duration.value);
-                //timeRoute.push(response.routes[0].legs[0].duration.value);
-                entry.duration = response.routes[0].legs[0].duration.value;
-            }
-        });
+        //console.log(entry.position.lat, entry.position.lon);
+        destinations.push(new google.maps.LatLng(entry.position.lat, entry.position.lon));
     });
 
+    //console.log(destinations);
 
-    //function initialize() {
-    //    directionsDisplay = new google.maps.DirectionsRenderer();
-    //    directionsDisplay.setMap(map);
-    //}
+    var d1 = [], d2 = [], d3 = [], d4=[], d5=[];
 
-    //function calcRoute(transType) {
-    //    for (i = 0; i<end.length; i++) {
-    //        var request = {
-    //            origin: start,
-    //            destination: end[i],
-    //            // Note that Javascript allows us to access the constant
-    //            // using square brackets and a string value as its
-    //            // "property."
-    //            travelMode: google.maps.TravelMode[transType]
-    //        };
-    //
-    //        directionsService.route(request, function (response, status) {
-    //            if (status == google.maps.DirectionsStatus.OK) {
-    //                //console.log(response.routes[0].legs[0].duration.value);
-    //                //directionsDisplay.setDirections(response);
-    //            }
-    //        });
-    //    }
-    //}
+    if(destinations.length < 25) {
+        d1 = destinations.slice(0,destinations.length);
+    }
+
+    if(destinations.length > 25 && destinations.length <= 50){
+        d1 = destinations.slice(0,25);
+        d2 = destinations.slice(25, destinations.length);
+    }
+
+    if(destinations.length > 50 && destinations.length <= 75){
+        d1 = destinations.slice(0,25);
+        d2 = destinations.slice(25, 50);
+        d3 = destinations.slice(50, destinations.length);
+    }
+
+    if(destinations.length > 75 && destinations.length <= 100){
+        d1 = destinations.slice(0,25);
+        d2 = destinations.slice(25, 50);
+        d3 = destinations.slice(50, 75);
+        d4 = destinations.slice(75, destinations.length);
+    }
+
+    if(destinations.length > 100 && destinations.length <= 125){
+        d1 = destinations.slice(0,25);
+        d2 = destinations.slice(25, 50);
+        d3 = destinations.slice(50, 75);
+        d4 = destinations.slice(75, 100);
+        d5 = destinations.slice(100, destinations.length);
+    }
+
+    if(d1[0] != null){
+        DistanceMatrixService.getDistanceMatrix(
+        {
+            origins: [start],
+            destinations: d1,
+            travelMode: google.maps.TravelMode[transType],
+            unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status){
+                console.log(status);
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    for(var i=0; i<d1.length ; i++){
+                        if(d1[i].lng().toFixed(4) == endPoints[i].position.lon.toFixed(4) && d1[i].lat().toFixed(4) == endPoints[i].position.lat.toFixed(4)){
+                            endPoints[i].duration = response.rows[0].elements[i].duration.value;
+                        }
+                    }
+                    //console.log(endPoints.slice(0,25));
+                }
+            });
+    }
+
+    if(d2[0] != null){
+        DistanceMatrixService.getDistanceMatrix(
+        {
+            origins: [start],
+            destinations: d2,
+            travelMode: google.maps.TravelMode[transType],
+            unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status){
+                console.log(status);
+
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    for(var i=0; i<d2.length ; i++){
+                        if(d2[i].lng().toFixed(4) == endPoints[i+25].position.lon.toFixed(4) && d2[i].lat().toFixed(4) == endPoints[i+25].position.lat.toFixed(4)){
+                            endPoints[i+25].duration = response.rows[0].elements[i].duration.value;
+                        }
+                    }
+                    //console.log(endPoints);
+                }
+            });
+    }
+
+    if(d3[0] != null){
+        DistanceMatrixService.getDistanceMatrix(
+        {
+            origins: [start],
+            destinations: d3,
+            travelMode: google.maps.TravelMode[transType],
+            unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status){
+                console.log(status);
+
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    for(var i=0; i<d3.length ; i++){
+                        if(d3[i].lng().toFixed(4) == endPoints[i+50].position.lon.toFixed(4) && d3[i].lat().toFixed(4) == endPoints[i+50].position.lat.toFixed(4)){
+                            endPoints[i+50].duration = response.rows[0].elements[i].duration.value;
+                        }
+                    }
+                    //console.log(endPoints);
+                }
+            });
+    }
+
+    if(d4[0] != null){
+        DistanceMatrixService.getDistanceMatrix(
+        {
+            origins: [start],
+            destinations: d4,
+            travelMode: google.maps.TravelMode[transType],
+            unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status){
+                console.log(status);
+
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    for(var i=0; i<d4.length ; i++){
+                        if(d4[i].lng().toFixed(4) == endPoints[i+75].position.lon.toFixed(4) && d4[i].lat().toFixed(4) == endPoints[i+75].position.lat.toFixed(4)){
+                            endPoints[i+75].duration = response.rows[0].elements[i].duration.value;
+                        }
+                    }
+                    //console.log(endPoints);
+                }
+            });
+    }
+
+    if(d5[0] != null){
+        DistanceMatrixService.getDistanceMatrix(
+        {
+            origins: [start],
+            destinations: d5,
+            travelMode: google.maps.TravelMode[transType],
+            unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status){
+                console.log(status);
+
+                if (status == google.maps.DistanceMatrixStatus.OK) {
+                    for(var i=0; i<d5.length ; i++){
+                        if(d5[i].lng().toFixed(4) == endPoints[i+100].position.lon.toFixed(4) && d5[i].lat().toFixed(4) == endPoints[i+100].position.lat.toFixed(4)){
+                            endPoints[i+100].duration = response.rows[0].elements[i].duration.value;
+                        }
+                    }
+
+                }
+            });
+    }
+
+    console.log(endPoints);
     return endPoints;
-    //initialize();
+
 }
