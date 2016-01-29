@@ -15,6 +15,54 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
         $scope.timeVal=15;
         $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
 
+
+
+
+            $scope.state = {
+                name: 'state',
+                checked: false
+            };
+
+            $scope.religious = {
+                name: 'religious',
+                checked: false
+            };
+
+            $scope.orthodox = {
+                name: 'orthodox',
+                checked: false
+            };
+
+            $scope.schools = data.data;
+            globalSchoolsArray = angular.copy($scope.schools);
+
+            //Getting user's address
+            $scope.theAddress = JSON.parse($window.sessionStorage.getItem("theAddress"));
+            $scope.tempAddress = $scope.theAddress.formatted_address.split(",");
+
+
+            //Show Top five schools
+            //$scope.showTopFive();
+
+            //Gets duration per school
+            globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
+
+            //Filters by supervision
+            $scope.supervisionIncludes = [];
+
+
+
+
+            $scope.onStart = function (){
+                //Shows markers on map
+                filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+                $('#google_map_filter').show();
+                $('#page-wrapper').hide();
+            }
+
+            $scope.onStart();
+
+
             //Show schools buildings function
             $scope.showTopFive = function(labels){
 
@@ -91,63 +139,51 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 });
 
-                $('#topFive svg').prepend('<defs> <pattern id="diagonal-stripe-2" patternUnits="userSpaceOnUse" width="10" height="10"> <image xlink:href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCc+CiAgPHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBmaWxsPSd3aGl0ZScvPgogIDxwYXRoIGQ9J00tMSwxIGwyLC0yCiAgICAgICAgICAgTTAsMTAgbDEwLC0xMAogICAgICAgICAgIE05LDExIGwyLC0yJyBzdHJva2U9J2JsYWNrJyBzdHJva2Utd2lkdGg9JzInLz4KPC9zdmc+" x="0" y="0" width="10" height="10"> </image> </pattern> </defs>');
+                //$('#topFive svg').prepend('<defs> <pattern id="img1" patternUnits="userSpaceOnUse" width="100" height="100"> <image xlink:href="/includes/images/selectArrow.png" x="0" y="0" width="100" height="100" /> </pattern> </defs>');
 
-                for(var i= 0 ; i<5; i++){
-                    $('#topFive .c3-chart-bars .c3-shape-' + i).each(function(index) {
-                        console.log(index);
-
-
-                        this.style.cssText = 'fill:url(#diagonal-stripe-2) #fff;';
-                        console.log(this);
-                    });
-                }
-
-
-                $('#topFive .c3-chart-texts .c3-text').each(function(index) {
-                    //console.log(index);
-                    //console.log(this);
-                    //this.style.cssText = styles[index];
-                });
+                //$('#topFive svg').append('defs')
+                //    .append('pattern')
+                //    .attr('id', 'diagonalHatch')
+                //    .attr('patternUnits', 'userSpaceOnUse')
+                //    .attr('width', 4)
+                //    .attr('height', 4)
+                //    .append('path')
+                //    .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
+                //    .attr('stroke', '#9cdfd9')
+                //    .attr('stroke-width', 1);
+                //
+                //console.log($('#topFive svg'));
 
 
+
+                //var t = textures.lines()
+                //    .thicker();
+                //console.log(t);
+                //
+                //for(var i= 0 ; i<5; i++){
+                //    $('#topFive .c3-chart-bars .c3-shape-' + i).each(function(index) {
+                //        //console.log(index);
+                //
+                //
+                //        this.style.fill = 'url(#diagonalHatch)';
+                //
+                //        //console.log(this.style);
+                //        console.log(this);
+                //    });
+                //}
+                //
+                //
+                //$('#topFive .c3-chart-texts .c3-text').each(function(index) {
+                //    //console.log(index);
+                //    //console.log(this);
+                //    //this.style.cssText = styles[index];
+                //});
             };
 
-            $scope.state = {
-                name: 'state',
-                checked: false
-            };
 
-            $scope.religious = {
-                name: 'religious',
-                checked: false
-            };
-
-            $scope.orthodox = {
-                name: 'orthodox',
-                checked: false
-            };
-
-            $scope.schools = data.data;
-            globalSchoolsArray = angular.copy($scope.schools);
-
-            //Getting user's address
-            $scope.theAddress = JSON.parse($window.sessionStorage.getItem("theAddress"));
-            $scope.tempAddress = $scope.theAddress.formatted_address.split(",");
-
-            //Shows markers on map
-            //filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
-
-            //Show Top five schools
-            //$scope.showTopFive();
-
-            //Gets duration per school
-            globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
-
-            //Filters by supervision
-            $scope.supervisionIncludes = [];
-
+            //Filters by supervision type
             $scope.includeSupervision = function(supervision) {
+                debugger;
                 var i = $.inArray(supervision.name, $scope.supervisionIncludes);
                 if (i > -1) {
                     $scope.supervisionIncludes.splice(i, 1);
@@ -156,20 +192,35 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     $scope.supervisionIncludes.push(supervision.name);
                     supervision.checked = true;
                 }
+
                 console.log($scope.supervisionIncludes);
                 //console.log('1st Schools final grade is: ' + $scope.localSchoolsScoresFinal[0]);
+
+                //if ($scope.supervisionIncludes[0] != null) {
+                //    for (var k = 0; k < $scope.schools.length; k++) {
+                //        for (var j = 0; j < 3; j++) {
+                //            if ($scope.supervisionIncludes[j] == null) continue;
+                //            if ((globalSchoolsArray[k].duration / 60 <= $scope.timeVal) && (globalSchoolsArray[k].supervision == $scope.supervisionIncludes[j])) localSchoolsArray.push(globalSchoolsArray[k]);
+                //        }
+                //
+                //    }
+                //}
+                //else filterMap($scope.schools, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                 $scope.getByDuration();
             }
 
             //Filter by mode of travel
             $scope.changeTravelType = function(){
                 console.log($scope.transType);
+                console.log("Global before: "+globalSchoolsArray.length);
                 globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
+                console.log("Global after: "+globalSchoolsArray.length);
                 $scope.getByDuration();
             }
 
             //Filter by time of travel
             $scope.getByDuration = function() {
+                //debugger;
                 console.log($scope.timeVal);
                 var localSchoolsArray = [];
                 for (var k = 0; k < globalSchoolsArray.length; k++) {
@@ -177,8 +228,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     if (globalSchoolsArray[k].duration) {
                         // Checks if the duration is less or equals the timeVal AND whether it applies to current filters (supervision)
                         if ($scope.supervisionIncludes[0] != null) {
-                            for (var j = 0; j < 3; j++) {
-                                if ($scope.supervisionIncludes[j] == null) continue;
+                            for (var j = 0; j < $scope.supervisionIncludes.length; j++) {
+                                //if ($scope.supervisionIncludes[j] == null) continue;
                                 if ((globalSchoolsArray[k].duration / 60 <= $scope.timeVal) && (globalSchoolsArray[k].supervision == $scope.supervisionIncludes[j])) localSchoolsArray.push(globalSchoolsArray[k]);
                             }
                         }
@@ -187,34 +238,10 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 }
 
-                localSchoolsArray = localSchoolsArray.slice(0,5);
+                //localSchoolsArray = localSchoolsArray.slice(0,5);
 
                 // Checked whether filter by grade is initiated
                 if ($scope.sortedSchoolsArray != null){
-                        // Creates a Calculated-Grade for each of the relevant schools
-                        // Plus - a local grades array while at it . . .
-                        //var localGradesArr = [];
-                        //localSchoolsArray.forEach(function (entry, i) {
-                        //    entry.calculatedGrade = $scope.localSchoolsScoresFinal[i];
-                        //    localGradesArr.push($scope.localSchoolsScoresFinal[i]);
-                        //});
-                        //
-                        //// Sorting the local grades array
-                        //function sortFloat(a, b) {
-                        //    return b - a;
-                        //}
-                        //
-                        //localGradesArr.sort(sortFloat);
-                        //console.log(localGradesArr.length);
-                        //
-                        //// Creating a new sorted schools array
-                        //var gradeSortedLocalSchoolsArray = [];
-                        //for (var g = 0; g < 5; g++) {
-                        //    for (var k = 0; k < localSchoolsArray.length; k++) {
-                        //        if ((localGradesArr[g] == localSchoolsArray[k].calculatedGrade) && (gradeSortedLocalSchoolsArray.length < 5)) gradeSortedLocalSchoolsArray.push(localSchoolsArray[k]);
-                        //    }
-                        //}
-                        //console.log(gradeSortedLocalSchoolsArray);
                         filterMap($scope.sortedSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                         $window.sessionStorage.setItem("topFiveSchools", JSON.stringify($scope.sortedSchoolsArray));
                     }
@@ -222,6 +249,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     filterMap(localSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                     $window.sessionStorage.setItem("topFiveSchools", JSON.stringify(localSchoolsArray));
                 }
+
+                console.log("localSchoolsArray: " + localSchoolsArray.length);
             }
 
             // Drag&Drop + Sorting Algorithm
