@@ -532,9 +532,6 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                         padding: {top:10, bottom:-10}
                     }
 
-                },
-                size: {
-                    height: 400
                 }
             });
 
@@ -694,20 +691,19 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                 axis: {
                     x: {
                         type: 'timeseries',
-                        tick:{
-                            format: function (x) { return x.getFullYear(); }
+                        tick: {
+                            format: function (x) {
+                                return x.getFullYear();
+                            }
                         },
 
                     },
                     y: {
                         max: 100,
                         min: 10,
-                        padding: {top:10, bottom:20}
+                        padding: {top: 10, bottom: 20}
                     }
 
-                },
-                size: {
-                    height: 400
                 }
             });
 

@@ -13,12 +13,6 @@ body {
     height: calc(100% - 4em);
 }
 
-@media(min-width:768px) {
-    body {
-        margin-top: 4em;
-    }
-}
-
 p {
     color: #252b5d;
     /*padding: 10px 35px 0px 10px;*/
@@ -39,16 +33,6 @@ p {
 .huge {
     font-size: 50px;
     line-height: normal;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 225px;
-    }
-
-    #page-wrapper {
-        /*padding: 10px;*/
-    }
 }
 
 /* Top Navigation */
@@ -120,35 +104,6 @@ ul.alert-dropdown {
 }
 
 /* Side Navigation */
-
-/*@media(min-width:768px) {*/
-    .side-nav {
-        position: fixed;
-        top: 51px;
-        left: 225px;
-        width: 250px;
-        margin-left: -225px;
-        border: none;
-        border-radius: 0;
-        overflow-y: auto;
-        /*bottom: 0;*/
-        overflow-x: hidden;
-        padding-bottom: 40px;
-        right: 4em;
-        margin-top: 2px;
-    }
-
-    .side-nav>li>a {
-        width: 225px;
-    }
-
-    .side-nav li a:hover,
-    .side-nav li a:focus {
-        outline: none;
-        //background-color: #000 !important;
-    }
-/*}*/
-
 .side-nav>li>ul {
     padding: 0;
 }
@@ -238,12 +193,6 @@ ul.alert-dropdown {
 
 /*bootstrap overrides*/
 
-@media (min-width: 768px) {
-.navbar-right {
-    float: right!important;
-    margin-right: 150px;
-}}
-
 input[type=search]{
     height: 30px;
     width: 300px;
@@ -255,6 +204,7 @@ input[type=search]{
     background-color: #fff7f7;
     border-bottom: 3px solid #f7a2a2;
     height: 4em;
+    min-width: 290px;
 }
 
 .navbar-inverse .navbar-brand {
@@ -283,13 +233,6 @@ input[type=search]{
     border-color: #337ab7;
 }
 
-@media (min-width: 768px) {
-.navbar-nav>li {
-    float: right;
-    /*border-bottom: 1px solid #c9c9c9;*/
-    width: inherit;
-}}
-
 button {
     display: inline-block;
     width: 180px;
@@ -307,6 +250,7 @@ button {
     margin-left: 15px;
     /*width: 40%;*/
     display: flex;
+    order: 2;
     flex-flow: row nowrap;
     align-items: stretch;
     /*padding-top: 10px;*/
@@ -367,9 +311,6 @@ button {
     width: 70%;
     margin: auto;
 }
-
-
-
 
 .form-control {
     outline: 0;
@@ -613,6 +554,7 @@ button {
 
 #logo {
     flex-grow: 16;
+    order: 1;
 }
 
 #logo img {
@@ -687,7 +629,6 @@ button {
 .pac-item-selected, .pac-item-selected:hover {
     background-color: #ff9999;
 }
-
 
 .clearable{
     background: #fff url(/includes/images/X.svg) no-repeat left -30px center;
@@ -775,8 +716,7 @@ button {
 .leftSearchBox #Autocomplete {
     background-color: #fff7f7;
     flex-grow: 5;
-    height: 1.5em;
-    border-radius: 8px;
+    height: 52px;
     border: none;
     box-shadow: none;
     padding-right: 2em;
@@ -786,6 +726,12 @@ button {
     width: auto;
     margin: 0;
 }
+
+/*Hides placesholder*/
+.form-control::-webkit-input-placeholder { color: #fff7f7; }
+.form-control:-moz-placeholder { color: #fff7f7; }
+.form-control::-moz-placeholder { color: #fff7f7; }
+.form-control:-ms-input-placeholder { color: #fff7f7; }
 
 .leftSearchBox #searchIcon {
     height:1.5em;
@@ -972,52 +918,6 @@ input[type=checkbox]:checked + .compSchoolName:before {
     height: 100%;
 }
 
-@media(max-width: 850px) {
-    #enterSchool {
-        flex-flow: column wrap;
-    }
-}
-
-
-@media(max-width:768px) {
-    .side-nav{
-        width: 80%;
-        left: 50%;
-        margin-left: -40%;
-        right: auto;
-        top: auto;
-        margin-top: 1px
-    }
-
-    #schoolInfo{
-        margin-bottom: 0px;
-    }
-
-    #schoolName article,
-    #schoolInfo li{
-        display: inline-block
-    }
-
-    #schoolInfo li {
-        margin-left: 1em;
-    }
-
-}
-
-@media(max-width:460px) {
-    .navbar-inverse {
-        height: auto;
-    }
-    .navbar-header {
-        text-align: center;
-        margin-top: 1em;
-    }
-    .navbar-brand, .leftSearchBox{
-        float: none;
-    }
-}
-
-
 /*C3 Graph design*/
 .c3-axis .c3 path, .c3 line {
     stroke: #42bfb9 !important;
@@ -1069,6 +969,7 @@ path.domain{
     display: flex;
     flex-flow: row nowrap;
     align-items: stretch;
+    height: 700px;
 }
 
 .c3 svg {
@@ -1081,8 +982,9 @@ path.domain{
 
 #c3chart{
     position: static !important;
+    height: 100%;
     align-self: flex-end;
-    max-width: 85%;
+    width: 80%;
 }
 
 #legends {
@@ -1122,7 +1024,7 @@ path.domain{
 }
 
 .schoolInfoSection:first-child {
-    height: 70%;
+    height: 700px;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
@@ -1137,13 +1039,13 @@ path.domain{
 /*Landing page*/
 #infoAndImage {
     color: #252b5d;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: stretch;
+    display: inline-block;
+    //flex-flow: row nowrap;
+    //align-items: stretch;
 }
 
 #infoAndImage p {
-    flex-grow: 3;
+    //flex-grow: 3;
     font-size: 1.3em;
     line-height: 1.4em;
 }
@@ -1156,13 +1058,15 @@ path.domain{
 
 #aboutImg {
     flex-grow: 1;
-    width:100%;
+    //width:100%;
     margin-left: 5em;
 }
 
 #aboutImg img {
     /*height: 80%;*/
-    max-width:80%
+    max-width: 200px;
+    float: right;
+    display: inline-block;
 }
 
 #aboutTheProject {
@@ -1185,15 +1089,34 @@ path.domain{
 }
 
 #landingPage .row {
-    width: 80%;
+
+    width: 880px;
+
     /*border: 1px solid black;*/
     margin: auto;
 }
 
 #shenkarCalcalistLogos {
     background-color: #f7a2a2;
-    flex-grow: 1;
+    //flex-grow: 1;
     text-align: left;
+    order: 3;
+    width: 116px;
+    height: 56px;
+}
+
+.textDisplay01 {
+    display: inline-block;
+    width: 600px;
+    float: left;
+    margin-bottom: 15px;
+}
+
+.textDisplay02 {
+    display: inline-block;
+    width: 600px;
+    float: left;
+    margin-bottom: 15px;
 }
 
 
@@ -1379,3 +1302,805 @@ ul {
     position: relative;
     height: 16.5em;
 }
+
+/*Media Queries*/
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 225px;
+    }
+
+    #page-wrapper {
+        /*padding: 10px;*/
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-nav>li {
+        float: right;
+        /*border-bottom: 1px solid #c9c9c9;*/
+        width: inherit;
+    }}
+
+@media (min-width: 768px) {
+    .navbar-right {
+        float: right!important;
+        margin-right: 150px;
+    }}
+
+@media(min-width:768px) {
+    body {
+        margin-top: 4em;
+    }
+}
+
+@media(max-width: 850px) {
+    #enterSchool {
+        flex-flow: column wrap;
+    }
+}
+
+@media(min-width:768px) {
+    .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 250px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        /*bottom: 0;*/
+        overflow-x: hidden;
+        padding-bottom: 40px;
+        right: 4em;
+        margin-top: 2px;
+    }
+
+    .side-nav>li>a {
+        width: 225px;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+        outline: none;
+    //background-color: #000 !important;
+    }
+}
+
+@media(max-width:768px) {
+    .side-nav{
+        width: 80%;
+        left: 50%;
+        //margin-left: -40%;
+        right: auto;
+        top: auto;
+        margin-top: 1px
+    }
+
+    #schoolInfo{
+        margin-bottom: 0px;
+    }
+
+    #schoolName article,
+    #schoolInfo li{
+        display: inline-block
+    }
+
+    #schoolInfo li {
+        margin-left: 1em;
+    }
+}
+
+@media(max-width:460px) {
+    .navbar-inverse {
+        height: auto;
+    }
+    .navbar-header {
+        text-align: center;
+        margin-top: 1em;
+    }
+    .navbar-brand, .leftSearchBox{
+        float: none;
+    }
+}
+
+
+@media(max-width: 950px) {
+    #landingPage .row {
+        width: 750px;
+    }
+
+    #aboutImg img {
+        margin-bottom: 50px;
+        margin-left: 50px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 500px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 500px;
+        float: left;
+        margin-bottom: 15px;
+    }
+}
+
+/*Small tablet*/
+@media (min-width: 501px) and (max-width:768px) {
+
+    /*Navbar*/
+    #logo {
+        margin-left: 50px;
+    }
+
+    #shenkarCalcalistLogos {
+        order: 2;
+    }
+    .leftSearchBox {
+        order: 3;
+        border-bottom: 3px solid #f7a2a2;
+    }
+
+    .leftSearchBox {
+        margin-left: 0px;
+        padding-left: 50px;
+        background-color: #fff7f7;
+    }
+
+    .navbar-inverse .navbar-brand {
+        margin-right: 1em;
+    }
+
+    .navbar-inverse{
+        border-bottom: none;
+    }
+
+    .leftSearchBox #Autocomplete {
+        padding-right: 50px;
+        font-size: 30px;
+    }
+
+    /*Landing Page*/
+    #landingPage{
+        padding-top: 4em;
+    }
+
+    #landingPage .row {
+        width: 500px;
+    }
+
+    #aboutImg img {
+        margin-bottom: 50px;
+        margin-left: 50px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 250px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .goToSite {
+        width: 60%;
+        margin: 15px 0px 20px 35px;
+        font-size: 1.3em;
+    }
+
+    #credits {
+        padding-top: 2em;
+        font-size: 1em;
+    }
+
+    /*Main search page*/
+    #searchBox{
+        display: none;
+    }
+
+    /*Reveals placesholder*/
+    .form-control::-webkit-input-placeholder { color: #FDC8C8; }
+    .form-control:-moz-placeholder { color: #FDC8C8; }
+    .form-control::-moz-placeholder { color: #FDC8C8; }
+    .form-control:-ms-input-placeholder { color: #FDC8C8; }
+
+    /*School Info page*/
+    #wrapper {
+        padding: 135px 0px 0px 0px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .schoolInfoSection:first-child {
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        position: fixed;
+        top: 113px;
+        width: 100%;
+    }
+
+    #opinionsBTN {
+        background-color: #ff9999;
+        outline: none;
+        float: left;
+        width: 80px;
+        height: 80px;
+        font-size: 1.2em;
+        position: fixed;
+        left: 0;
+        top: 111px;
+        border-radius: 0;
+    }
+
+    #comparisonBTN {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        font-size: 1.4em;
+    }
+
+    .schoolInfoSection:nth-child(2) {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .schoolInfoSection {
+         border: none;
+         background-color: transparent;
+    }
+
+    #graphsFiltersSection {
+        display: inherit;
+        width: 100%;
+    }
+
+    #categoriesLegends {
+        height: 550px;
+        margin-top:0;
+    }
+}
+
+/*Big phones*/
+@media(min-width: 376px) and (max-width:  500px){
+
+    /*Navbar*/
+    #shenkarCalcalistLogos {
+        order: 2;
+    }
+    .leftSearchBox {
+        order: 3;
+        border-bottom: 3px solid #f7a2a2;
+    }
+
+    .leftSearchBox {
+        margin-left: 0px;
+        padding-left: 50px;
+        background-color: #fff7f7;
+        z-index: 1;
+    }
+
+    .navbar-header {
+        margin-top: 0px;
+    }
+
+    .navbar-inverse .navbar-brand {
+        margin-right: -130px;
+    }
+
+    .leftSearchBox #Autocomplete {
+        padding-right: 45px;
+        font-size: 22px;
+    }
+
+    .navbar-inverse{
+        border-bottom: none;
+    }
+
+    /*Landing Page*/
+    #landingPage {
+        padding-top: 3em;
+    }
+
+    #landingPage .row {
+        width: 370px;
+    }
+
+    #infoAndImage p{
+        font-size: 1.17em;
+    }
+
+    #aboutImg img {
+        margin-bottom: 20px;
+        margin-left: 0px;
+        width: 120px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 225px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .goToSite {
+        width: 60%;
+        margin: 0px 0px 20px 35px;
+        font-size: 1.17em;
+    }
+
+    #credits {
+        padding-top: 2em;
+        font-size: 1em;
+    }
+
+    /*Main search page*/
+    #searchBox{
+       display: none;
+    }
+
+    /*Reveals placesholder*/
+    .form-control::-webkit-input-placeholder { color: #FDC8C8; }
+    .form-control:-moz-placeholder { color: #FDC8C8; }
+    .form-control::-moz-placeholder { color: #FDC8C8; }
+    .form-control:-ms-input-placeholder { color: #FDC8C8; }
+
+    /*School Info page*/
+    #wrapper {
+        padding: 115px 0px 0px 0px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .schoolInfoSection:first-child {
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        position: fixed;
+        top: 95px;
+        width: 100%;
+        font-size: 1em;
+        background-color: white;
+    }
+
+    #schoolName {
+        font-size: 1.5em;
+    }
+
+    #schoolInfo {
+        font-size: 0.9em;
+    }
+
+    #opinionsBTN {
+        background-color: #ff9999;
+        outline: none;
+        float: left;
+        width: 70px;
+        height: 70px;
+        font-size: 1em;
+        position: fixed;
+        left: 0;
+        top: 111px;
+        border-radius: 0;
+    }
+
+    #comparisonBTN {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        font-size: 1.2em;
+    }
+
+    .schoolInfoSection:nth-child(2) {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .schoolInfoSection {
+        border: none;
+        background-color: transparent;
+    }
+
+
+    #graphsFiltersSection {
+        display: inherit;
+        width: 100%;
+    }
+
+    #categoriesLegends {
+        height: 350px;
+        margin-top:0;
+    }
+
+    #c3chart {
+        width: 70%;
+    }
+}
+
+/*Medium phones*/
+@media(min-width: 321px) and (max-width:  375px){
+
+    /*Navbar*/
+    #shenkarCalcalistLogos {
+        order: 2;
+    }
+    .leftSearchBox {
+        order: 3;
+        border-bottom: 3px solid #f7a2a2;
+    }
+
+    .leftSearchBox {
+        margin-left: 0px;
+        padding-left: 50px;
+        background-color: #fff7f7;
+        z-index: 1;
+    }
+
+    .navbar-header {
+        margin-top: 0px;
+    }
+
+    .navbar-inverse .navbar-brand {
+        margin-right: -70px;
+    }
+
+    .leftSearchBox #Autocomplete {
+        padding-right: 45px;
+        font-size: 18px;
+    }
+
+    .navbar-inverse{
+        border-bottom: none;
+    }
+
+    /*Landing Page*/
+    #landingPage {
+        padding-top: 2em;
+    }
+
+    #landingPage .row {
+        width: 330px;
+    }
+
+    #infoAndImage p{
+        font-size: 1.1em;
+    }
+
+    #aboutImg img {
+        margin-bottom: 20px;
+        margin-left: 0px;
+        width: 120px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 180px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .goToSite {
+        width: 60%;
+        margin: -10px 0px 10px 35px;
+    }
+
+    #credits {
+        padding-top: 1em;
+        font-size: 1em;
+    }
+
+    /*Main search page*/
+    #searchBox{
+        display: none;
+    }
+
+    /*Reveals placesholder*/
+    .form-control::-webkit-input-placeholder { color: #FDC8C8; }
+    .form-control:-moz-placeholder { color: #FDC8C8; }
+    .form-control::-moz-placeholder { color: #FDC8C8; }
+    .form-control:-ms-input-placeholder { color: #FDC8C8; }
+
+    /*School Info page*/
+    #wrapper {
+        padding: 105px 0px 0px 0px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .schoolInfoSection:first-child {
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        position: fixed;
+        top: 95px;
+        width: 100%;
+        font-size: 1em;
+        background-color: white;
+    }
+
+    #schoolName {
+        font-size: 1.3em;
+    }
+
+    #schoolInfo {
+        font-size: 0.8em;
+    }
+
+    #opinionsBTN {
+        background-color: #ff9999;
+        outline: none;
+        float: left;
+        width: 60px;
+        height: 60px;
+        font-size: 1em;
+        position: fixed;
+        left: 0;
+        top: 111px;
+        border-radius: 0;
+    }
+
+    #comparisonBTN {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        border-radius: 0;
+        font-size: 1.1em;
+    }
+
+    .schoolInfoSection:nth-child(2) {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .schoolInfoSection {
+        border: none;
+        background-color: transparent;
+    }
+
+
+    #graphsFiltersSection {
+        display: inherit;
+        width: 100%;
+    }
+
+    #categoriesLegends {
+        height: 260px;
+        margin-top:0;
+    }
+
+    #c3chart {
+        width: 65%;
+    }
+
+}
+
+
+/*Small phones*/
+@media(max-width:  320px){
+
+    /*Navbar*/
+    #shenkarCalcalistLogos {
+        order: 2;
+    }
+    .leftSearchBox {
+        order: 3;
+        border-bottom: 3px solid #f7a2a2;
+    }
+
+    .leftSearchBox {
+        margin-left: 0px;
+        padding-left: 50px;
+        background-color: #fff7f7;
+        z-index: 1;
+    }
+
+    .navbar-header {
+        margin-top: 0px;
+    }
+
+    .navbar-inverse .navbar-brand {
+        margin-right: -15px;
+    }
+
+    .leftSearchBox #Autocomplete {
+        padding-right: 45px;
+        font-size: 15px;
+    }
+
+    .navbar-inverse{
+        border-bottom: none;
+    }
+
+    /*Landing Page*/
+    #landingPage {
+        padding-top: 2em;
+    }
+
+    #landingPage .row {
+        width: 300px;
+    }
+
+    #infoAndImage p{
+        font-size: 1em;
+    }
+
+    #aboutImg img {
+        margin-bottom: 0px;
+        margin-left: 0px;
+        width: 120px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 150px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .goToSite {
+        width: 60%;
+        margin: -10px 0px 10px 35px;
+    }
+
+    #credits {
+        padding-top: 1em;
+        font-size: 1em;
+    }
+
+    /*Main search page*/
+    #searchBox{
+        display: none;
+    }
+
+    /*Reveals placesholder*/
+    .form-control::-webkit-input-placeholder { color: #FDC8C8; }
+    .form-control:-moz-placeholder { color: #FDC8C8; }
+    .form-control::-moz-placeholder { color: #FDC8C8; }
+    .form-control:-ms-input-placeholder { color: #FDC8C8; }
+
+    /*School Info page*/
+    #wrapper {
+        padding: 105px 0px 0px 0px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .schoolInfoSection:first-child {
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        position: fixed;
+        top: 95px;
+        width: 100%;
+        font-size: 1em;
+        background-color: white;
+    }
+
+    #schoolName {
+        font-size: 1.2em;
+    }
+
+    #schoolInfo {
+        font-size: 0.75em;
+    }
+
+    #opinionsBTN {
+        background-color: #ff9999;
+        outline: none;
+        float: left;
+        width: 60px;
+        height: 60px;
+        font-size: 1em;
+        position: fixed;
+        left: 0;
+        top: 111px;
+        border-radius: 0;
+    }
+
+    #comparisonBTN {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        border-radius: 0;
+        font-size: 1.1em;
+    }
+
+    .schoolInfoSection:nth-child(2) {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .schoolInfoSection {
+        border: none;
+        background-color: transparent;
+    }
+
+    #graphsFiltersSection {
+        display: inherit;
+        width: 100%;
+    }
+
+    #categoriesLegends {
+        height: 200px;
+        margin-top:0;
+    }
+
+    #c3chart {
+        width: 60%;
+    }
+
+    .tick text tspan{
+        font-size: 1.1em;
+    }
+}
+
+
