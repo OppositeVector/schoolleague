@@ -12,7 +12,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
     function ($scope, $http,  $routeParams, $window, $location, $rootScope) {
         globalSchoolsArray = [];
         $scope.transType="DRIVING";
-        $scope.timeVal=15;
+        $scope.timeVal="15";
         $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
 
 
@@ -43,6 +43,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
             //Show Top five schools
             //$scope.showTopFive();
+
+            //console.log($scope.theAddress);
 
             //Gets duration per school
             globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);

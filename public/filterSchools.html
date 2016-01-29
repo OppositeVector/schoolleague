@@ -93,7 +93,7 @@
                 <section class="innerSearchBox" ng-controller="autoCompleteSearch">
                     <label for="filterAutocomplete">מיקום </label>
                     <input type="text" id="filterAutocomplete" class="form-control clearable" ng-autocomplete="result2"
-                           details="details2" options="options2" placeholder=""/>
+                           details="details2" options="options2" placeholder="" ng-model="theAddress.formatted_address"/>
                     <!--<label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>-->
                 </section>
             </div>
@@ -107,11 +107,11 @@
             </div>
             <div>
                 <input type="range" id="timeRange" min="5" max="60" ng-model="timeVal"
-                       ng-change="getByDuration()" step="1">
+                       ng-change="getByDuration()" step="5">
             </div>
             <div>
                 <label for="timeSelect">עד</label>
-                <select name="timeSelect" id="timeSelect" ng-change="getByDuration()" ng-model="timeVal">
+                <select name="timeSelect" id="timeSelect" ng-change="getByDuration()" ng-model="timeVal" ng-selected="timeVal">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
