@@ -481,6 +481,7 @@ button {
 
 #graphsFilters.navbar-nav>li {
     border-bottom: 2px solid #f7a2a2;
+    position: relative;
 }
 
 #graphsFiltersSection {
@@ -518,6 +519,7 @@ button {
     border-radius: 15px;
     margin-top: -3px;
     background-color: #fff7f7;
+    width: 100%;
 }
 
 #opinionsBTN,
@@ -721,7 +723,7 @@ button {
 .leftSearchBox #Autocomplete {
     background-color: #fff7f7;
     flex-grow: 5;
-    height: 52px;
+    height: 50px;
     border: none;
     box-shadow: none;
     padding-right: 2em;
@@ -1151,6 +1153,7 @@ path.domain{
     background-color: #fff7f7;
     width: 250px;
     padding-bottom: 0;
+    height: 103px;
 }
 
 .filterSelectors {
@@ -1181,18 +1184,10 @@ path.domain{
     background-color: #fff7f7;
     width: 250px;
     margin-top: -3px;
+    height: 700px;
 }
 
 /*Drag&Drop*/
-
-
-#poolList {
-    /*min-height: 30px;*/
-    /*height: auto;*/
-    /*width: 100%;*/
-    /*margin-right: -50px;*/
-}
-
 ul {
     list-style: none;
 }
@@ -1458,8 +1453,9 @@ b, strong {
 
 #topFive {
     margin-top: 100px;
-    width: 50%;
+    width: 66%;
     margin-right: 33%;
+    height: 700px;
     /*margin-right: calc(250px + 4em);*/
 }
 
@@ -1475,13 +1471,13 @@ b, strong {
 #topFive .c3-axis-x .tick tspan{
     color: #2b2d78;
     /*text-decoration: underline;*/
-    font-size: 1.2em;
+    font-size: 1.4em;
     text-align: right;
 }
 
 #routingFilters {
     margin-right: 330px;
-    margin-top: 15px;
+    margin-top: 65px;
 }
 
 #routingFilters label {
@@ -1504,7 +1500,9 @@ b, strong {
     display: inline-block;
     /*position: absolute;*/
     /*left: calc(10px + 2em);*/
+    font-size: inherit;
     width: 12em;
+    margin-left: 10px;
     /*height: 1.7em;*/
     /*top: -2.5em;*/
 }
@@ -1530,11 +1528,11 @@ input[type="range"] {
     /*height: 1px;*/
     margin: 0;
     border: none;
-    padding: 5px 25px;
+    padding: 5px 20px;
     border-radius: 14px;
     background-color: #ff9999;
     outline: none; /* no focus outline */
-    margin-right: 15px;
+    margin-left: 25px;
 }
 
 input[type=range] {
@@ -1632,9 +1630,9 @@ input[type="range"]::-ms-thumb {
 
 /*Media Queries*/
 
-@media(min-width:768px) {
+@media(min-width:1024px) {
     #wrapper {
-        padding-left: 225px;
+        /*padding-left: 225px;*/
     }
 
     #page-wrapper {
@@ -1642,20 +1640,20 @@ input[type="range"]::-ms-thumb {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .navbar-nav>li {
         float: right;
         /*border-bottom: 1px solid #c9c9c9;*/
-        width: inherit;
+        /*width: inherit;*/
     }}
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .navbar-right {
         float: right!important;
         margin-right: 150px;
     }}
 
-@media(min-width:768px) {
+@media(min-width:1024px) {
     body {
         margin-top: 4em;
     }
@@ -1667,7 +1665,7 @@ input[type="range"]::-ms-thumb {
     }
 }
 
-@media(min-width:768px) {
+@media(min-width:1024px) {
     .side-nav {
         position: fixed;
         top: 51px;
@@ -1695,7 +1693,7 @@ input[type="range"]::-ms-thumb {
     }
 }
 
-@media(max-width:768px) {
+@media(max-width:767px) {
     .side-nav{
         width: 80%;
         left: 50%;
@@ -1733,31 +1731,31 @@ input[type="range"]::-ms-thumb {
 }
 
 
-@media(max-width: 950px) {
-    #landingPage .row {
-        width: 750px;
-    }
+/*@media(max-width: 950px) {*/
+    /*#landingPage .row {*/
+        /*width: 750px;*/
+    /*}*/
 
-    #aboutImg img {
-        margin-bottom: 50px;
-        margin-left: 50px;
-    }
+    /*#aboutImg img {*/
+        /*margin-bottom: 50px;*/
+        /*margin-left: 50px;*/
+    /*}*/
 
-    .textDisplay01 {
-        display: block;
-        width: 500px;
-    }
+    /*.textDisplay01 {*/
+        /*display: block;*/
+        /*width: 500px;*/
+    /*}*/
 
-    .textDisplay02 {
-        display: block;
-        width: 500px;
-        float: left;
-        margin-bottom: 15px;
-    }
-}
+    /*.textDisplay02 {*/
+        /*display: block;*/
+        /*width: 500px;*/
+        /*float: left;*/
+        /*margin-bottom: 15px;*/
+    /*}*/
+/*}*/
 
-/*Small tablet*/
-@media (min-width: 501px) and (max-width:768px) {
+/*Normal tablet*/
+@media (min-width: 768px) and (max-width:1023px) {
 
     /*Navbar*/
     #logo {
@@ -1839,13 +1837,138 @@ input[type="range"]::-ms-thumb {
     .form-control::-moz-placeholder { color: #FDC8C8; }
     .form-control:-ms-input-placeholder { color: #FDC8C8; }
 
+    /*Filters Page*/
+    .ng-scope {
+        height: 95%;
+    }
+
+    #google_map_filter {
+        height: 54.7%;
+        margin-top: 150px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .nav>li {
+        position: fixed;
+    }
+
+    .supervisionFilter {
+        top: 184px;
+        border: none;
+        border-bottom: 2px solid #9695CF;
+        padding-top: 0px;
+        padding-right: 42px;
+        padding-left: 5px;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 30px;
+    }
+
+    .filterSelectors{
+        margin-top: -27px;
+    }
+
+    .filterSelectors li {
+        margin-right: 92px;
+        float: left;
+    }
+
+    #routingFilters {
+        margin-right: -1px;
+        margin-top: 0;
+    }
+
+    #routingFilters label {
+        font-size: 1.1em;
+        display: block;
+    }
+
+    .tagsFilter {
+        bottom: 0;
+        border: none;
+        border-top: 2px solid #9695CF;
+        border-radius: 0;
+        /* padding: 1em; */
+        background-color: #FFF7F7;
+        width: 100%;
+        /* margin-top: -3px; */
+        height: 280px;
+    }
+
+    .tagsFilter .layer.title {
+        width: 100%;
+        margin-right: 110%;
+    }
+
+    #labelsList, #mockupLabelsList {
+        width: 90%;
+        right: 80px;
+    }
+
+    #filterAutocomplete {
+        width: 24em;
+    }
+
+    #switchViews {
+        left: 10px;
+        bottom: 285px;
+    }
+
+    #switchViews button {
+        display: initial;
+    }
+
+    #choiceBox {
+        position: relative;
+        height: 19em;
+        width: 40%;
+        float: right;
+    }
+
+    #poolList {
+        width: 40%;
+        float: left;
+        margin-top: 70px;
+    }
+
+    #routingFilters {
+        position: absolute;
+        right: 23px;
+        top: 114px;
+    }
+
+    #topFive {
+        width: 85%;
+        height: 500px;
+        margin: auto;
+        margin-top: 100px;
+    }
+
     /*School Info page*/
     #wrapper {
-        padding: 135px 0px 0px 0px;
+        padding: 75px 0px 0px 0px;
     }
 
     .container-fluid {
-        padding: 0;
+    //padding: 0;
+    }
+
+    #schoolName {
+        font-size: 2em;
+        width: 650px;
+        line-height: 2em;
+        display: inline-flex;
+    }
+
+    #schoolInfo {
+        font-size: 1.2em;
+        width: 650px;
+        line-height: 1em;
+        display: inline-flex;
     }
 
     .schoolInfoSection:first-child {
@@ -1853,7 +1976,7 @@ input[type="range"]::-ms-thumb {
         display: flex;
         flex-flow: column nowrap;
         position: fixed;
-        top: 113px;
+        top: 80px;
         width: 100%;
     }
 
@@ -1866,7 +1989,276 @@ input[type="range"]::-ms-thumb {
         font-size: 1.2em;
         position: fixed;
         left: 0;
-        top: 111px;
+        top: 108px;
+        border-radius: 0;
+    }
+
+    #comparisonBTN {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        border-radius: 0;
+        font-size: 1.4em;
+    }
+
+    .schoolInfoSection:nth-child(2) {
+        border: none;
+        background-color: transparent;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+    }
+
+    button {
+        margin: 0;
+    }
+
+    .schoolInfoSection {
+        border: none;
+        background-color: transparent;
+    }
+
+    #graphsFiltersSection {
+        display: inherit;
+        width: 100%;
+    }
+
+    #categoriesLegends {
+        height: 260px;
+        margin-top:0;
+        width: 100%;
+    }
+
+    #legends {
+        position: absolute;
+        display: inherit;
+    }
+
+    #c3chart {
+        position: absolute;
+        padding-top: 400px;
+        padding-right: 10px;
+        width: 100%;
+        height: 250%;
+    }
+}
+
+/*Small tablet*/
+@media (min-width: 501px) and (max-width:767px) {
+
+    /*Navbar*/
+    #logo {
+        margin-left: 50px;
+    }
+
+    #shenkarCalcalistLogos {
+        order: 2;
+    }
+    .leftSearchBox {
+        order: 3;
+        border-bottom: 3px solid #f7a2a2;
+    }
+
+    .leftSearchBox {
+        margin-left: 0px;
+        padding-left: 50px;
+        background-color: #fff7f7;
+    }
+
+    .navbar-inverse .navbar-brand {
+        margin-right: 1em;
+    }
+
+    .navbar-inverse{
+        border-bottom: none;
+    }
+
+    .leftSearchBox #Autocomplete {
+        padding-right: 50px;
+        font-size: 30px;
+    }
+
+    /*Landing Page*/
+    #landingPage{
+        padding-top: 4em;
+    }
+
+    #landingPage .row {
+        width: 500px;
+    }
+
+    #aboutImg img {
+        margin-bottom: 50px;
+        margin-left: 50px;
+    }
+
+    .textDisplay01 {
+        display: block;
+        width: 250px;
+    }
+
+    .textDisplay02 {
+        display: block;
+        width: 100%;
+        float: left;
+        margin-bottom: 15px;
+    }
+
+    .goToSite {
+        width: 60%;
+        margin: 15px 0px 20px 35px;
+        font-size: 1.3em;
+    }
+
+    #credits {
+        padding-top: 2em;
+        font-size: 1em;
+    }
+
+    /*Main search page*/
+    #searchBox{
+        display: none;
+    }
+
+    /*Reveals placesholder*/
+    .form-control::-webkit-input-placeholder { color: #FDC8C8; }
+    .form-control:-moz-placeholder { color: #FDC8C8; }
+    .form-control::-moz-placeholder { color: #FDC8C8; }
+    .form-control:-ms-input-placeholder { color: #FDC8C8; }
+
+    /*Filters Page*/
+    .ng-scope {
+        height: 95%;
+    }
+
+    #google_map_filter {
+        height: 51.7%;
+        margin-top: 150px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .nav>li {
+        position: fixed;
+    }
+
+    .supervisionFilter {
+        top: 184px;
+        border: none;
+        border-bottom: 2px solid #9695CF;
+        padding-top: 0px;
+        padding-right: 42px;
+         padding-left: 5px;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 30px;
+    }
+
+    .filterSelectors{
+        margin-top: -27px;
+    }
+
+    .filterSelectors li {
+        margin-right: 92px;
+        float: left;
+    }
+
+    #routingFilters {
+        margin-right: -1px;
+        margin-top: 0;
+    }
+
+    #routingFilters label {
+        font-size: 1.1em;
+        display: block;
+    }
+
+    .tagsFilter {
+        bottom: 0;
+        border: none;
+        border-top: 2px solid #9695CF;
+        border-radius: 0;
+        /* padding: 1em; */
+        background-color: #FFF7F7;
+        width: 100%;
+        /* margin-top: -3px; */
+        height: 280px;
+    }
+
+    #switchViews {
+        left: 10px;
+        bottom: 285px;
+    }
+
+    #switchViews button {
+        display: initial;
+    }
+
+    #choiceBox {
+        position: relative;
+        height: 19em;
+        width: 40%;
+        float: right;
+    }
+
+    #poolList {
+        width: 49%;
+        float: left;
+        margin-top: 70px;
+    }
+
+    #routingFilters {
+        position: absolute;
+        right: 23px;
+        top: 114px;
+    }
+
+    #topFive {
+       width: 85%;
+       height: 450px;
+       margin: auto;
+       margin-top: 100px;
+    }
+
+    /*School Info page*/
+    #wrapper {
+        padding: 60px 0px 0px 0px;
+    }
+
+    .container-fluid {
+        //padding: 0;
+    }
+
+    #schoolName {
+        font-size: 1.5em;
+        width: 490px;
+        line-height: 2em;
+    }
+
+    .schoolInfoSection:first-child {
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
+        position: fixed;
+        top: 80px;
+        width: 100%;
+    }
+
+    #opinionsBTN {
+        background-color: #ff9999;
+        outline: none;
+        float: left;
+        width: 80px;
+        height: 80px;
+        font-size: 1.2em;
+        position: fixed;
+        left: 0;
+        top: 108px;
         border-radius: 0;
     }
 
@@ -1903,8 +2295,22 @@ input[type="range"]::-ms-thumb {
     }
 
     #categoriesLegends {
-        height: 550px;
+        height: 260px;
         margin-top:0;
+        width: 100%;
+    }
+
+    #legends {
+        position: absolute;
+        display: inherit;
+    }
+
+    #c3chart {
+        position: absolute;
+        padding-top: 350px;
+        padding-right: 10px;
+        width: 100%;
+        height: 230%;
     }
 }
 
@@ -1938,6 +2344,7 @@ input[type="range"]::-ms-thumb {
     .leftSearchBox #Autocomplete {
         padding-right: 45px;
         font-size: 22px;
+        height: 40px;
     }
 
     .navbar-inverse{
@@ -1945,6 +2352,11 @@ input[type="range"]::-ms-thumb {
     }
 
     /*Landing Page*/
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 12px;
+    }
+
     #landingPage {
         padding-top: 3em;
     }
@@ -1997,13 +2409,134 @@ input[type="range"]::-ms-thumb {
     .form-control::-moz-placeholder { color: #FDC8C8; }
     .form-control:-ms-input-placeholder { color: #FDC8C8; }
 
+    /*Filters Page*/
+    .ng-scope {
+        height: 90%;
+    }
+
+    #google_map_filter {
+        height: 49%;
+        margin-top: 119px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .nav>li {
+        position: fixed;
+    }
+
+    .supervisionFilter {
+        top: 150px;
+        border: none;
+        border-bottom: 2px solid #9695CF;
+        padding-top: 0px;
+        padding-right: 20px;
+        padding-left: 5px;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 24px;
+    }
+
+    p {
+        margin: 0px 0 10px 0;
+    }
+
+    /*#timeRange {*/
+        /*background: url(../images/range_shorter.png) no-repeat center;*/
+    /*}*/
+
+    input[type="range"] {
+        padding: 5px 38px;
+        //margin-left: -11px;
+        margin-right: 0;
+    }
+
+    #timeSelect, #mode{
+        padding-left: 0.8em;
+        padding-right: 2px;
+        padding-left: 10px;
+    }
+
+    .filterSelectors{
+        margin-top: -27px;
+    }
+
+    .filterSelectors li {
+        margin-right: 55px;
+        float: left;
+    }
+
+    #routingFilters {
+        margin-right: -1px;
+        margin-top: 0;
+    }
+
+    #routingFilters label {
+        font-size: 1.1em;
+        display: block;
+        margin-right: 10px;
+        display: none;
+    }
+
+    #filterAutocomplete {
+        font-size: 12px;
+        width: 8em;
+        margin-left: 10px;
+        padding-left: 10px;
+        padding-right: 5px;
+        display: none;
+    }
+
+    .tagsFilter {
+        bottom: 0;
+        border: none;
+        border-top: 2px solid #9695CF;
+        border-radius: 0;
+        /* padding: 1em; */
+        background-color: #FFF7F7;
+        width: 100%;
+        /* margin-top: -3px; */
+        height: 230px;
+    }
+
+    #switchViews {
+        left: 10px;
+        bottom: 235px;
+    }
+
+    #switchViews button {
+        display: initial;
+    }
+
+    #choiceBox {
+        position: relative;
+        height: 19em;
+        width: 40%;
+        float: right;
+    }
+
+    #poolList {
+        width: 55%;
+        float: left;
+        margin-top: 35px;
+    }
+
+    #routingFilters {
+        position: absolute;
+        right: 18px;
+        top: 110px;
+    }
+
     /*School Info page*/
     #wrapper {
-        padding: 115px 0px 0px 0px;
+        padding: 55px 0px 0px 0px;
     }
 
     .container-fluid {
-        padding: 0;
+        //padding: 0;
     }
 
     .schoolInfoSection:first-child {
@@ -2011,18 +2544,22 @@ input[type="range"]::-ms-thumb {
         display: flex;
         flex-flow: column nowrap;
         position: fixed;
-        top: 95px;
+        top: 80px;
         width: 100%;
         font-size: 1em;
-        background-color: white;
+        background-color: transparent;
     }
 
     #schoolName {
         font-size: 1.5em;
+        width: 320px;
+        line-height: 2em;
     }
 
     #schoolInfo {
         font-size: 0.9em;
+        width: 320px;
+        line-height: 1em;
     }
 
     #opinionsBTN {
@@ -2034,7 +2571,7 @@ input[type="range"]::-ms-thumb {
         font-size: 1em;
         position: fixed;
         left: 0;
-        top: 111px;
+        top: 98px;
         border-radius: 0;
     }
 
@@ -2072,12 +2609,29 @@ input[type="range"]::-ms-thumb {
     }
 
     #categoriesLegends {
-        height: 350px;
+        height: 260px;
         margin-top:0;
+        width: 100%;
+    }
+
+    #legends {
+        position: absolute;
+        display: inherit;
     }
 
     #c3chart {
-        width: 70%;
+        position: absolute;
+        padding-top: 140px;
+        padding-right: 10px;
+        width: 100%;
+        height: 150%;
+    }
+
+    #topFive {
+        width: 85%;
+        height: 300px;
+        margin: auto;
+        margin-top: 90px;
     }
 }
 
@@ -2111,6 +2665,7 @@ input[type="range"]::-ms-thumb {
     .leftSearchBox #Autocomplete {
         padding-right: 45px;
         font-size: 18px;
+        height: 40px;
     }
 
     .navbar-inverse{
@@ -2118,6 +2673,11 @@ input[type="range"]::-ms-thumb {
     }
 
     /*Landing Page*/
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 11px;
+    }
+
     #landingPage {
         padding-top: 2em;
     }
@@ -2169,13 +2729,142 @@ input[type="range"]::-ms-thumb {
     .form-control::-moz-placeholder { color: #FDC8C8; }
     .form-control:-ms-input-placeholder { color: #FDC8C8; }
 
+    /*Filters Page*/
+    .ng-scope {
+        height: 90%;
+    }
+
+    #google_map_filter {
+        height: 51.4%;
+        margin-top: 108px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .nav>li {
+        position: fixed;
+    }
+
+    .supervisionFilter {
+        top: 140px;
+        border: none;
+        border-bottom: 2px solid #9695CF;
+        padding-top: 0px;
+        padding-right: 15px;
+        padding-left: 0;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 20px;
+    }
+
+    p {
+        margin: 0px 0 10px 0;
+    }
+
+    /*#timeRange {*/
+        /*background: url(../images/range_shorter.png) no-repeat center;*/
+    /*}*/
+
+    input[type="range"] {
+        padding: 5px 35px;
+        //margin-left: -11px;
+        margin-right: 0;
+    }
+
+    #timeSelect, #mode{
+        padding-left: 0.8em;
+        padding-right: 2px;
+        padding-left: 10px;
+    }
+
+    .filterSelectors{
+        margin-top: -27px;
+    }
+
+    .filterSelectors li {
+        margin-right: 50px;
+        float: left;
+    }
+
+    #routingFilters {
+        margin-right: -1px;
+        margin-top: 0;
+    }
+
+    #routingFilters label {
+        font-size: 1.1em;
+        display: block;
+        margin-right: 10px;
+        display: none;
+    }
+
+    #filterAutocomplete {
+        font-size: inherit;
+        width: 8em;
+        margin-left: 10px;
+        padding-left: 10px;
+        padding-right: 5px;
+        display: none;
+    }
+
+    .tagsFilter {
+        bottom: 0;
+        border: none;
+        border-top: 2px solid #9695CF;
+        border-radius: 0;
+        /* padding: 1em; */
+        background-color: #FFF7F7;
+        width: 100%;
+        /* margin-top: -3px; */
+        height: 175px;
+    }
+
+    #choiceBox {
+        position: relative;
+        height: 19em;
+        width: 40%;
+        float: right;
+    }
+
+    .tagsFilter .layer.title {
+        display: none;
+    }
+
+    #labelsList, #mockupLabelsList {
+        top: 0;
+    }
+
+    #poolList {
+        width: 57%;
+        float: left;
+        margin-top: 10px;
+    }
+
+    #routingFilters {
+        position: absolute;
+        right: 5px;
+        top: 105px;
+    }
+
+    #switchViews {
+        left: 10px;
+        bottom: 180px;
+    }
+
+    #switchViews button {
+        display: initial;
+    }
+
     /*School Info page*/
     #wrapper {
-        padding: 105px 0px 0px 0px;
+        padding: 50px 0px 0px 0px;
     }
 
     .container-fluid {
-        padding: 0;
+        //padding: 0;
     }
 
     .schoolInfoSection:first-child {
@@ -2183,7 +2872,7 @@ input[type="range"]::-ms-thumb {
         display: flex;
         flex-flow: column nowrap;
         position: fixed;
-        top: 95px;
+        top: 80px;
         width: 100%;
         font-size: 1em;
         background-color: white;
@@ -2191,10 +2880,14 @@ input[type="range"]::-ms-thumb {
 
     #schoolName {
         font-size: 1.3em;
+        width: 290px;
+        line-height: 2em;
     }
 
     #schoolInfo {
-        font-size: 0.8em;
+        font-size: 0.9em;
+        width: 290px;
+        line-height: 1em;
     }
 
     #opinionsBTN {
@@ -2206,7 +2899,7 @@ input[type="range"]::-ms-thumb {
         font-size: 1em;
         position: fixed;
         left: 0;
-        top: 111px;
+        top: 97px;
         border-radius: 0;
     }
 
@@ -2246,14 +2939,29 @@ input[type="range"]::-ms-thumb {
     #categoriesLegends {
         height: 260px;
         margin-top:0;
+        width: 100%;
+    }
+
+    #legends {
+        position: absolute;
+        display: inherit;
     }
 
     #c3chart {
-        width: 65%;
+        position: absolute;
+        padding-top: 50px;
+        padding-right: 10px;
+        width: 100%;
+        height: 115%;
     }
 
+    #topFive {
+        width: 80%;
+        height: 280px;
+        margin: auto;
+        margin-top: 50px;
+    }
 }
-
 
 /*Small phones*/
 @media(max-width:  320px){
@@ -2285,6 +2993,7 @@ input[type="range"]::-ms-thumb {
     .leftSearchBox #Autocomplete {
         padding-right: 45px;
         font-size: 15px;
+        height: 35px;
     }
 
     .navbar-inverse{
@@ -2292,6 +3001,11 @@ input[type="range"]::-ms-thumb {
     }
 
     /*Landing Page*/
+    body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 10px;
+    }
+
     #landingPage {
         padding-top: 2em;
     }
@@ -2343,13 +3057,142 @@ input[type="range"]::-ms-thumb {
     .form-control::-moz-placeholder { color: #FDC8C8; }
     .form-control:-ms-input-placeholder { color: #FDC8C8; }
 
+    /*Filters Page*/
+    .ng-scope {
+        height: 88%;
+    }
+
+    #google_map_filter {
+        height: 49%;
+        margin-top: 111px;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .nav>li {
+        position: fixed;
+    }
+
+    .supervisionFilter {
+        top: 138px;
+        border: none;
+        border-bottom: 2px solid #9695CF;
+        padding-top: 0px;
+        padding-right: 15px;
+        padding-left: 0;
+        border-radius: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        height: 20px;
+    }
+
+    p {
+        margin: 0 0 12px 0;
+    }
+
+    #timeRange {
+        background: url(../images/range.png) no-repeat center;
+    }
+
+    input[type="range"] {
+        padding: 5px 13px;
+        /*margin-left: 0;*/
+        margin-right: 0;
+    }
+
+    #timeSelect, #mode{
+        padding-left: 0.8em;
+        padding-right: 2px;
+        padding-left: 10px;
+    }
+
+    .filterSelectors{
+        margin-top: -27px;
+    }
+
+    .filterSelectors li {
+        margin-right: 50px;
+        float: left;
+    }
+
+    #routingFilters {
+        margin-right: -1px;
+        margin-top: 0;
+    }
+
+    #routingFilters label {
+        font-size: 1.1em;
+        display: block;
+        margin-right: 10px;
+        display: none;
+    }
+
+    #filterAutocomplete {
+        font-size: inherit;
+        width: 8em;
+        margin-left: 10px;
+        padding-left: 10px;
+        padding-right: 5px;
+        display: none;
+    }
+
+    .tagsFilter {
+        bottom: 0;
+        border: none;
+        border-top: 2px solid #9695CF;
+        border-radius: 0;
+        /* padding: 1em; */
+        background-color: #FFF7F7;
+        width: 100%;
+        /* margin-top: -3px; */
+        height: 160px;
+    }
+
+    .tagsFilter .layer.title {
+        display: none;
+    }
+
+    #labelsList, #mockupLabelsList {
+        top: 0em;
+    }
+
+    #choiceBox {
+        position: relative;
+        height: 19em;
+        width: 35%;
+        float: right;
+    }
+
+    #poolList {
+        width: 61%;
+        float: left;
+        margin-top: 0px;
+    }
+
+    #routingFilters {
+        position: absolute;
+        right: 5px;
+        top: 100px;
+    }
+
     /*School Info page*/
     #wrapper {
-        padding: 105px 0px 0px 0px;
+        padding: 40px 0px 0px 0px;
+    }
+
+    #switchViews {
+        left: 7px;
+        bottom: 165px;
+    }
+
+    #switchViews button {
+        display: initial;
     }
 
     .container-fluid {
-        padding: 0;
+        //padding: 0;
     }
 
     .schoolInfoSection:first-child {
@@ -2357,18 +3200,22 @@ input[type="range"]::-ms-thumb {
         display: flex;
         flex-flow: column nowrap;
         position: fixed;
-        top: 95px;
+        top: 80px;
         width: 100%;
         font-size: 1em;
-        background-color: white;
+        background-color: transparent;
     }
 
     #schoolName {
         font-size: 1.2em;
+        width: 240px;
+        line-height: 2em;
     }
 
     #schoolInfo {
-        font-size: 0.75em;
+        font-size: 0.9em;
+        width: 240px;
+        line-height: 1em;
     }
 
     #opinionsBTN {
@@ -2380,7 +3227,7 @@ input[type="range"]::-ms-thumb {
         font-size: 1em;
         position: fixed;
         left: 0;
-        top: 111px;
+        top: 90px;
         border-radius: 0;
     }
 
@@ -2417,12 +3264,29 @@ input[type="range"]::-ms-thumb {
     }
 
     #categoriesLegends {
-        height: 200px;
+        height: 260px;
         margin-top:0;
+        width: 100%;
+    }
+
+    #legends {
+        position: absolute;
+        display: inherit;
     }
 
     #c3chart {
-        width: 60%;
+        position: absolute;
+        padding-top: 10px;
+        padding-right: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    #topFive {
+        width: 90%;
+        height: 250px;
+        margin: auto;
+        margin-top: 50px;
     }
 
     .tick text tspan{
