@@ -57,10 +57,10 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
             $scope.onStart = function (){
                 //Shows markers on map
+                $('#page-wrapper').hide();
+                $('#google_map_filter').show();
+                //globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
                 filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
-                //$('#google_map_filter').show();
-                //$('#page-wrapper').hide();
-
             }
 
             $scope.onStart();
@@ -228,35 +228,27 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 
                 //Adding textures to legends
-                var legends = $('#labelsList li .itemName');
+                var legends = $('#labelsList li .itemName img');
                 for(var i=0; i<legends.length ; i++){
-                    //var shape = $($('.c3-shapes-' + labels[i] + ' path')[0])[0].style.stroke;
-                    //$(legends[i]).css('background-color', shape);
-                    //$(legends[i]).child();
                     switch (i){
                         case 0: {
-                            $($(legends[i]).children()).removeClass();
-                            $($(legends[i]).children()).addClass("pattern squares");
+                            $(legends[i]).attr("src","/includes/images/bigSquaresTexture.png");
                             break;
                         }
                         case 1:{
-                            $($(legends[i]).children()).removeClass();
-                            $($(legends[i]).children()).addClass("pattern tablecloth");
+                            $(legends[i]).attr("src","/includes/images/smallSquaresTexture.png");
                             break;
                         }
                         case 2:{
-                            $($(legends[i]).children()).removeClass();
-                            $($(legends[i]).children()).addClass("pattern blueprint-grid");
+                            $(legends[i]).attr("src","/includes/images/bluePrintTexture.png");
                             break;
                         }
                         case 3:{
-                            $($(legends[i]).children()).removeClass();
-                            $($(legends[i]).children()).addClass("pattern diagonalStipes");
+                            $(legends[i]).attr("src","/includes/images/diagonalStripesTexture.png");
                             break;
                         }
                         case 4:{
-                            $($(legends[i]).children()).removeClass();
-                            $($(legends[i]).children()).addClass("pattern vertical-stripesThin");
+                            $(legends[i]).attr("src","/includes/images/verticalStripesTexture.png");
                             break;
                         }
                     }
@@ -293,10 +285,10 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             //Filter by time of travel
             $scope.getByDuration = function() {
                 //debugger;
-                console.log($scope.timeVal);
+                console.log(globalSchoolsArray);
                 var localSchoolsArray = [];
                 for (var k = 0; k < globalSchoolsArray.length; k++) {
-                    // If exist - temporary check (until we manage to get more than 10 time values back)
+                    // If exist - for schools with no location data
                     if (globalSchoolsArray[k].duration) {
                         // Checks if the duration is less or equals the timeVal AND whether it applies to current filters (supervision)
                         if ($scope.supervisionIncludes[0] != null) {
@@ -316,7 +308,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 if ($scope.sortedSchoolsArray != null){
                         filterMap($scope.sortedSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                         $window.sessionStorage.setItem("topFiveSchools", JSON.stringify($scope.sortedSchoolsArray));
-                    }
+                }
                 else {
                     filterMap(localSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                     $window.sessionStorage.setItem("topFiveSchools", JSON.stringify(localSchoolsArray));
@@ -373,8 +365,10 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 onSort:function(evt){
                     //console.log('onStart.pList:', [evt.item, evt.from]);
                     console.log(sortable.toArray());
-                    if (sortable.toArray().length > 0)
+                    if (sortable.toArray().length > 0) {
                         $scope.labelFilter(sortable.toArray());
+                    }
+
                 },
                 onEnd: function(evt) {
                     //console.log('onEnd.pList:', [evt.item, evt.from]);
@@ -622,6 +616,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
     }]);
 
+
+//School info page controller
 schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
     function ($scope, $http, $routeParams) {
         $http.get('/GetSchool?id=' + $routeParams.schoolId).success(function(data) {

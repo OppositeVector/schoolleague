@@ -455,7 +455,7 @@ function filterRoutes(startPoint, endPoints, transType) {
         destinations.push(new google.maps.LatLng(entry.position.lat, entry.position.lon));
     });
 
-    //console.log(destinations);
+    console.log("Trans type:" + transType);
 
     var d1 = [], d2 = [], d3 = [], d4=[], d5=[];
 
@@ -584,12 +584,13 @@ function filterRoutes(startPoint, endPoints, transType) {
                             endPoints[i+100].duration = response.rows[0].elements[i].duration.value;
                         }
                     }
-
                 }
             });
     }
 
     console.log(endPoints);
     return endPoints;
-
+    //setTimeout(function(){
+    //    return endPoints;
+    //}, 2000);
 }

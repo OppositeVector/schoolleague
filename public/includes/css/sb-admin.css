@@ -1596,44 +1596,6 @@ input[type="range"]::-ms-thumb {
     background-color: #2b2d78; /* W3C */
 }
 
-
-.diagonalStipes{
-    background-color: #9cdfd9;
-    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(255,255,255,1) 1px, rgba(255,255,255,1) 9px);
-    fill:#9cdfd9;
-}
-
-.blueprint-grid{
-    background-color:#fff;
-    background-image: linear-gradient(#9cdfd9 0px, transparent 2px), linear-gradient(90deg, #9cdfd9 0px, transparent 1px), linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-    background-size:10px 10px, 10px 10px, 2px 2px, 2px 2px;
-    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
-}
-
-
-.tablecloth{
-    background-color:#9cdfd9;
-    background-image: linear-gradient(90deg, rgba(255,255,255,1) 50%, transparent 50%), linear-gradient(rgba(255,255,255,1) 50%, transparent 50%);
-    background-size:5px 5px;
-}
-
-
-.vertical-stripesThick{
-    background-color: #9cdfd9;
-    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,1) 10%);
-    background-size: 1em 1em;
-}
-
-.vertical-stripesThin {
-    background-color: #9cdfd9;
-    background-image: linear-gradient(90deg, transparent 10%, rgba(255,255,255,1) 10%);
-    background-size: 6px 10px;
-}
-
-.squares {
-    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJklEQVQYV2Occ//mfwYiACNIYYqiOiM+tSA1owpxhhA8eIgIbwYACddBSa7FXMsAAAAASUVORK5CYII=) repeat;
-}
-
 /*Media Queries*/
 
 @media(min-width:768px) {
