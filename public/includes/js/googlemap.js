@@ -369,10 +369,6 @@ function geocodeLatLng(geocoder, map, lat, lng) {
     });
 }
 
-function timeCap(schools ,timeVal) {
-     console.log(schools[0]);
-    var newSchoolsArray = [];
-}
 
 function filterMap(schools, location, title) {
     //var map;
@@ -429,7 +425,7 @@ function filterMap(schools, location, title) {
         // Allow each marker to have an info window
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                infoWindow.setContent(schools[i].name);
+                infoWindow.setContent('<a href="#/getSchool/' + schools[i]._id +'">' + schools[i].name + '</a>');
                 infoWindow.open(map, marker);
             }
         })(marker, i));
@@ -446,34 +442,6 @@ function filterMap(schools, location, title) {
 
 }
 
-//function filterRoutes(startPoint, endPoints, transType) {
-//    var directionsDisplay;
-//    var directionsService = new google.maps.DirectionsService();
-//    //var map;
-//    var start = new google.maps.LatLng(startPoint.lat, startPoint.lng);
-//    var end;
-//
-//
-//    endPoints.forEach(function(entry, i){
-//
-//            end = new google.maps.LatLng(entry.position.lat, entry.position.lon);
-//
-//            var request = {
-//                origin: start,
-//                destination: end,
-//                travelMode: google.maps.TravelMode[transType]
-//            };
-//
-//            directionsService.route(request, function (response, status) {
-//                console.log(status);
-//                if (status == google.maps.DirectionsStatus.OK) {
-//                    entry.duration = response.routes[0].legs[0].duration.value;
-//                }
-//
-//            });
-//    });
-//    return endPoints;
-//}
 
 
 function filterRoutes(startPoint, endPoints, transType) {
@@ -484,7 +452,6 @@ function filterRoutes(startPoint, endPoints, transType) {
 
 
     endPoints.forEach(function(entry, i){
-        //console.log(entry.position.lat, entry.position.lon);
         destinations.push(new google.maps.LatLng(entry.position.lat, entry.position.lon));
     });
 
@@ -537,7 +504,6 @@ function filterRoutes(startPoint, endPoints, transType) {
                             endPoints[i].duration = response.rows[0].elements[i].duration.value;
                         }
                     }
-                    //console.log(endPoints.slice(0,25));
                 }
             });
     }
@@ -558,7 +524,6 @@ function filterRoutes(startPoint, endPoints, transType) {
                             endPoints[i+25].duration = response.rows[0].elements[i].duration.value;
                         }
                     }
-                    //console.log(endPoints);
                 }
             });
     }
@@ -579,7 +544,6 @@ function filterRoutes(startPoint, endPoints, transType) {
                             endPoints[i+50].duration = response.rows[0].elements[i].duration.value;
                         }
                     }
-                    //console.log(endPoints);
                 }
             });
     }
@@ -600,7 +564,6 @@ function filterRoutes(startPoint, endPoints, transType) {
                             endPoints[i+75].duration = response.rows[0].elements[i].duration.value;
                         }
                     }
-                    //console.log(endPoints);
                 }
             });
     }

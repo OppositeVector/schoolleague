@@ -58,8 +58,9 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             $scope.onStart = function (){
                 //Shows markers on map
                 filterMap(globalSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
-                $('#google_map_filter').show();
-                $('#page-wrapper').hide();
+                //$('#google_map_filter').show();
+                //$('#page-wrapper').hide();
+
             }
 
             $scope.onStart();
@@ -67,8 +68,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
             //Show schools buildings function
             $scope.showTopFive = function(labels){
-
-
 
                 var rowsData = [];
                 for(var i = 0; i < labels.length; i++) {
@@ -91,11 +90,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     //console.log($scope.sortedSchoolsArray[i]);
                     schoolNames.push($scope.sortedSchoolsArray[i].name);
                 }
-
-                //console.log($scope.sortedSchoolsArray[0]);
-                //console.log(schoolNames);
-
-                //for(var r=0; r<rowsData.length)
 
                 var chart = c3.generate({
                     bindto: "#topFive",
@@ -121,7 +115,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     },
                     bar: {
                         width: {
-                            ratio: 0.9
+                            ratio: 0.8
                         }
                     },
                     axis: {
@@ -141,51 +135,138 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 });
 
-                //$('#topFive svg').prepend('<defs> <pattern id="img1" patternUnits="userSpaceOnUse" width="100" height="100"> <image xlink:href="/includes/images/selectArrow.png" x="0" y="0" width="100" height="100" /> </pattern> </defs>');
-
-                //$('#topFive svg').append('defs')
-                //    .append('pattern')
-                //    .attr('id', 'diagonalHatch')
-                //    .attr('patternUnits', 'userSpaceOnUse')
-                //    .attr('width', 4)
-                //    .attr('height', 4)
-                //    .append('path')
-                //    .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
-                //    .attr('stroke', '#9cdfd9')
-                //    .attr('stroke-width', 1);
-                //
-                //console.log($('#topFive svg'));
+                $('#topFive svg').attr('id', 'topFiveSvg');
 
 
+                var svg = d3.select("#topFiveSvg");
 
-                //var t = textures.lines()
-                //    .thicker();
-                //console.log(t);
-                //
-                //for(var i= 0 ; i<5; i++){
-                //    $('#topFive .c3-chart-bars .c3-shape-' + i).each(function(index) {
-                //        //console.log(index);
-                //
-                //
-                //        this.style.fill = 'url(#diagonalHatch)';
-                //
-                //        //console.log(this.style);
-                //        console.log(this);
-                //    });
-                //}
-                //
-                //
-                //$('#topFive .c3-chart-texts .c3-text').each(function(index) {
-                //    //console.log(index);
-                //    //console.log(this);
-                //    //this.style.cssText = styles[index];
-                //});
+                //vertical thick
+                var texture1 = textures.paths()
+                    .d("squares")
+                    .stroke("#9cdfd9");
+
+
+                //Diagonal stripes
+                var texture2 = textures.lines()
+                    .heavier()
+                    .stroke('#9cdfd9');
+
+                //vertical thin
+                var texture3 = textures.lines()
+                    .orientation("vertical")
+                    .strokeWidth(2)
+                    .stroke('#9cdfd9');
+
+
+                //blue print grid
+                var texture4 = textures.lines()
+                    .orientation("vertical", "horizontal")
+                    .size(15)
+                    .strokeWidth(1)
+                    .stroke('#9cdfd9');
+
+                //squares
+                var texture5 = textures.lines()
+                    .orientation("vertical", "horizontal")
+                    .size(4)
+                    .strokeWidth(1)
+                    .background('#9cdfd9')
+                    .stroke('#fff');
+
+                svg.call(texture1);
+                svg.call(texture2);
+                svg.call(texture3);
+                svg.call(texture4);
+                svg.call(texture5);
+
+
+                //adding textures to graph
+                for(var l=0; l<labels.length ; l++){
+                    var shapes = $('#topFive .c3-target-' + labels[l] + ' g path');
+                        //console.log(shapes);
+                    //var w = $(shapes[i]).getBoundingClientRect().width;
+                    //var h = $(shapes[i]).getBoundingClientRect().height;
+                    //console.log(w + " " + h);
+
+
+                    for(var i= 0 ; i<shapes.length; i++){
+                        switch (l){
+                            case 0: {
+                                //console.log(texture1.url());
+                                shapes[i].style.fill = texture1.url();
+                                shapes[i].style.stroke = "#9cdfd9";
+                                shapes[i].style.strokeWidth = "4";
+                                break;
+                            }
+                            case 1:{
+                                shapes[i].style.fill = texture5.url();
+                                shapes[i].style.stroke = "#9cdfd9";
+                                shapes[i].style.strokeWidth = "4";
+                                break;
+                            }
+                            case 2:{
+                                shapes[i].style.fill = texture4.url();
+                                shapes[i].style.stroke = "#9cdfd9";
+                                shapes[i].style.strokeWidth = "4";
+                                break;
+                            }
+                            case 3:{
+                                shapes[i].style.fill = texture2.url();
+                                shapes[i].style.stroke = "#9cdfd9";
+                                shapes[i].style.strokeWidth = "4";
+                                break;
+                            }
+                            case 4:{
+                                shapes[i].style.fill = texture3.url();
+                                shapes[i].style.stroke = "#9cdfd9";
+                                shapes[i].style.strokeWidth = "4";
+                                break;
+                            }
+                        }
+                    }
+                }
+
+
+                //Adding textures to legends
+                var legends = $('#labelsList li .itemName');
+                for(var i=0; i<legends.length ; i++){
+                    //var shape = $($('.c3-shapes-' + labels[i] + ' path')[0])[0].style.stroke;
+                    //$(legends[i]).css('background-color', shape);
+                    //$(legends[i]).child();
+                    switch (i){
+                        case 0: {
+                            $($(legends[i]).children()).removeClass();
+                            $($(legends[i]).children()).addClass("pattern squares");
+                            break;
+                        }
+                        case 1:{
+                            $($(legends[i]).children()).removeClass();
+                            $($(legends[i]).children()).addClass("pattern tablecloth");
+                            break;
+                        }
+                        case 2:{
+                            $($(legends[i]).children()).removeClass();
+                            $($(legends[i]).children()).addClass("pattern blueprint-grid");
+                            break;
+                        }
+                        case 3:{
+                            $($(legends[i]).children()).removeClass();
+                            $($(legends[i]).children()).addClass("pattern diagonalStipes");
+                            break;
+                        }
+                        case 4:{
+                            $($(legends[i]).children()).removeClass();
+                            $($(legends[i]).children()).addClass("pattern vertical-stripesThin");
+                            break;
+                        }
+                    }
+                }
             };
 
 
             //Filters by supervision type
             $scope.includeSupervision = function(supervision) {
-                debugger;
+                //debugger;
                 var i = $.inArray(supervision.name, $scope.supervisionIncludes);
                 if (i > -1) {
                     $scope.supervisionIncludes.splice(i, 1);
@@ -196,18 +277,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 }
 
                 console.log($scope.supervisionIncludes);
-                //console.log('1st Schools final grade is: ' + $scope.localSchoolsScoresFinal[0]);
 
-                //if ($scope.supervisionIncludes[0] != null) {
-                //    for (var k = 0; k < $scope.schools.length; k++) {
-                //        for (var j = 0; j < 3; j++) {
-                //            if ($scope.supervisionIncludes[j] == null) continue;
-                //            if ((globalSchoolsArray[k].duration / 60 <= $scope.timeVal) && (globalSchoolsArray[k].supervision == $scope.supervisionIncludes[j])) localSchoolsArray.push(globalSchoolsArray[k]);
-                //        }
-                //
-                //    }
-                //}
-                //else filterMap($scope.schools, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                 $scope.getByDuration();
             }
 
@@ -563,7 +633,7 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         function GenerateC3Graph(schools, params) {
 
             var rowsData = [];
-            var criteria = filterCriteria; // This comes from includes/js/filterCriteria.js
+            var criteria = filterCriteria;
             var colorBank = [
                 '#c03c3c', '#f87e7e',
                 '#c94848','#f49292','#f05656',];

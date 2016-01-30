@@ -1228,6 +1228,10 @@ ul {
     cursor: move;
 }
 
+.tagsStyle li span {
+    background-color: #9cdfd9;
+}
+
 .container {
     width: 100%;
     padding: 0;
@@ -1244,7 +1248,7 @@ ul {
     position: relative;
 }
 
-#labelsList li span {
+#labelsList li .itemName {
     background-color: #9cdfd9;
     padding: 5px 10px;
     width:100%;
@@ -1458,7 +1462,7 @@ b, strong {
 
 #topFive {
     margin-top: 100px;
-    width: 50%;
+    width: 65%;
     margin-right: 33%;
     /*margin-right: calc(250px + 4em);*/
 }
@@ -1595,39 +1599,39 @@ input[type="range"]::-ms-thumb {
 
 .diagonalStipes{
     background-color: #9cdfd9;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,1) 35px, rgba(255,255,255,1) 70px);
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 4px, rgba(255,255,255,1) 1px, rgba(255,255,255,1) 9px);
     fill:#9cdfd9;
 }
 
 .blueprint-grid{
     background-color:#fff;
-    background-image: linear-gradient(#9cdfd9 4px, transparent 2px),
-    linear-gradient(90deg, #9cdfd9 4px, transparent 2px),
-    linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-image: linear-gradient(#9cdfd9 0px, transparent 2px), linear-gradient(90deg, #9cdfd9 0px, transparent 1px), linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+    background-size:10px 10px, 10px 10px, 2px 2px, 2px 2px;
     background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 
 
 .tablecloth{
     background-color:#9cdfd9;
-    background-image: linear-gradient(90deg, rgba(255,255,255,1) 80%, transparent 80%),
-    linear-gradient(rgba(255,255,255,1) 80%, transparent 80%);
-    background-size:50px 50px;
+    background-image: linear-gradient(90deg, rgba(255,255,255,1) 50%, transparent 50%), linear-gradient(rgba(255,255,255,1) 50%, transparent 50%);
+    background-size:5px 5px;
 }
 
 
 .vertical-stripesThick{
     background-color: #9cdfd9;
     background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,1) 10%);
-    background-size: 50px 50px;
+    background-size: 1em 1em;
 }
 
 .vertical-stripesThin {
     background-color: #9cdfd9;
     background-image: linear-gradient(90deg, transparent 10%, rgba(255,255,255,1) 10%);
-    background-size: 50px 50px;
+    background-size: 6px 10px;
+}
+
+.squares {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJklEQVQYV2Occ//mfwYiACNIYYqiOiM+tSA1owpxhhA8eIgIbwYACddBSa7FXMsAAAAASUVORK5CYII=) repeat;
 }
 
 /*Media Queries*/
@@ -2431,3 +2435,23 @@ input[type="range"]::-ms-thumb {
 }
 
 
+/*Google marker content style*/
+.gm-style-iw a {
+    color: #2b2d78;
+    /*text-decoration: underline;*/
+    font-family: 'Alef', sans-serifns;
+}
+
+#topFiveSvg .c3 path, .c3 line {
+    stroke: none !important;
+}
+
+.pattern {
+    height: 2em;
+    width: 2em;
+    display: inline-block;
+}
+
+#poolList .pattern {
+    display: none;
+}
