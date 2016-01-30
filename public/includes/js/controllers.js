@@ -652,8 +652,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 
 //School info page controller
-schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams',
-    function ($scope, $http, $routeParams) {
+schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParams', '$location',
+    function ($scope, $http, $routeParams, $location) {
         $http.get('/GetSchool?id=' + $routeParams.schoolId).success(function(data) {
              console.log(data.data);
             $scope.school = data.data;
@@ -1052,5 +1052,24 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
         $scope.togglePopUp = function(){
             $('#comparePopUp').toggle();
         }
+
+        $scope.goToCompare = function() {
+            $location.path( '/schoolCompare' );
+        }
 }]);
 
+schoolsControllers.controller('schoolCompareCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        $scope.schools = [
+            {
+                name: "בית ספר יבנה"
+            },
+            {
+                name: "בית ספר הדר"
+            },
+            {
+                name: "בית ספר זיו"
+            }
+        ]
+    }
+]);

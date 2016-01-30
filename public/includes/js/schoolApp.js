@@ -11,7 +11,7 @@ var schoolApp = angular.module("schoolApp", [
 
 schoolApp.controller('landingCtrl', ['$scope', '$http', '$location',
     function ($scope, $http, $location) {
-        $scope.goToSite = function(supervision) {
+        $scope.goToSite = function() {
             $location.path( '/search' );
         }
 
@@ -35,6 +35,10 @@ schoolApp.config(['$routeProvider',
         when('/getSchool/:schoolId', {
             templateUrl: 'schoolInfo.html',
             controller: 'schoolInfoCtrl'
+        }).
+        when('/schoolCompare', {
+            templateUrl: 'schoolCompare.html',
+            controller: 'schoolCompareCtrl'
         }).
         otherwise({
             redirectTo: '/'
