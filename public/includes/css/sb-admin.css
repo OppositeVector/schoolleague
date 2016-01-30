@@ -582,6 +582,7 @@ button {
     border: none;
     border-radius: 8px;
     box-shadow: none;
+    z-index: 100000;
 }
 
 .pac-container:before{
@@ -728,7 +729,7 @@ button {
     box-shadow: none;
     padding-right: 2em;
     font-size: 2.2em;
-    color: #2b2d78;
+    color: #89879c;
     position: static;
     width: auto;
     margin: 0;
@@ -1334,7 +1335,7 @@ b, strong {
     font-size: 1.1em;
 }
 
-.border100::before {
+#labelsList .border100::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1345,7 +1346,7 @@ b, strong {
     transition: width 2s
 }
 
-.border60::before {
+#labelsList .border60::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1356,7 +1357,7 @@ b, strong {
     transition: width 2s;
 }
 
-.border50::before {
+#labelsList .border50::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1367,7 +1368,7 @@ b, strong {
     transition: width 2s
 }
 
-.border45::before {
+#labelsList .border45::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1378,7 +1379,7 @@ b, strong {
     transition: width 2s
 }
 
-.border40::before {
+#labelsList .border40::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1389,7 +1390,7 @@ b, strong {
     transition: width 2s
 }
 
-.border30::before {
+#labelsList .border30::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1400,7 +1401,7 @@ b, strong {
     transition: width 2s
 }
 
-.border25::before {
+#labelsList .border25::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1411,7 +1412,7 @@ b, strong {
     transition: width 2s
 }
 
-.border20::before {
+#labelsList .border20::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1422,7 +1423,7 @@ b, strong {
     transition: width 2s
 }
 
-.border17::before {
+#labelsList .border17::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1433,7 +1434,7 @@ b, strong {
     transition: width 2s
 }
 
-.border12::before {
+#labelsList .border12::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1444,7 +1445,7 @@ b, strong {
     transition: width 2s
 }
 
-.border10::before {
+#labelsList .border10::before {
     content : "";
     position: absolute;
     right    : 1em;
@@ -1456,11 +1457,14 @@ b, strong {
 }
 
 #topFive {
+    position: absolute !important;
+    left: 5%;
     margin-top: 100px;
     width: 66%;
-    margin-right: 33%;
+    /*margin-right: 33%;*/
     height: 700px;
     /*margin-right: calc(250px + 4em);*/
+
 }
 
 #topFive .tick line,
@@ -3273,11 +3277,33 @@ input[type="range"]::-ms-thumb {
 }
 
 .pattern {
-    height: 2em;
-    width: 2em;
+    position: absolute;
+    height: 2.1em;
+    width: 2.1em;
     display: inline-block;
+    top: 0px;
+    left: 0px;
 }
 
 #poolList .pattern {
     display: none;
+}
+
+#noDataLabeled,
+#noSearchResults{
+    display: none;
+    position: absolute;
+    color: #2b2d78;
+    font-family: 'Alef', sans-serifns;
+    font-size: 30px;
+    padding-top: 120px;
+    width:500px;
+    height: 300px;
+    margin: auto;
+    top:20%;
+    left:20%;
+    background-color: #fff7f7;
+    text-align: center;
+    border: 3px solid #f7a2a2;
+    border-radius: 10px;
 }

@@ -377,7 +377,7 @@ function filterMap(schools, location, title) {
         mapTypeId: 'roadmap'
     };
 
-    //console.log('schools length:' + schools.length);
+    console.log('schools length:' + schools.length);
 
       // Display a map on the page and places the chosen position in a balloon
     map = new google.maps.Map(document.getElementById("google_map_filter"), mapOptions, {
@@ -412,27 +412,28 @@ function filterMap(schools, location, title) {
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
     // Loop through our array of markers & place each one on the map
-    for( i = 0; i < schools.length ; i++ ) {
-        if ((schools[i].position.lat == 360) || (schools[i].position.lon == 360)) continue;
-        var position = new google.maps.LatLng(schools[i].position.lat, schools[i].position.lon);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: schools[i].name
-        });
+    schools.forEach(function(entry){
+        if ((entry.position.lat != 360) && (entry.position.lon != 360)){
+            var position = new google.maps.LatLng(entry.position.lat, entry.position.lon);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: entry.name
+            });
 
-        // Allow each marker to have an info window
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent('<a href="#/getSchool/' + schools[i]._id +'">' + schools[i].name + '</a>');
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
+            // Allow each marker to have an info window
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent('<a href="#/getSchool/' + entry._id +'">' + entry.name + '</a>');
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
 
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-    }
+            // Automatically center the map fitting all markers on the screen
+            map.fitBounds(bounds);
+        }
+    });
 
     // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
@@ -588,9 +589,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             });
     }
 
-    console.log(endPoints);
+    //console.log(endPoints);
     return endPoints;
-    //setTimeout(function(){
-    //    return endPoints;
-    //}, 2000);
 }

@@ -15,9 +15,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
         $scope.timeVal="15";
         $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
 
-
-
-
             $scope.state = {
                 name: 'state',
                 checked: false
@@ -52,7 +49,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             //Filters by supervision
             $scope.supervisionIncludes = [];
 
-
+            labelsFiltered = false;
 
 
             $scope.onStart = function (){
@@ -67,28 +64,35 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 
             //Show schools buildings function
-            $scope.showTopFive = function(labels){
+            $scope.showTopFive = function(labels, schools){
 
+                console.log(schools.length);
                 var rowsData = [];
+
+
                 for(var i = 0; i < labels.length; i++) {
-                    rowsData.push([null, null, null, null, null, null]);
+                    var row =[]
+                    for(var j =0; j<schools.length +1 ; j++){
+                        row.push(null);
+                    }
+                    rowsData.push(row);
                 }
 
                 var localWeights = weights[labels.length - 1];
 
-                $scope.sortedSchoolsArray = $scope.sortedSchoolsArray.reverse();
+                schools = schools.reverse();
 
                 for(var l=0; l<labels.length ; l++){
                     rowsData[l][0] = labels[l];
-                    for (var i=0 ; i<$scope.sortedSchoolsArray.length; i++){
-                        rowsData[l][i+1] = $scope.sortedSchoolsArray[i].perLabelGrades[l] * localWeights[l];
+                    for (var i=0 ; i<schools.length; i++){
+                        rowsData[l][i+1] = schools[i].perLabelGrades[l] * localWeights[l];
                     }
                 }
 
                 var schoolNames = []
-                for (var i=0 ; i<$scope.sortedSchoolsArray.length; i++){
+                for (var i=0 ; i<schools.length; i++){
                     //console.log($scope.sortedSchoolsArray[i]);
-                    schoolNames.push($scope.sortedSchoolsArray[i].name);
+                    schoolNames.push(schools[i].name);
                 }
 
                 var chart = c3.generate({
@@ -98,7 +102,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         type: 'bar',
                         groups: [labels],
                         onclick: function (d, element) {
-                            $location.path( '/getSchool/' + $scope.sortedSchoolsArray[d.index]._id );
+                            $location.path( '/getSchool/' + schools[d.index]._id );
                             $scope.$apply();
                         }
                     },
@@ -140,7 +144,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
                 var svg = d3.select("#topFiveSvg");
 
-                //vertical thick
+                //squares
                 var texture1 = textures.paths()
                     .d("squares")
                     .stroke("#9cdfd9");
@@ -183,12 +187,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 //adding textures to graph
                 for(var l=0; l<labels.length ; l++){
                     var shapes = $('#topFive .c3-target-' + labels[l] + ' g path');
-                        //console.log(shapes);
-                    //var w = $(shapes[i]).getBoundingClientRect().width;
-                    //var h = $(shapes[i]).getBoundingClientRect().height;
-                    //console.log(w + " " + h);
-
-
                     for(var i= 0 ; i<shapes.length; i++){
                         switch (l){
                             case 0: {
@@ -267,7 +265,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     $scope.supervisionIncludes.push(supervision.name);
                     supervision.checked = true;
                 }
-
                 console.log($scope.supervisionIncludes);
 
                 $scope.getByDuration();
@@ -285,7 +282,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             //Filter by time of travel
             $scope.getByDuration = function() {
                 //debugger;
-                console.log(globalSchoolsArray);
+                console.log($scope.transType);
+                console.log("Global: "+globalSchoolsArray);
                 var localSchoolsArray = [];
                 for (var k = 0; k < globalSchoolsArray.length; k++) {
                     // If exist - for schools with no location data
@@ -303,18 +301,29 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 }
 
                 //localSchoolsArray = localSchoolsArray.slice(0,5);
-
+                console.log(localSchoolsArray);
                 // Checked whether filter by grade is initiated
-                if ($scope.sortedSchoolsArray != null){
-                        filterMap($scope.sortedSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
-                        $window.sessionStorage.setItem("topFiveSchools", JSON.stringify($scope.sortedSchoolsArray));
-                }
-                else {
+                if (labelsFiltered == true){
+
+                    //for(var p=0; p<localSchoolsArray.length; p++){
+                    //    console.log(localSchoolsArray[p].name + " "+ localSchoolsArray[p].calculatedGrade);
+                    //}
+                    localSchoolsArray = localSchoolsArray.slice(0, 5);
                     filterMap(localSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
                     $window.sessionStorage.setItem("topFiveSchools", JSON.stringify(localSchoolsArray));
+                    $scope.showTopFive($scope.labels, localSchoolsArray);
                 }
-
-                console.log("localSchoolsArray: " + localSchoolsArray.length);
+                else {
+                    if(localSchoolsArray.length == 0){
+                        $scope.notifications();
+                        filterMap(localSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+                    }
+                    else {
+                        $scope.hideNotifications();
+                        filterMap(localSchoolsArray, $scope.theAddress.geometry.location, $scope.tempAddress[0]);
+                        //$window.sessionStorage.setItem("topFiveSchools", JSON.stringify(localSchoolsArray));
+                    }
+                }
             }
 
             // Drag&Drop + Sorting Algorithm
@@ -366,9 +375,16 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     //console.log('onStart.pList:', [evt.item, evt.from]);
                     console.log(sortable.toArray());
                     if (sortable.toArray().length > 0) {
+                        $scope.hideNotifications();
+                        labelsFiltered = true;
                         $scope.labelFilter(sortable.toArray());
                     }
-
+                    else {
+                        //$scope.sortedSchoolsArray = null;
+                        labelsFiltered = false;
+                        d3.select("#topFiveSvg").remove();
+                        $scope.notifications();
+                    }
                 },
                 onEnd: function(evt) {
                     //console.log('onEnd.pList:', [evt.item, evt.from]);
@@ -467,6 +483,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                //console.log(sortable.toArray());
                //console.log($scope.criteria.length);
 
+               $scope.labels = labels;
+
                // Creating a local criteria array
                var localCriteria =[];
                for (var l=0 ; l< labels.length ; l++){
@@ -498,6 +516,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         var lastYear = globalSchoolsArray[s].claims.length - 1;
                         for (c = 0 ; c < localCriteria[l].claims.length ; c++) {
                             //console.log('claim ' + l + ' has those grades: ' + localCriteria[l].claims[c]);
+                            if(globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]] == -1) continue;
                             tempClaimSum += globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]];
                         }
                         tempClaimSum /= localCriteria[l].claims.length;
@@ -505,11 +524,9 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         //console.log(tempClaimSum);
 
                         //Student safety - the 'positive' side of the grade
-                        if (localCriteria[l].id == 'sSft')
-                            tempClaimSum = 100 - tempClaimSum;
+                        if (localCriteria[l].id == 'sSft' && tempClaimSum != 0) tempClaimSum = 100 - tempClaimSum;
 
                         tempClaimSumArr.push(tempClaimSum);
-
                     }
                     // Summed grade per criteria for each school
                     localSchoolsScoresPerLabel.push(tempClaimSumArr);
@@ -532,16 +549,16 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                    entry.perLabelGrades = localSchoolsScoresPerLabel[i];
                });
 
-               // Sorting the globalSchoolsArray grades into a new sorted array
-               $scope.sortedSchoolsArray = angular.copy(globalSchoolsArray);
-               $scope.sortedSchoolsArray.sort(function(a, b) {
+               // Sorting the globalSchoolsArray grades
+               //$scope.sortedSchoolsArray = angular.copy(globalSchoolsArray);
+               globalSchoolsArray.sort(function(a, b) {
                    return parseFloat(b.calculatedGrade) - parseFloat(a.calculatedGrade);
                });
 
-               $scope.sortedSchoolsArray = $scope.sortedSchoolsArray.slice(0, 5);
+               //$scope.sortedSchoolsArray = $scope.sortedSchoolsArray.slice(0, 5);
 
                $scope.getByDuration();
-               $scope.showTopFive(labels);
+               //$scope.showTopFive(labels);
 
 
                // Styling selected tags
@@ -608,12 +625,29 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 $('#google_map_filter').hide();
                 $('#page-wrapper').show();
                 $scope.getByDuration();
+
+                if(labelsFiltered == false){
+                    //alert('You have to choose at least one label');
+                    $scope.notifications();
+                }
             };
 
+            $scope.notifications = function(){
+              if($('#google_map_filter').is(":visible")){
+                  $('#noDataLabeled').hide();
+                  $('#noSearchResults').show();
+              }
+                else if($('#page-wrapper').is(":visible")){
+                  $('#noDataLabeled').show();
+                  $('#noSearchResults').hide();
+              }
+            };
 
-        });
-
-
+            $scope.hideNotifications = function(){
+                    $('#noDataLabeled').hide();
+                    $('#noSearchResults').hide();
+            };
+         });
     }]);
 
 
