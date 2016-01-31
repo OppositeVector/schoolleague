@@ -123,8 +123,6 @@ exports.GetCityByName = function(cityName, callback) {
 			return;
 		}
 
-		console.log(authorityData);
-
 		schoolModel.find({ _id: { $in: authorityData.schools } }, function(err, schools) {
 
 			if(err) {
@@ -141,6 +139,39 @@ exports.GetCityByName = function(cityName, callback) {
 }
 
 exports.GetAuthoritySchools = function(name, callback) {
+
+	var innerTAG = TAG + ": GetAuthoritySchools: ";
+	if(callback == null) {
+		console.log(innerTAG + "no callback supplied");
+		return;
+	}
+
+	name = authority.GetAlias(name);
+
+	authorityModel.findOne({ name: name }, function(err, data) {
+
+		if(err) {
+			callback(err);
+			return;
+		}
+
+		if(data == null) {
+			callback(innerTAG + " could not find the authority");
+			return;
+		}
+
+		schoolModel.find({ _id: { $in: data.schools } }, function(err, schools) {
+
+			if(err) {
+				callback(err);
+				return;
+			}
+
+			callback(null, schools);
+
+		});
+
+	});
 
 }
 
@@ -228,6 +259,12 @@ exports.PostComment = function(comment, callback) {
 }
 
 exports.GetAuthority = function(id, callback) {
+
+	var innerTAG = ": GetAuthority: ";
+	if(callback == null) {
+		console.log(innerTAG + "no callback supplied");
+		return;
+	}
 
 	authorityModel.findOne({ _id: id }, function(err, authority) {
 
@@ -373,6 +410,7 @@ exports.GetEmpty = function(callback) {
 
 }
 
+// Internal
 function TranslateClass(str) {
 
 	switch(str) {
@@ -410,6 +448,7 @@ function TranslateClass(str) {
 
 }
 
+// Interal
 function I_GetAuthority(school, callback) {
 
 	// Try to find the school's authority in the DB
@@ -491,6 +530,7 @@ function I_GetAuthority(school, callback) {
 
 }
 
+// Stage 1 data population function
 exports.RecieveSchool = function(data, callback) {
 
 	var school = {
@@ -588,6 +628,7 @@ exports.RecieveSchool = function(data, callback) {
 
 }
 
+// Stage 2 data population function
 exports.RecieveGrades = function(data, callback) {
 
 	// in-year in-class indexing:
@@ -624,6 +665,7 @@ exports.RecieveGrades = function(data, callback) {
 
 }
 
+// Stage 3 data population function, defunct
 exports.RecieveClaimsNOT = function(data, callback) {
 
 	var current = 0;
@@ -778,6 +820,7 @@ exports.RecieveClaimsNOT = function(data, callback) {
 
 }
 
+// Used to be the stage 3 data population function, was converted to populate everything
 exports.RecieveData = function(data, callback) {
 
 	var i = 0;

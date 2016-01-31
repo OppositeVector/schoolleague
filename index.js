@@ -99,27 +99,24 @@ app.get("/GetCity", function(req, res) {
 
 		// }
 
-		// if(data.length == 0) {
-
-		// 	if(area != null) {
-		// 		dbc.GetAuthoritySchools(area, function(err, data) {
-		// 			if(err) {
-		// 				res.json({ result: 0, data: err });
-		// 				return;
-		// 			}
-		// 			for(var i = 0; i < data.length; ++i) {
-		// 				data[i].id = data[i]._id;
-		// 				if(data[i].fromClass > 1) {
-		// 					data.splice(i, 1);
-		// 					--i;
-		// 				}
-		// 			}
-		// 			res.json({ result: 1, data: data });
+		// if(area != null) {
+		// 	dbc.GetAuthoritySchools(area, function(err, data) {
+		// 		if(err) {
+		// 			res.json({ result: 0, data: err });
 		// 			return;
-		// 		});
-		// 	}
-			
+		// 		}
+		// 		for(var i = 0; i < data.length; ++i) {
+		// 			data[i].id = data[i]._id;
+		// 			if(data[i].fromClass > 1) {
+		// 				data.splice(i, 1);
+		// 				--i;
+		// 			}
+		// 		}
+		// 		res.json({ result: 1, data: data });
+		// 		return;
+		// 	});
 		// }
+			
 
 	});
 
