@@ -79,6 +79,7 @@ angular.module( "ngAutocomplete", [])
 
                             console.log (scope.details);
 
+                            //TODO after final submission - send area to server
                             //for (var i=0; i<scope.details.address_components.length; i++){
                             //    if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
                             //        scope.athority = scope.details.address_components[i].long_name;
@@ -109,11 +110,11 @@ angular.module( "ngAutocomplete", [])
                                 scope.city = scope.tempAddress[0];
                             }
 
-                            if (scope.city.indexOf('מחוז') > -1){
-                                scope.city = scope.city.replace('מחוז ','');
+                            if (scope.city.indexOf('תל אביב') > -1){
+                                scope.city = 'תל אביב יפו';
                             }
 
-                            console.log(scope.city);
+                            //console.log(scope.city);
                             $window.sessionStorage.setItem("theAddress", JSON.stringify(scope.details));
                             $location.path("filter/" + scope.city);
 

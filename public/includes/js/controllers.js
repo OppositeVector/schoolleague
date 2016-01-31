@@ -15,6 +15,8 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
         $scope.timeVal="15";
         $http.get('/GetCity?name=' + $routeParams.name).success(function(data) {
 
+
+
             $scope.state = {
                 name: 'state',
                 checked: false
@@ -38,11 +40,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             $scope.tempAddress = $scope.theAddress.formatted_address.split(",");
 
 
-            //Show Top five schools
-            //$scope.showTopFive();
-
-            //console.log($scope.theAddress);
-
             //Gets duration per school
             globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
 
@@ -65,7 +62,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             //Show schools buildings function
             $scope.showTopFive = function(labels, schools){
 
-                console.log(schools.length);
                 var rowsData = [];
 
 
@@ -188,7 +184,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     for(var i= 0 ; i<shapes.length; i++){
                         switch (l){
                             case 0: {
-                                //console.log(texture1.url());
                                 shapes[i].style.fill = texture1.url();
                                 shapes[i].style.stroke = "#9cdfd9";
                                 shapes[i].style.strokeWidth = "4";
@@ -281,6 +276,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         // Checks if the duration is less or equals the timeVal AND whether it applies to current filters (supervision)
                         if ($scope.supervisionIncludes[0] != null) {
                             for (var j = 0; j < $scope.supervisionIncludes.length; j++) {
+                                //Not sure why we need this line
                                 //if ($scope.supervisionIncludes[j] == null) continue;
                                 if ((globalSchoolsArray[k].duration / 60 <= $scope.timeVal) && (globalSchoolsArray[k].supervision == $scope.supervisionIncludes[j])) localSchoolsArray.push(globalSchoolsArray[k]);
                             }
@@ -290,8 +286,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 }
 
-                //localSchoolsArray = localSchoolsArray.slice(0,5);
-                console.log(localSchoolsArray);
                 // Checked whether filter by grade is initiated
                 if (labelsFiltered == true){
                     localSchoolsArray = localSchoolsArray.slice(0, 5);
@@ -351,7 +345,6 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 onStart:function(evt) {
                 },
                 onSort:function(evt){
-                    console.log(sortable.toArray());
                     if (sortable.toArray().length > 0) {
                         $scope.hideNotifications();
                         $('#google_map_filter').hide();
@@ -448,6 +441,11 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     hebName: 'למידה דיפרנציאלית',
                     id: "difLrn",
                     claims: [ 6, 7, 21, 23, 59, 73 ]
+                },
+                {
+                    name: "Budget",
+                    hebName: 'תקציב',
+                    id: "budget"
                 }
             ]
 
@@ -466,17 +464,11 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         }
                     }
                }
-               //console.log(localCriteria);
-               //console.log(localCriteria.length);
 
                // Creating a local weights array
                var localWeights = [];
                localWeights = weights[localCriteria.length - 1];
-               console.log(localWeights);
 
-
-               //console.log(localCriteria[0].claims.length);
-               console.log(globalSchoolsArray[12]);
                localSchoolsScoresPerLabel = [];
                $scope.localSchoolsScoresFinal = [];
                 for (var s = 0 ; s < globalSchoolsArray.length ; s++) {
@@ -485,33 +477,39 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     for (l = 0 ; l < localCriteria.length ; l++) {
                         var tempClaimSum = 0;
                         var lastYear = globalSchoolsArray[s].claims.length - 1;
-                        for (c = 0 ; c < localCriteria[l].claims.length ; c++) {
-                            if (globalSchoolsArray[s].claims.length == 0) continue;
-                            if(globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]] == -1) continue;
-                            tempClaimSum += globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]];
+                        //Checks if normal criteria (not budget)
+                        if(localCriteria[l].id != 'budget')
+                        {
+                            for (c = 0 ; c < localCriteria[l].claims.length ; c++) {
+                                if (globalSchoolsArray[s].claims.length == 0) continue;
+                                if(globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]] == -1) continue;
+                                tempClaimSum += globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]];
+                            }
+                            tempClaimSum /= localCriteria[l].claims.length;
+
+                            //Student safety - the 'positive' side of the grade
+                            if (localCriteria[l].id == 'sSft' && tempClaimSum != 0) tempClaimSum = 100 - tempClaimSum;
                         }
-                        tempClaimSum /= localCriteria[l].claims.length;
-                        //tempAverage += (tempClaimSum / localCriteria[l].claims.length);
-                        //console.log(tempClaimSum);
+                        else { //Budget tag
+                            if(globalSchoolsArray[s].budget != 0)
+                            {
+                                //In case the budget is high
+                                if(globalSchoolsArray[s].budget >= 10000000)
+                                    tempClaimSum = 100;
+                                else tempClaimSum = (globalSchoolsArray[s].budget * 0.00001).toFixed(3);
 
-                        //Student safety - the 'positive' side of the grade
-                        if (localCriteria[l].id == 'sSft' && tempClaimSum != 0) tempClaimSum = 100 - tempClaimSum;
-
+                            }
+                            else tempClaimSum = 0;
+                        }
                         tempClaimSumArr.push(tempClaimSum);
                     }
                     // Summed grade per criteria for each school
                     localSchoolsScoresPerLabel.push(tempClaimSumArr);
-                    //console.log('School ' + s + ' has those grades: ' + localSchoolsScoresPerLabel[s]);
                     for (var w = 0 ; w < localWeights.length ; w++) {
-                        //console.log('S = ' + s + ": ");
-                        //console.log(tempClaimSumArr[w]);
-                        //console.log(tempClaimSumArr[w] * localWeights[w]);
                         tempCriteria += (tempClaimSumArr[w] * localWeights[w]);
-                        //console.log(tempCriteria);
                     }
                     // Summed total weighted grade for each school (not criteria)
                     $scope.localSchoolsScoresFinal.push(tempCriteria);
-                    //console.log('School ' + s + 's final grade is: ' + localSchoolsScoresFinal[s]);
                 }
 
                // Adds two more fields to the globalSchoolsArray - Final grade (for each school) and array of criteria's gardes (for each school)
@@ -521,12 +519,9 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                });
 
                // Sorting the globalSchoolsArray grades
-               //$scope.sortedSchoolsArray = angular.copy(globalSchoolsArray);
                globalSchoolsArray.sort(function(a, b) {
                    return parseFloat(b.calculatedGrade) - parseFloat(a.calculatedGrade);
                });
-
-               //$scope.sortedSchoolsArray = $scope.sortedSchoolsArray.slice(0, 5);
 
                $scope.getByDuration();
 
@@ -669,7 +664,6 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                 }
             }
 
-            console.log(rowsData);
             $scope.activeYears = [
                 {
                     year: 2009,
@@ -886,7 +880,6 @@ schoolsControllers.controller('schoolInfoCtrl', ['$scope', '$http', '$routeParam
                 acounter2 = 1, ecounter2 = 1, hcounter2 = 1, tcounter2 = 1, mcounter2 = 1;
             }
 
-            console.log (rowsData);
 
             for(var i = 1 ; i<rowsData.length ; i++){
                 for(var j=1; j<rowsData[i].length ; j++){
