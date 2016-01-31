@@ -35,8 +35,6 @@
                                 <p>ממ&#34;ד</p>
                             </li>
                             <li>
-                                <!--<input type="checkbox" name="supervisionFilter" value="orthodox"-->
-                                       <!--ng-click="includeSupervision('orthodox')"> חרדי-->
                                 <img ng-model="orthodox" ng-src="{{orthodox.checked == true && '/includes/images/check1.svg' || '/includes/images/check_empty.svg'}}" alt="" class="supervisionCheckIcon" ng-click="includeSupervision(orthodox)">
                                 <p>חרדי</p>
                             </li>
@@ -94,7 +92,6 @@
                     <label for="filterAutocomplete">מיקום </label>
                     <input type="text" id="filterAutocomplete" class="form-control clearable" ng-autocomplete="result2"
                            details="details2" options="options2" placeholder="" ng-model="theAddress.formatted_address"/>
-                    <!--<label for="Autocomplete"><img src="/includes/images/Search.svg" id="searchIcon" alt="חיפוש"></label>-->
                 </section>
             </div>
             <div>

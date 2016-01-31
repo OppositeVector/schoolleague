@@ -3309,3 +3309,7 @@ input[type="range"]::-ms-thumb {
     border: 2px solid #f7a2a2;
     border-radius: 10px;
 }
+
+.disabledLegend{
+    color: #89879c;
+}

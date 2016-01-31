@@ -377,8 +377,6 @@ function filterMap(schools, location, title) {
         mapTypeId: 'roadmap'
     };
 
-    console.log('schools length:' + schools.length);
-
       // Display a map on the page and places the chosen position in a balloon
     map = new google.maps.Map(document.getElementById("google_map_filter"), mapOptions, {
         center: {lat: location.lat, lng: location.lng},
@@ -456,8 +454,6 @@ function filterRoutes(startPoint, endPoints, transType) {
         destinations.push(new google.maps.LatLng(entry.position.lat, entry.position.lon));
     });
 
-    console.log("Trans type:" + transType);
-
     var d1 = [], d2 = [], d3 = [], d4=[], d5=[];
 
     if(destinations.length < 25) {
@@ -498,7 +494,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status){
-                console.log(status);
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d1.length ; i++){
                         if(d1[i].lng().toFixed(4) == endPoints[i].position.lon.toFixed(4) && d1[i].lat().toFixed(4) == endPoints[i].position.lat.toFixed(4)){
@@ -517,8 +512,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status){
-                console.log(status);
-
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d2.length ; i++){
                         if(d2[i].lng().toFixed(4) == endPoints[i+25].position.lon.toFixed(4) && d2[i].lat().toFixed(4) == endPoints[i+25].position.lat.toFixed(4)){
@@ -537,8 +530,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status){
-                console.log(status);
-
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d3.length ; i++){
                         if(d3[i].lng().toFixed(4) == endPoints[i+50].position.lon.toFixed(4) && d3[i].lat().toFixed(4) == endPoints[i+50].position.lat.toFixed(4)){
@@ -557,8 +548,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status){
-                console.log(status);
-
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d4.length ; i++){
                         if(d4[i].lng().toFixed(4) == endPoints[i+75].position.lon.toFixed(4) && d4[i].lat().toFixed(4) == endPoints[i+75].position.lat.toFixed(4)){
@@ -577,8 +566,6 @@ function filterRoutes(startPoint, endPoints, transType) {
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status){
-                console.log(status);
-
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d5.length ; i++){
                         if(d5[i].lng().toFixed(4) == endPoints[i+100].position.lon.toFixed(4) && d5[i].lat().toFixed(4) == endPoints[i+100].position.lat.toFixed(4)){
@@ -589,6 +576,5 @@ function filterRoutes(startPoint, endPoints, transType) {
             });
     }
 
-    //console.log(endPoints);
     return endPoints;
 }
