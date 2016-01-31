@@ -79,15 +79,15 @@ angular.module( "ngAutocomplete", [])
 
                             console.log (scope.details);
 
-                            for (var i=0; i<scope.details.address_components.length; i++){
-                                if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
-                                    scope.athority = scope.details.address_components[i].long_name;
-                                }
-                            }
-
-
-                            if(scope.athority)
-                                console.log(scope.athority);
+                            //for (var i=0; i<scope.details.address_components.length; i++){
+                            //    if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
+                            //        scope.athority = scope.details.address_components[i].long_name;
+                            //    }
+                            //}
+                            //
+                            //
+                            //if(scope.athority)
+                            //    console.log(scope.athority);
 
 
                             scope.tempAddress = scope.details.formatted_address.split(",");
@@ -100,8 +100,8 @@ angular.module( "ngAutocomplete", [])
                                     scope.tempAddress[1] = scope.tempAddress[1].substr(1);
                                     scope.city = scope.tempAddress[1];
                                 }
-                                console.log (scope.tempAddress[0]);
-                                console.log (scope.tempAddress[1]);
+                                //console.log (scope.tempAddress[0]);
+                                //console.log (scope.tempAddress[1]);
                             }
 
                             //In case only city name is entered
@@ -109,8 +109,12 @@ angular.module( "ngAutocomplete", [])
                                 scope.city = scope.tempAddress[0];
                             }
 
+                            if (scope.city.indexOf('מחוז') > -1){
+                                scope.city = scope.city.replace('מחוז ','');
+                            }
+
+                            console.log(scope.city);
                             $window.sessionStorage.setItem("theAddress", JSON.stringify(scope.details));
-                            console.log($window.sessionStorage);
                             $location.path("filter/" + scope.city);
 
                         });
