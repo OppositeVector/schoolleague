@@ -4,12 +4,6 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
-                <!--<span class="sr-only">Toggle navigation</span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-                <!--<span class="icon-bar"></span>-->
-            <!--</button>-->
             <a class="navbar-brand" href="#/search" id="logo">
                 <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
                 <b>ליגת בתי הספר</b>
@@ -79,8 +73,6 @@
                 <section class="borderCompletion"></section>
                 <ul id="graphsFilters" class="nav navbar-nav">
                     <li class="categoryFilter" ng-class="{active:isSelectedTab(1)}" ng-click="changeTab(1)">
-                        <!--<img src="/includes/images/4.svg" alt="" class="categoryIcon">-->
-                        <!--<object data="/includes/images/4.svg" type="image/svg+xml" class="categoryIcon"></object>-->
                         <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="401.169px" height="186.631px" viewBox="0 0 401.169 186.631" enable-background="new 0 0 401.169 186.631"
                              xml:space="preserve">
@@ -93,7 +85,6 @@
                         <h5 class="categoryTitle">שביעות רצון</h5>
                     </li>
                     <li class="categoryFilter" ng-class="{active:isSelectedTab(2)}" ng-click="changeTab(2)">
-                        <!--<object data="/includes/images/3.svg" type="image/svg+xml" class="categoryIcon"></object>-->
                         <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="341.676px" height="336.644px" viewBox="0 0 341.676 336.644" enable-background="new 0 0 341.676 336.644"
                              xml:space="preserve">
@@ -111,7 +102,6 @@
                         <h5 class="categoryTitle">אווירה</h5>
                     </li>
                     <li class="categoryFilter" ng-class="{active:isSelectedTab(3)}" ng-click="changeTab(3)">
-                        <!--<object data="/includes/images/1.svg" type="image/svg+xml" class="categoryIcon"></object>-->
                         <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="364.124px" height="257.335px" viewBox="0 0 364.124 257.335" enable-background="new 0 0 364.124 257.335"
                              xml:space="preserve">
@@ -124,7 +114,6 @@
                         <h5 class="categoryTitle">רמת לימוד</h5>
                     </li>
                     <li class="categoryFilter" ng-class="{active:isSelectedTab(4)}" ng-click="changeTab(4)">
-                        <!--<object data="/includes/images/2.svg" type="image/svg+xml" class="categoryIcon"></object>-->
                         <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="367.865px" height="327px" viewBox="0 0 367.865 327" enable-background="new 0 0 367.865 327" xml:space="preserve">
                         <path fill="#EE5253" d="M147.269,57.889l8.761-14.248V15.227L141.08,0h-30.713L95.035,15.452L80.563,0H49.851L34.521,15.452
@@ -139,7 +128,6 @@
                         <h5 class="categoryTitle">איכות לימוד</h5>
                     </li>
                     <li class="categoryFilter" ng-class="{active:isSelectedTab(5)}" ng-click="changeTab(5)">
-                        <!--<object data="/includes/images/5.svg" type="image/svg+xml" class="categoryIcon"></object>-->
                         <svg class="categoryIcon" version="1.1" id="Line" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                              width="337.735px" height="337.735px" viewBox="0 0 337.735 337.735" enable-background="new 0 0 337.735 337.735"
                              xml:space="preserve">
@@ -172,21 +160,13 @@
 
             <div class="row" id="categoriesLegends">
                 <div id="legends">
-                    <section class="itemLegend" ng-repeat="item in legendItems" ng-click="toggleGraph(item.id, $index)" ng-mouseover="mouseOverGraph(item.id)" ng-mouseout="mouseOutGraph()">
-                        <!--<object data="/includes/images/check_empty.svg" data-id="{{item}}" type="image/svg+xml"  class="itemLegendIcon"></object>-->
+                    <section class="itemLegend" ng-class="{disabledLegend : item.disabled}" ng-repeat="item in legendItems"  ng-disabled="item.disabled" ng-click="toggleGraph(item.id, $index)" ng-mouseover="mouseOverGraph(item.id, $index)" ng-mouseout="mouseOutGraph()">
                         <img ng-src="{{item.checked == true && '/includes/images/check_empty.svg' || '/includes/images/check1.svg'}}" alt="" id="checkbox_{{item.id}}" class="itemLegendIcon">
                         {{item.id}}
                     </section>
                 </div>
                 <div id="c3chart"></div>
             </div>
-
-            <!--<div class="row" id="graphContainer">-->
-                <!---->
-            <!--</div>-->
-            <!-- /.row -->
-
-
         </div>
         <!-- /.container-fluid -->
 

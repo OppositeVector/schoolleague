@@ -100,8 +100,8 @@ angular.module( "ngAutocomplete", [])
                                     scope.tempAddress[1] = scope.tempAddress[1].substr(1);
                                     scope.city = scope.tempAddress[1];
                                 }
-                                console.log (scope.tempAddress[0]);
-                                console.log (scope.tempAddress[1]);
+                                //console.log (scope.tempAddress[0]);
+                                //console.log (scope.tempAddress[1]);
                             }
 
                             //In case only city name is entered
@@ -109,8 +109,12 @@ angular.module( "ngAutocomplete", [])
                                 scope.city = scope.tempAddress[0];
                             }
 
+                            if (scope.city.indexOf('מחוז') > -1){
+                                scope.city = scope.city.replace('מחוז ','');
+                            }
+
+                            console.log(scope.city);
                             $window.sessionStorage.setItem("theAddress", JSON.stringify(scope.details));
-                            console.log($window.sessionStorage);
                             $location.path("filter/" + scope.city);
 
                         });

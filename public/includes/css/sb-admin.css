@@ -3389,3 +3389,7 @@ input[type="range"]::-ms-thumb {
     top: 40%;
     left: 38%;
 }
+
+.disabledLegend{
+    color: #89879c;
+}
