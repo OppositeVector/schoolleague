@@ -12,3 +12,5 @@ var city = Schema({
 }, { collection: "cities" });
 
 exports.schema = city;
+
+

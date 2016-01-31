@@ -74,7 +74,9 @@ app.get("/GetSchool", function(req, res) {
 
 app.get("/GetCity", function(req, res) {
 
-	var name = url.parse(req.url,true).query.name;
+	var queryObject = url.parse(req.url,true).query;
+	var name = queryObject.name;
+	var area = queryObject.area;
 
 	dbc.GetCityByName(name, function(err, data) {
 
@@ -83,14 +85,41 @@ app.get("/GetCity", function(req, res) {
 			return;
 		}
 
-		for(var i = 0; i < data.length; ++i) {
-			data[i].id = data[i]._id;
-			if(data[i].fromClass > 1) {
-				data.splice(i, 1);
-				--i;
+		// if(data.length > 0) {
+
+			for(var i = 0; i < data.length; ++i) {
+				data[i].id = data[i]._id;
+				if(data[i].fromClass > 1) {
+					data.splice(i, 1);
+					--i;
+				}
 			}
-		}
-		res.json({ result: 1, data: data });
+			res.json({ result: 1, data: data });
+			return;
+
+		// }
+
+		// if(data.length == 0) {
+
+		// 	if(area != null) {
+		// 		dbc.GetAuthoritySchools(area, function(err, data) {
+		// 			if(err) {
+		// 				res.json({ result: 0, data: err });
+		// 				return;
+		// 			}
+		// 			for(var i = 0; i < data.length; ++i) {
+		// 				data[i].id = data[i]._id;
+		// 				if(data[i].fromClass > 1) {
+		// 					data.splice(i, 1);
+		// 					--i;
+		// 				}
+		// 			}
+		// 			res.json({ result: 1, data: data });
+		// 			return;
+		// 		});
+		// 	}
+			
+		// }
 
 	});
 

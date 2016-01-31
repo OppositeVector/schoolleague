@@ -109,6 +109,8 @@ exports.GetCityByName = function(cityName, callback) {
 		return;
 	}
 
+	cityName = authority.GetAlias(cityName);
+
 	authorityModel.findOne({ cities: cityName }, function(err, authorityData) {
 
 		if(err) {
@@ -135,6 +137,10 @@ exports.GetCityByName = function(cityName, callback) {
 		});
 
 	});
+
+}
+
+exports.GetAuthoritySchools = function(name, callback) {
 
 }
 
