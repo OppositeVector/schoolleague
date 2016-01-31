@@ -17,21 +17,18 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
             $scope.state = {
                 name: 'state',
-                checked: true
+                checked: false
             };
 
             $scope.religious = {
                 name: 'religious',
-                checked: true
+                checked: false
             };
 
             $scope.orthodox = {
                 name: 'orthodox',
-                checked: true
+                checked: false
             };
-
-
-
 
             $scope.schools = data.data;
             globalSchoolsArray = angular.copy($scope.schools);
@@ -40,11 +37,17 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
             $scope.theAddress = JSON.parse($window.sessionStorage.getItem("theAddress"));
             $scope.tempAddress = $scope.theAddress.formatted_address.split(",");
 
+
+            //Show Top five schools
+            //$scope.showTopFive();
+
+            //console.log($scope.theAddress);
+
             //Gets duration per school
             globalSchoolsArray = filterRoutes($scope.theAddress.geometry.location, globalSchoolsArray, $scope.transType);
 
             //Filters by supervision
-            $scope.supervisionIncludes = [$scope.state.name, $scope.religious.name, $scope.orthodox.name];
+            $scope.supervisionIncludes = [];
 
             labelsFiltered = false;
 
