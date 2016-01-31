@@ -19,8 +19,6 @@ for (var i = 0; i < aliases.length; ++i) {
 	regex_parts.push('(' + aliases[i].pattern + ')');
 }
 var regex = new RegExp(regex_parts.join('|'), 'g');
-console.log(regex_parts);
-console.log(regex);
 
 exports.GetAlias = function(city) {
 
