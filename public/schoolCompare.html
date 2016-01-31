@@ -4,12 +4,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">-->
-            <!--<span class="sr-only">Toggle navigation</span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--</button>-->
+
             <a class="navbar-brand" href="#/search" id="logo">
                 <img src="/includes/images/Logo.svg" alt="ליגת בתי הספר">
                 <b>ליגת בתי הספר</b>
@@ -29,38 +24,16 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div>
             <ul class="nav navbar-nav side-nav">
-                <li class="schoolInfoSection" style="height: 120px">
-                    <section id="schoolName" ng-repeat="school in schools" style="font-size: 1.5em">
+                <li class="schoolInfoSection" style="height: 150px">
+                    <section id="schoolName" ng-repeat="school in schools" style="font-size: 1.2em; line-height: 1.8em">
                     <img src="/includes/images/check1.svg" alt="" class="itemLegendIcon">
                     {{school.name}}
-                    <img src="/includes/images/rightArrow.png" alt="">
+                    <img src="/includes/images/rightArrow.png" alt="" style="width: 6px">
                 </section>
-                    <!--<ul id="schoolInfo">-->
-                        <!--<li>-->
-                            <!--<p class="inlineBlock">סוג חינוך: </p>-->
-                            <!--{{school.type}}-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p class="inlineBlock">מספר תלמידים:</p>-->
-                            <!--{{school.studentsCount}}-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p class="inlineBlock">תלמידים בכיתה:</p>-->
-                            <!--{{(school.studentsCount/school.classCount)-((school.studentsCount/school.classCount)%2)}}-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p class="inlineBlock">שנת הקמה:</p>-->
-                            <!--{{school.foudingYear}}-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p class="inlineBlock">טלפון: </p>-->
-                            <!--{{school.phoneNumber}}-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                    <!--<button type="button" id="opinionsBTN"> חוות דעת </button>-->
+
                 </li>
                 <li class="schoolInfoSection">
-                    <button type="button" id="comparisonBTN" ng-click="togglePopUp()">הוסיפו בי״ס להשוואה</button>
+                    <button type="button" id="comparisonBTN" ng-click="togglePopUp()"  style="font-size: 15px ; font-weight: bold">הוסיפו בי״ס להשוואה</button>
 
                 </li>
             </ul>
@@ -165,23 +138,7 @@
                 </ul>
                 <section class="borderCompletion"></section>
             </div>
-            <!-- /.row -->
 
-            <!--<div class="row" id="categoriesLegends">-->
-                <!--<div id="legends">-->
-                    <!--<section class="itemLegend" ng-repeat="item in legendItems" ng-click="toggleGraph(item.id, $index)" ng-mouseover="mouseOverGraph(item.id)" ng-mouseout="mouseOutGraph()">-->
-                        <!--&lt;!&ndash;<object data="/includes/images/check_empty.svg" data-id="{{item}}" type="image/svg+xml"  class="itemLegendIcon"></object>&ndash;&gt;-->
-                        <!--<img ng-src="{{item.checked == true && '/includes/images/check_empty.svg' || '/includes/images/check1.svg'}}" alt="" id="checkbox_{{item.id}}" class="itemLegendIcon">-->
-                        <!--{{item.id}}-->
-                    <!--</section>-->
-                <!--</div>-->
-                <!--<div id="c3chart"></div>-->
-            <!--</div>-->
-
-            <!--<div class="row" id="graphContainer">-->
-            <!---->
-            <!--</div>-->
-            <!-- /.row -->
             
             <div class="row" style="position: absolute; top: 200px; left: 11%;">
                 <img src="/includes/images/compareGraph.jpg" alt="">
@@ -208,42 +165,6 @@
             </svg>
         </button>
 
-
-        <!--&lt;!&ndash;TODO ng-repeat when saving schools in filters page&ndash;&gt;-->
-        <!--<section>-->
-        <!--<input id="Option" type="checkbox">-->
-        <!--<label class="compSchoolName" for="Option"> Option 1 </label>-->
-        <!--</section>-->
-
-        <!--<section>-->
-        <!--<input id="option2" type="checkbox" >-->
-        <!--<label class="compSchoolName" for="option2"> Option 2 </label>-->
-        <!--</section>-->
-
-        <!--<section>-->
-        <!--<input id="option3" type="checkbox" >-->
-        <!--<label class="compSchoolName" for="option3"> Option 3 </label>-->
-        <!--</section>-->
-
-        <!--<section>-->
-        <!--<input id="option4" type="checkbox" >-->
-        <!--<label class="compSchoolName" for="option4"> Option 4 </label>-->
-        <!--</section>-->
-
-        <!--<section id="enterSchool">-->
-        <!--<input id="typeSchool" type="checkbox" >-->
-        <!--<label class="compSchoolName" for="typeSchool">הזן שם בית ספר</label>-->
-        <!--<angucomplete id="compareSchools"-->
-        <!--selectedobject="selectedSchool"-->
-        <!--localdata="schools"-->
-        <!--searchfields="name,city"-->
-        <!--titlefield="name,city"-->
-        <!--inputclass="form-control form-control-small"/>-->
-        <!--</section>-->
-
-        <button id="compareGo">הוסף</button>
-
-        <!--<span style="font-size: 30px ;position: relative ; top: 30%">הוספת בתי ספר להשוואה...</span>-->
 
     </section>
 </div>

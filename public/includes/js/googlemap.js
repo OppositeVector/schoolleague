@@ -392,13 +392,13 @@ function filterMap(schools, location, title) {
     var infoBalloon = new google.maps.InfoWindow({content:title});
 
     // Home Marker Properties
-    var image = '../../includes/images/Location.svg';
+    var homeMarker = '../../includes/images/Location.svg';
     marker = new google.maps.Marker({
         map: map,
         draggable: false,
         animation: google.maps.Animation.DROP,
         position: {lat: location.lat, lng: location.lng},
-        icon: image
+        icon: homeMarker
     });
 
     // Allow Home marker to have an info window
@@ -412,6 +412,7 @@ function filterMap(schools, location, title) {
     var infoWindow = new google.maps.InfoWindow(), marker, i;
 
     // Loop through our array of markers & place each one on the map
+    var schoolMarker = '../../includes/images/schoolMarker.svg';
     schools.forEach(function(entry){
         if ((entry.position.lat != 360) && (entry.position.lon != 360)){
             var position = new google.maps.LatLng(entry.position.lat, entry.position.lon);
@@ -419,7 +420,8 @@ function filterMap(schools, location, title) {
             marker = new google.maps.Marker({
                 position: position,
                 map: map,
-                title: entry.name
+                title: entry.name,
+                icon: schoolMarker
             });
 
             // Allow each marker to have an info window

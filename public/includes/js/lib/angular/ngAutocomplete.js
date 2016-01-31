@@ -79,15 +79,15 @@ angular.module( "ngAutocomplete", [])
 
                             console.log (scope.details);
 
-                            for (var i=0; i<scope.details.address_components.length; i++){
-                                if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
-                                    scope.athority = scope.details.address_components[i].long_name;
-                                }
-                            }
-
-
-                            if(scope.athority)
-                                console.log(scope.athority);
+                            //for (var i=0; i<scope.details.address_components.length; i++){
+                            //    if(scope.details.address_components[i].types[0] == 'administrative_area_level_2'){
+                            //        scope.athority = scope.details.address_components[i].long_name;
+                            //    }
+                            //}
+                            //
+                            //
+                            //if(scope.athority)
+                            //    console.log(scope.athority);
 
 
                             scope.tempAddress = scope.details.formatted_address.split(",");

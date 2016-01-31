@@ -496,14 +496,14 @@ button {
     font-size: 2em;
     line-height: 1.1em;
     font-weight: bold;
-    flex-grow: 2;
+    flex-grow: 0.5;
     /*margin-bottom: 0.8em;*/
 }
 
 #schoolInfo {
     list-style: none;
     margin-bottom: 2em;
-    flex-grow: 5;
+    flex-grow: 2;
 }
 
 .schoolInfoSection {
@@ -807,17 +807,21 @@ button {
     margin: auto;
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
-    width: 45%;
-    height: 50%;
+    width: 600px;
+    height: 420px;
     /*overflow: auto;*/
     border: 2px solid #ff9999;
     background-color: #fff7f7;
     border-radius: 10px;
     padding-top: 3em;
     box-sizing: border-box;
-    max-height: 350px;
-    min-width: 250px;
     text-align: center;
+}
+
+.compareImg {
+    position: absolute ;
+    top: 75px ;
+    left: 78px
 }
 
 #closePopUp{
@@ -826,8 +830,8 @@ button {
     position: absolute;
     top: -2em;
     left: -2em;
-    width: 3.2em;
-    height: 3.2em;
+    width: 4em;
+    height: 4em;
     float: left;
 }
 
@@ -877,13 +881,14 @@ input[type=checkbox]:checked + .compSchoolName:before {
     background-color: #ff9999;
     border-radius: 10px;
     position: absolute;
-    top: 17em;
-    left: 2em;
+    top: 20em;
+    left: 58px;
     width: 8em;
     height: 2.2em;
     float: left;
     color: #252b5d;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bolder;
 }
 
 #enterSchool {
@@ -1033,7 +1038,7 @@ path.domain{
 }
 
 .schoolInfoSection:first-child {
-    height: 700px;
+    height: 450px;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
@@ -1187,7 +1192,7 @@ path.domain{
     background-color: #fff7f7;
     width: 250px;
     margin-top: -3px;
-    height: 700px;
+    //height: 700px;
 }
 
 /*Drag&Drop*/
@@ -1200,6 +1205,10 @@ ul {
 #mockupLabelsList{
     margin: 0;
     padding: 0;
+}
+
+.tagsStyle {
+    margin: 1em 0 1.5em 0;
 }
 
 #labelsList,
@@ -1280,7 +1289,7 @@ ul {
 
 #mockupLabelsList li span {
     vertical-align: -webkit-baseline-middle;
-    color: #3d4f76
+    color: #89879c
 }
 
 .choiceNum {
@@ -1309,13 +1318,13 @@ ul {
 
 #switchViews {
     position: absolute;
-    left: 0;
-    bottom:0;
+    left: 15px;
+    bottom:15px;
 }
 
 #switchViews button {
-    width: 2em;
-    height: 2em;
+    width: 2.5em;
+    height: 2.5em;
     outline: none;
     background-color: #ff9999;
     border-radius: 5px;
@@ -1487,7 +1496,7 @@ b, strong {
 
 #routingFilters {
     margin-right: 330px;
-    margin-top: 65px;
+    margin-top: 75px;
 }
 
 #routingFilters label {
@@ -1511,7 +1520,7 @@ b, strong {
     /*position: absolute;*/
     /*left: calc(10px + 2em);*/
     font-size: inherit;
-    width: 12em;
+    width: 20em;
     margin-left: 10px;
     /*height: 1.7em;*/
     /*top: -2.5em;*/
@@ -2140,6 +2149,10 @@ input[type="range"]::-ms-thumb {
         float: left;
     }
 
+    #filterAutocomplete {
+        width: 12em;
+    }
+
     #routingFilters {
         margin-right: -1px;
         margin-top: 0;
@@ -2284,6 +2297,22 @@ input[type="range"]::-ms-thumb {
         width: 100%;
         height: 230%;
     }
+
+    #popUpBox {
+        width: 350px;
+        height: 300px;
+    }
+
+    .compareImg {
+        width: 270px;
+        top: 60px;
+        left: 65px;
+    }
+
+    #compareGo {
+        top: 14em;
+        left: 47px
+    }
 }
 
 /*Big phones*/
@@ -2416,10 +2445,6 @@ input[type="range"]::-ms-thumb {
         margin: 0px 0 10px 0;
     }
 
-    /*#timeRange {*/
-        /*background: url(../images/range_shorter.png) no-repeat center;*/
-    /*}*/
-
     input[type="range"] {
         padding: 5px 38px;
         //margin-left: -11px;
@@ -2472,6 +2497,10 @@ input[type="range"]::-ms-thumb {
         width: 100%;
         /* margin-top: -3px; */
         height: 230px;
+    }
+
+    #labelsList li .itemName {
+        padding: 4px 10px;
     }
 
     #switchViews {
@@ -2604,6 +2633,23 @@ input[type="range"]::-ms-thumb {
         height: 300px;
         margin: auto;
         margin-top: 90px;
+        margin-left: 20px;
+    }
+
+    #popUpBox {
+        width: 350px;
+        height: 300px;
+    }
+
+    .compareImg {
+        width: 270px;
+        top: 60px;
+        left: 65px;
+    }
+
+    #compareGo {
+        top: 14em;
+        left: 47px
     }
 }
 
@@ -2736,10 +2782,6 @@ input[type="range"]::-ms-thumb {
         margin: 0px 0 10px 0;
     }
 
-    /*#timeRange {*/
-        /*background: url(../images/range_shorter.png) no-repeat center;*/
-    /*}*/
-
     input[type="range"] {
         padding: 5px 35px;
         //margin-left: -11px;
@@ -2792,6 +2834,10 @@ input[type="range"]::-ms-thumb {
         width: 100%;
         /* margin-top: -3px; */
         height: 175px;
+    }
+
+    #labelsList li .itemName {
+        padding: 4px 10px;
     }
 
     #choiceBox {
@@ -2932,6 +2978,22 @@ input[type="range"]::-ms-thumb {
         height: 280px;
         margin: auto;
         margin-top: 50px;
+    }
+
+    #popUpBox {
+        width: 350px;
+        height: 300px;
+    }
+
+    .compareImg {
+        width: 270px;
+        top: 60px;
+        left: 65px;
+    }
+
+    #compareGo {
+        top: 14em;
+        left: 47px
     }
 }
 
@@ -3130,15 +3192,19 @@ input[type="range"]::-ms-thumb {
         top: 0em;
     }
 
+    #labelsList li .itemName {
+        padding: 3.5px 10px;
+    }
+
     #choiceBox {
         position: relative;
         height: 19em;
-        width: 35%;
+        width: 45%;
         float: right;
     }
 
     #poolList {
-        width: 61%;
+        width: 54%;
         float: left;
         margin-top: 0px;
     }
@@ -3147,6 +3213,10 @@ input[type="range"]::-ms-thumb {
         position: absolute;
         right: 5px;
         top: 100px;
+    }
+
+    .tagsStyle li {
+        padding: 5px 5px;
     }
 
     /*School Info page*/
@@ -3264,6 +3334,22 @@ input[type="range"]::-ms-thumb {
     .tick text tspan{
         font-size: 1.1em;
     }
+
+    #popUpBox {
+        width: 250px;
+        height: 200px;
+    }
+
+    .compareImg {
+        width: 225px;
+        top: 40px;
+        left: 27px;
+    }
+
+    #compareGo {
+        top: 9em;
+        left: 10px
+    }
 }
 
 
@@ -3274,9 +3360,9 @@ input[type="range"]::-ms-thumb {
     font-family: 'Alef', sans-serifns;
 }
 
-#topFiveSvg .c3 path, .c3 line {
-    stroke: none !important;
-}
+/*#topFiveSvg .c3 path, .c3 line {*/
+    /*stroke: none !important;*/
+/*}*/
 
 .pattern {
     position: absolute;
@@ -3295,17 +3381,11 @@ input[type="range"]::-ms-thumb {
 #noSearchResults{
     display: none;
     position: absolute;
-    color: #2b2d78;
+    color: #89879c;
     font-family: 'Alef', sans-serifns;
     font-size: 30px;
-    padding-top: 120px;
-    width:500px;
-    height: 300px;
+    height: 50px;
     margin: auto;
-    top:20%;
-    left:20%;
-    background-color: #fff7f7;
-    text-align: center;
-    border: 2px solid #f7a2a2;
-    border-radius: 10px;
+    top: 40%;
+    left: 38%;
 }

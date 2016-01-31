@@ -505,7 +505,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
 
                //console.log(localCriteria[0].claims.length);
-
+               console.log(globalSchoolsArray[12]);
                localSchoolsScoresPerLabel = [];
                $scope.localSchoolsScoresFinal = [];
                 for (var s = 0 ; s < globalSchoolsArray.length ; s++) {
@@ -515,7 +515,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                         var tempClaimSum = 0;
                         var lastYear = globalSchoolsArray[s].claims.length - 1;
                         for (c = 0 ; c < localCriteria[l].claims.length ; c++) {
-                            //console.log('claim ' + l + ' has those grades: ' + localCriteria[l].claims[c]);
+                            if (globalSchoolsArray[s].claims.length == 0) continue;
                             if(globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]] == -1) continue;
                             tempClaimSum += globalSchoolsArray[s].claims[lastYear].percent[localCriteria[l].claims[c]];
                         }
