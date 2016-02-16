@@ -61,7 +61,9 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
             //Show schools buildings function
             $scope.showTopFive = function(labels, schools){
-
+                //d3.select("#topFive svg").remove();
+                //$("#topFive").css('max-height', '');
+                $('#topFiveHeader').show();
                 var rowsData = [];
 
 
@@ -86,8 +88,12 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
 
                 var schoolNames = []
                 for (var i=0 ; i<schools.length; i++){
+                    var durationInMin = Math.round(schools[i].duration / 60);
                     schoolNames.push(schools[i].name);
                 }
+
+                //var chartHeight = (labels.length * 20) + '%';
+                //$('#topFive').css('height', chartHeight);
 
                 var chart = c3.generate({
                     bindto: "#topFive",
@@ -133,43 +139,29 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 });
 
+
+
                 $('#topFive svg').attr('id', 'topFiveSvg');
 
 
                 var svg = d3.select("#topFiveSvg");
 
                 //squares
-                var texture1 = textures.paths()
-                    .d("squares")
-                    .stroke("#9cdfd9");
+                var texture1 = textures.paths().d("squares").stroke("#9cdfd9");
 
 
                 //Diagonal stripes
-                var texture2 = textures.lines()
-                    .heavier()
-                    .stroke('#9cdfd9');
+                var texture2 = textures.lines().heavier().stroke('#9cdfd9');
 
                 //vertical thin
-                var texture3 = textures.lines()
-                    .orientation("vertical")
-                    .strokeWidth(2)
-                    .stroke('#9cdfd9');
+                var texture3 = textures.lines().orientation("vertical").strokeWidth(2).stroke('#9cdfd9');
 
 
                 //blue print grid
-                var texture4 = textures.lines()
-                    .orientation("vertical", "horizontal")
-                    .size(15)
-                    .strokeWidth(1)
-                    .stroke('#9cdfd9');
+                var texture4 = textures.lines().orientation("vertical", "horizontal").size(15).strokeWidth(1).stroke('#9cdfd9');
 
                 //squares
-                var texture5 = textures.lines()
-                    .orientation("vertical", "horizontal")
-                    .size(4)
-                    .strokeWidth(1)
-                    .background('#9cdfd9')
-                    .stroke('#fff');
+                var texture5 = textures.lines().orientation("vertical", "horizontal").size(4).strokeWidth(1).background('#9cdfd9').stroke('#fff');
 
                 svg.call(texture1);
                 svg.call(texture2);
@@ -245,6 +237,39 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                     }
                 }
             };
+
+
+            //Trying to change top five graph
+            //$scope.showTopFive = function(labels, schools){
+            //    var data = {
+            //        labels: ["January", "February", "March", "April", "May", "June", "July"],
+            //        datasets: [
+            //            {
+            //                label: "My First dataset",
+            //                fillColor: "rgba(220,220,220,0.5)",
+            //                strokeColor: "rgba(220,220,220,0.8)",
+            //                highlightFill: "rgba(220,220,220,0.75)",
+            //                highlightStroke: "rgba(220,220,220,1)",
+            //                data: [65, 59, 80, 81, 56, 55, 40]
+            //            },
+            //            {
+            //                label: "My Second dataset",
+            //                fillColor: "rgba(151,187,205,0.5)",
+            //                strokeColor: "rgba(151,187,205,0.8)",
+            //                highlightFill: "rgba(151,187,205,0.75)",
+            //                highlightStroke: "rgba(151,187,205,1)",
+            //                data: [28, 48, 40, 19, 86, 27, 90]
+            //            }
+            //        ]
+            //    };
+            //    var ctx = document.getElementById("topFiveCanvas").getContext("2d");
+            //    var myBarChart = new Chart(ctx).Bar(data, {
+            //        barShowStroke: false,
+            //        scaleShowGridLines : false
+            //
+            //    });
+            //
+            //}
 
 
             //Filters by supervision type
@@ -438,7 +463,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
                 },
                 {
                     name: "Differential Learning",
-                    hebName: 'למידה דיפרנציאלית',
+                    hebName: 'למידה מותאמת',
                     id: "difLrn",
                     claims: [ 6, 7, 21, 23, 59, 73 ]
                 },
@@ -603,6 +628,7 @@ schoolsControllers.controller('filterSchoolsCtrl', ['$scope', '$http', '$routePa
               }
                 else if($('#page-wrapper').is(":visible")){
                   $('#noDataLabeled').show();
+                  $('#topFiveHeader').hide();
                   $('#noSearchResults').hide();
               }
             };

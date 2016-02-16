@@ -49,7 +49,8 @@ function autoCompleteSearch ($scope, $timeout) {
     //TODO complete
     $scope.result2 = '';
     $scope.options2 = {
-        country: 'il'
+        country: 'il',
+        types:'address'
     };
     $scope.details2 = '';
 }

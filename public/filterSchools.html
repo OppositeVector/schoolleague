@@ -44,7 +44,10 @@
                     <!-- Connected lists -->
                     <div class="container" >
                         <div data-force="30" id="choiceBox">
-                            <p class="layer title"><b>דירוג קריטריונים</b></p>
+                            <!--<p class="layer title"><b>מצאו את 5 ביה״ס הטובים</b></p>-->
+                            <!--<p class="layer title"><b>מצאו את 5 ביה״ס המתאימים</b></p>-->
+                            <p class="layer title" id="tagsTitle"><b>סננו למציאת 5 ביה״ס המתאימים</b></p>
+                            <!--<p class="layer title"><b>סננו למציאת 5 ביה״ס הטובים</b></p>-->
                             <ul id="mockupLabelsList" class="block__list block__list_words">
                                 <li>
                                     <span class="choiceNum">1</span>
@@ -130,8 +133,11 @@
 
     <div id="page-wrapper">
         <div class="container-fluid">
-            <div class="row">
-                <section id="topFive"></section>
+            <div class="row" id="topFiveSection">
+                <!--<h1 id="topFiveHeader">חמשת בתי הספר המתאימים ביותר לילדך</h1>-->
+                <section id="topFive">
+                    <canvas id="topFiveCanvas"></canvas>
+                </section>
             </div>
         </div>
     </div>
@@ -139,7 +145,7 @@
 
 
     <div id="switchViews">
-        <button ng-click="mapView()"><img src="includes/images/View_Map.svg" alt=""></button>
+        <button ng-click="mapView()"><img src="includes/images/map.svg" alt=""></button>
         <button ng-click="listView()"><img src="includes/images/view_Buildings.svg" alt=""></button>
     </div>
 
