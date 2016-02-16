@@ -23,7 +23,7 @@ var regex = new RegExp(regex_parts.join('|'), 'g');
 exports.GetAlias = function(city) {
 
 	var result = regex.exec(city);
-	console.log(result);
+	// console.log(result);
 	if (result !== null) {
 		for (var i = 0; i < aliases.length; i++) {
 			// Find the matching rulea SO question
