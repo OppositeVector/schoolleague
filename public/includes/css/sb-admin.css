@@ -827,7 +827,8 @@ path.domain{  stroke: none !important;  }
 #aboutTheProject {
     flex-flow: column nowrap;
     align-items: stretch;
-    border-bottom: 2px solid #f7a2a2;  }
+    border-bottom: 2px solid #f7a2a2;
+    padding-bottom: 3em;}
 
 #credits {
     color: #f7a2a2;
@@ -874,7 +875,7 @@ path.domain{  stroke: none !important;  }
     background-color: #ff9999;
     outline: none;
     float: left;
-    margin-top: 3em;
+    margin-top: 10em;
     margin-left: 0;  }
 
 /*Filters Page*/
