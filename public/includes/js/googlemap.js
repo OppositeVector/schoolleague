@@ -454,6 +454,10 @@ function filterRoutes(startPoint, endPoints, transType) {
         d5 = destinations.slice(100, destinations.length);
     }
 
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(7,30,0,0);
+
     if(d1[0] != null){
         DistanceMatrixService.getDistanceMatrix(
         {
@@ -461,7 +465,13 @@ function filterRoutes(startPoint, endPoints, transType) {
             destinations: d1,
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
-            //departure_time: 1455003000,
+            drivingOptions: {
+                departureTime: tomorrow,
+                trafficModel: google.maps.TrafficModel.BEST_GUESS
+            },
+            transitOptions: {
+                departureTime: tomorrow
+            }
         }, function(response, status){
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d1.length ; i++){
@@ -473,6 +483,8 @@ function filterRoutes(startPoint, endPoints, transType) {
             });
     }
 
+
+
     if(d2[0] != null){
         DistanceMatrixService.getDistanceMatrix(
         {
@@ -480,6 +492,10 @@ function filterRoutes(startPoint, endPoints, transType) {
             destinations: d2,
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
+            drivingOptions: {
+                departureTime: tomorrow,
+                trafficModel: google.maps.TrafficModel.BEST_GUESS
+            }
         }, function(response, status){
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d2.length ; i++){
@@ -498,6 +514,10 @@ function filterRoutes(startPoint, endPoints, transType) {
             destinations: d3,
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
+            drivingOptions: {
+                departureTime: tomorrow,
+                trafficModel: google.maps.TrafficModel.BEST_GUESS
+            }
         }, function(response, status){
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d3.length ; i++){
@@ -516,6 +536,10 @@ function filterRoutes(startPoint, endPoints, transType) {
             destinations: d4,
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
+            drivingOptions: {
+                departureTime: tomorrow,
+                trafficModel: google.maps.TrafficModel.BEST_GUESS
+            }
         }, function(response, status){
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d4.length ; i++){
@@ -534,6 +558,10 @@ function filterRoutes(startPoint, endPoints, transType) {
             destinations: d5,
             travelMode: google.maps.TravelMode[transType],
             unitSystem: google.maps.UnitSystem.METRIC,
+            drivingOptions: {
+                departureTime: tomorrow,
+                trafficModel: google.maps.TrafficModel.BEST_GUESS
+            }
         }, function(response, status){
                 if (status == google.maps.DistanceMatrixStatus.OK) {
                     for(var i=0; i<d5.length ; i++){
